@@ -52,6 +52,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Pizza\BambinoPizza.cs" />
+    <Compile Include="Model\Pizza\MargheritaPizza.cs" />
+    <Compile Include="Model\Pizza\PescaTorePizza.cs" />
+    <Compile Include="Model\Pizza\PlainPizza.cs" />
+    <Compile Include="Model\Pizza\SeafoodPizza.cs" />
     <Compile Include="Model\Topping\Bacon.cs" />
     <Compile Include="Model\Topping\Basil.cs" />
     <Compile Include="Model\Topping\Cheese.cs" />
@@ -61,6 +66,7 @@
     <Compile Include="Model\Topping\Scallops.cs" />
     <Compile Include="Model\Topping\SeafoodMix.cs" />
     <Compile Include="Model\Topping\Tomato.cs" />
+    <Compile Include="Model\Topping\Topping.cs" />
     <Compile Include="Model\Topping\Tuna.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,8 +92,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Pizza\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,16 +1,16 @@
 ﻿namespace PizzaOrderSystem.Model.Topping
 {
-    public class Cheese
+    public class Cheese : Topping
     {
         private string _name = "チーズ";
         private int _price = 100;
 
-        public string GetName()
+        public override string GetName()
         {
             return _name;
         }
 
-        public int GetPrice()
+        public override int GetPrice()
         {
             return _price;
         }
