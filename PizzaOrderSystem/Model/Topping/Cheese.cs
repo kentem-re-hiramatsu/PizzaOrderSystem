@@ -11,11 +11,11 @@ namespace PizzaOrderSystem.Model.Topping
         public Cheese() { }
         public Cheese(int defaultPrice)
         {
-            if (defaultPrice == 0)
+            if (defaultPrice != 0)
             {
-                _price = defaultPrice;
+                throw new Exception(Consts.ERROR_MESSAGE_DEFAULT_PRICE);
             }
-            throw new Exception(Consts.ERROR_MESSAGE_DEFAULT_PRICE);
+            _price = defaultPrice;
         }
         public string GetName()
         {

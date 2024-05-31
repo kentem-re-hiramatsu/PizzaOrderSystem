@@ -68,7 +68,6 @@
     <Compile Include="Model\Topping\Scallops.cs" />
     <Compile Include="Model\Topping\SeafoodMix.cs" />
     <Compile Include="Model\Topping\Tomato.cs" />
-    <Compile Include="Model\Topping\Topping.cs" />
     <Compile Include="Model\Topping\Tuna.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
