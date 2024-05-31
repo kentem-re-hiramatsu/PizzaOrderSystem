@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PizzaOrderSystem.Model.Topping;
+using System;
 
 namespace ModelTest
 {
@@ -18,6 +19,14 @@ namespace ModelTest
         }
 
         [TestMethod]
+        public void CheeseDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new Cheese(1));
+            Assert.ThrowsException<Exception>(() => new Cheese(-1));
+        }
+
+
+        [TestMethod]
         public void FriedGarlicTest()
         {
             var friedGarlic = new FriedGarlic();
@@ -26,6 +35,13 @@ namespace ModelTest
 
             Assert.AreEqual(name, "フライドガーリック");
             Assert.AreEqual(price, 150);
+        }
+
+        [TestMethod]
+        public void FriedGarlicDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new FriedGarlic(1));
+            Assert.ThrowsException<Exception>(() => new FriedGarlic(-1));
         }
 
         [TestMethod]
@@ -40,6 +56,13 @@ namespace ModelTest
         }
 
         [TestMethod]
+        public void MozzarellaCheeseDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new MozzarellaCheese(1));
+            Assert.ThrowsException<Exception>(() => new MozzarellaCheese(-1));
+        }
+
+        [TestMethod]
         public void SeafoodMixTest()
         {
             var seafoodMix = new SeafoodMix();
@@ -48,6 +71,13 @@ namespace ModelTest
 
             Assert.AreEqual(name, "シーフードミックス");
             Assert.AreEqual(price, 500);
+        }
+
+        [TestMethod]
+        public void SeafoodMixDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new SeafoodMix(1));
+            Assert.ThrowsException<Exception>(() => new SeafoodMix(-1));
         }
 
         [TestMethod]
@@ -60,6 +90,14 @@ namespace ModelTest
             Assert.AreEqual(name, "ホタテ");
             Assert.AreEqual(price, 500);
         }
+
+        [TestMethod]
+        public void ScallopsDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new Scallops(1));
+            Assert.ThrowsException<Exception>(() => new Scallops(-1));
+        }
+
         [TestMethod]
         public void BasilTest()
         {
@@ -70,6 +108,14 @@ namespace ModelTest
             Assert.AreEqual(name, "バジル");
             Assert.AreEqual(price, 100);
         }
+
+        [TestMethod]
+        public void BasilDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new Basil(1));
+            Assert.ThrowsException<Exception>(() => new Basil(-1));
+        }
+
         [TestMethod]
         public void TomatoTest()
         {
@@ -80,6 +126,14 @@ namespace ModelTest
             Assert.AreEqual(name, "トマト");
             Assert.AreEqual(price, 250);
         }
+
+        [TestMethod]
+        public void TomatoDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new Tomato(1));
+            Assert.ThrowsException<Exception>(() => new Tomato(-1));
+        }
+
         [TestMethod]
         public void TunaTest()
         {
@@ -90,6 +144,14 @@ namespace ModelTest
             Assert.AreEqual(name, "ツナ");
             Assert.AreEqual(price, 250);
         }
+
+        [TestMethod]
+        public void TunaDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new Tuna(1));
+            Assert.ThrowsException<Exception>(() => new Tuna(-1));
+        }
+
         [TestMethod]
         public void CornTest()
         {
@@ -102,6 +164,13 @@ namespace ModelTest
         }
 
         [TestMethod]
+        public void CornDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new Corn(1));
+            Assert.ThrowsException<Exception>(() => new Corn(-1));
+        }
+
+        [TestMethod]
         public void BaconTest()
         {
             var bacon = new Bacon();
@@ -110,6 +179,13 @@ namespace ModelTest
 
             Assert.AreEqual(name, "ベーコン");
             Assert.AreEqual(price, 250);
+        }
+
+        [TestMethod]
+        public void BaconDefaultTest()
+        {
+            Assert.ThrowsException<Exception>(() => new Bacon(1));
+            Assert.ThrowsException<Exception>(() => new Bacon(-1));
         }
     }
 }
