@@ -29,7 +29,7 @@ namespace PizzaOrderSystem.Model.Pizza
             return _defaultToppingList.Count;
         }
 
-        public IMenuItem GetDefaultToppingList(int index)
+        public IMenuItem GetDefaultTopping(int index)
         {
             return _defaultToppingList[index];
         }
