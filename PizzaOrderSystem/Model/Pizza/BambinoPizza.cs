@@ -2,8 +2,17 @@
 {
     public class BambinoPizza : IMenuItem
     {
-        public int DefaulPrice { get; set; }
-        public string PizzaName { get; set; }
+        string _name = "バンビーノピザ";
+        int _price = 1600;
+
+        public int GetPrice()
+        {
+            return _price;
+        }
+        public string GetName()
+        {
+            return _name;
+        }
         public void SetCalculatePezza()
         {
 

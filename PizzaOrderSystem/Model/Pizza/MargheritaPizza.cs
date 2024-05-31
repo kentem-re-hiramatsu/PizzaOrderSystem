@@ -2,8 +2,17 @@
 {
     public class MargheritaPizza : IMenuItem
     {
-        public int DefaulPrice { get; set; }
-        public string PizzaName { get; set; }
+        string _name = "マルゲリータピザ";
+        int _price = 1500;
+
+        public int GetPrice()
+        {
+            return _price;
+        }
+        public string GetName()
+        {
+            return _name;
+        }
         public void SetCalculatePezza()
         {
 
