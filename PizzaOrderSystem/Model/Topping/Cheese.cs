@@ -1,27 +1,28 @@
-﻿using System;
+﻿using PizzaOrderSystem.Model.Pizza;
+using System;
 
 namespace PizzaOrderSystem.Model.Topping
 {
-    public class Cheese : Topping
+    public class Cheese : IMenuItem
     {
         private string _name = "チーズ";
         private int _price = 100;
 
         public Cheese() { }
-        public Cheese(int price)
+        public Cheese(int defaultPrice)
         {
-            if (price == 0)
+            if (defaultPrice == 0)
             {
-                _price = price;
+                _price = defaultPrice;
             }
             throw new Exception(Consts.ERROR_MESSAGE_DEFAULT_PRICE);
         }
-        public override string GetName()
+        public string GetName()
         {
             return _name;
         }
 
-        public override int GetPrice()
+        public int GetPrice()
         {
             return _price;
         }
