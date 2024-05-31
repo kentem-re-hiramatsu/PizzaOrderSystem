@@ -93,14 +93,14 @@ namespace ModelTest
             Assert.AreEqual("トマト", bambinoPizza.GetDefaultTopping(1).GetName());
             Assert.AreEqual(0, bambinoPizza.GetDefaultTopping(1).GetPrice());
 
-            Assert.AreEqual("ツナ", bambinoPizza.GetDefaultTopping(0).GetName());
-            Assert.AreEqual(0, bambinoPizza.GetDefaultTopping(0).GetPrice());
+            Assert.AreEqual("ツナ", bambinoPizza.GetDefaultTopping(2).GetName());
+            Assert.AreEqual(0, bambinoPizza.GetDefaultTopping(2).GetPrice());
 
-            Assert.AreEqual("コーン", bambinoPizza.GetDefaultTopping(1).GetName());
-            Assert.AreEqual(0, bambinoPizza.GetDefaultTopping(1).GetPrice());
+            Assert.AreEqual("コーン", bambinoPizza.GetDefaultTopping(3).GetName());
+            Assert.AreEqual(0, bambinoPizza.GetDefaultTopping(3).GetPrice());
 
-            Assert.AreEqual("ベーコン", bambinoPizza.GetDefaultTopping(1).GetName());
-            Assert.AreEqual(0, bambinoPizza.GetDefaultTopping(1).GetPrice());
+            Assert.AreEqual("ベーコン", bambinoPizza.GetDefaultTopping(4).GetName());
+            Assert.AreEqual(0, bambinoPizza.GetDefaultTopping(4).GetPrice());
         }
     }
 }
