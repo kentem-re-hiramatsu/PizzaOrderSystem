@@ -4,6 +4,5 @@
     {
         int GetPrice();
         string GetName();
-        void SetCalculatePezza();
     }
 }

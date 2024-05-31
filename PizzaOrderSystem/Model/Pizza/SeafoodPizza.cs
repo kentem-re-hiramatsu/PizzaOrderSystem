@@ -1,10 +1,19 @@
-﻿namespace PizzaOrderSystem.Model.Pizza
+﻿using PizzaOrderSystem.Model.Topping;
+using System.Collections.Generic;
+
+namespace PizzaOrderSystem.Model.Pizza
 {
     public class SeafoodPizza : IMenuItem
     {
         string _name = "シーフードピザ";
         int _price = 1400;
+        List<IMenuItem> _defaultToppingList = new List<IMenuItem>();
 
+        public SeafoodPizza()
+        {
+            _defaultToppingList.Add(new Cheese(0));
+            _defaultToppingList.Add(new SeafoodMix(0));
+        }
         public int GetPrice()
         {
             return _price;
@@ -13,9 +22,14 @@
         {
             return _name;
         }
-        public void SetCalculatePezza()
+        public int GetCountDefaultToppingList()
         {
+            return _defaultToppingList.Count;
+        }
 
+        public IMenuItem GetDefaultToppingList(int index)
+        {
+            return _defaultToppingList[index];
         }
     }
 }

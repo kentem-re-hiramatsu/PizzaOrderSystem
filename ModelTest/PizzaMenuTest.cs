@@ -12,6 +12,7 @@ namespace ModelTest
 
             Assert.AreEqual(plainPizza.GetName(), "プレーンピザ");
             Assert.AreEqual(plainPizza.GetPrice(), 1200);
+            Assert.AreEqual(plainPizza.GetCountDefaultToppingList(), 2);
         }
 
         [TestMethod]
@@ -21,6 +22,7 @@ namespace ModelTest
 
             Assert.AreEqual(margheritaPizza.GetName(), "マルゲリータピザ");
             Assert.AreEqual(margheritaPizza.GetPrice(), 1500);
+            Assert.AreEqual(margheritaPizza.GetCountDefaultToppingList(), 4);
         }
 
         [TestMethod]
@@ -30,6 +32,7 @@ namespace ModelTest
 
             Assert.AreEqual(seafoodPizza.GetName(), "シーフードピザ");
             Assert.AreEqual(seafoodPizza.GetPrice(), 1400);
+            Assert.AreEqual(seafoodPizza.GetCountDefaultToppingList(), 2);
         }
 
         [TestMethod]
@@ -39,6 +42,7 @@ namespace ModelTest
 
             Assert.AreEqual(pescaTorePizza.GetName(), "ペスカトーレピザ");
             Assert.AreEqual(pescaTorePizza.GetPrice(), 1800);
+            Assert.AreEqual(pescaTorePizza.GetCountDefaultToppingList(), 3);
         }
 
         [TestMethod]
@@ -48,6 +52,8 @@ namespace ModelTest
 
             Assert.AreEqual(bambinoPizza.GetName(), "バンビーノピザ");
             Assert.AreEqual(bambinoPizza.GetPrice(), 1600);
+            Assert.AreEqual(bambinoPizza.GetCountDefaultToppingList(), 5);
         }
+
     }
 }
