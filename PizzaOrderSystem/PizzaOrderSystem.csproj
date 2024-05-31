@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consts.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +54,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Pizza\BambinoPizza.cs" />
+    <Compile Include="Model\Pizza\IMenuItem.cs" />
     <Compile Include="Model\Pizza\MargheritaPizza.cs" />
     <Compile Include="Model\Pizza\PescaTorePizza.cs" />
     <Compile Include="Model\Pizza\PlainPizza.cs" />

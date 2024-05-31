@@ -1,8 +1,13 @@
-﻿namespace PizzaOrderSystem.Model.Topping
+﻿using PizzaOrderSystem.Model.Pizza;
+
+namespace PizzaOrderSystem.Model.Topping
 {
-    public abstract class Topping
+    public abstract class Topping : IMenuItem
     {
-        public abstract string GetName();
         public abstract int GetPrice();
+        public abstract string GetName();
+        public void SetCalculatePezza()
+        {
+        }
     }
 }
