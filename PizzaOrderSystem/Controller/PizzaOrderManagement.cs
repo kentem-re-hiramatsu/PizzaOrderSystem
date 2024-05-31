@@ -1,24 +1,22 @@
-﻿using PizzaOrderSystem.Model.Pizza;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PizzaOrderSystem.Controller
 {
     public class PizzaOrderManagement
     {
-        private List<IMenuItem> _pizzaOrderList = new List<IMenuItem>();
-        private List<IMenuItem> _toppingOrderList = new List<IMenuItem>();
+        private List<ToppingOrderManagement> _pizzaOrderList;
 
         public PizzaOrderManagement()
         {
+            _pizzaOrderList = new List<ToppingOrderManagement>();
         }
 
-        //PizzaOrderList
-        public void AddPizzaOrderList(IMenuItem pizzaMenu)
+        public void AddPizzaOrderList(ToppingOrderManagement pizzaMenu)
         {
             _pizzaOrderList.Add(pizzaMenu);
         }
 
-        public IMenuItem GetPizzaOrder(int index)
+        public ToppingOrderManagement GetPizzaOrder(int index)
         {
             return _pizzaOrderList[index];
         }
@@ -33,25 +31,16 @@ namespace PizzaOrderSystem.Controller
             _pizzaOrderList.RemoveAt(index);
         }
 
-        //ToppingOrderList
-        public void AddToppingOrderList(IMenuItem pizzaMenu)
+        public int GetCalculatePizzaTotalPrice()
         {
-            _toppingOrderList.Add(pizzaMenu);
-        }
+            int totalPrice = 0;
 
-        public IMenuItem GetToppingOrderList(int index)
-        {
-            return _toppingOrderList[index];
-        }
+            for (int i = 0; i < GetPizzaOrderListCount(); i++)
+            {
+                totalPrice += _pizzaOrderList[i].GetTotalToppingPrice();
+            }
 
-        public int GetToppingOrderListCount()
-        {
-            return _toppingOrderList.Count;
-        }
-
-        public void RemoveToppingOrderList(int index)
-        {
-            _toppingOrderList.RemoveAt(index);
+            return totalPrice;
         }
     }
 }

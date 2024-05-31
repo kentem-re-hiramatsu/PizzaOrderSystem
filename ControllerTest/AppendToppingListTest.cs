@@ -1,39 +1,59 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PizzaOrderSystem.Controller;
 using PizzaOrderSystem.Model.Pizza;
+using PizzaOrderSystem.Model.Topping;
 
 namespace ControllerTest
 {
     [TestClass]
     public class AppendToppingListTest
     {
-        PizzaOrderManagement pizzaorderMana = new PizzaOrderManagement();
-        //appendToppingList
+        ToppingOrderManagement toppingOrderMana = new ToppingOrderManagement();
+
         [TestMethod]
         public void AddToppingListTest()
         {
-            var listCount = pizzaorderMana.GetToppingOrderListCount();
+            var listCount = toppingOrderMana.GetToppingOrderListCount();
             Assert.AreEqual(listCount, 0);
 
-            pizzaorderMana.AddToppingOrderList(new BambinoPizza());
-            pizzaorderMana.AddToppingOrderList(new MargheritaPizza());
+            toppingOrderMana.AddToppingOrderList(new Tomato());
+            toppingOrderMana.AddToppingOrderList(new Bacon());
 
-            listCount = pizzaorderMana.GetToppingOrderListCount();
+            listCount = toppingOrderMana.GetToppingOrderListCount();
             Assert.AreEqual(listCount, 2);
         }
 
         [TestMethod]
         public void RemovePizzaOrderListTest()
         {
-            pizzaorderMana.AddToppingOrderList(new BambinoPizza());
-            pizzaorderMana.AddToppingOrderList(new MargheritaPizza());
+            toppingOrderMana.AddToppingOrderList(new Cheese());
+            toppingOrderMana.AddToppingOrderList(new FriedGarlic());
 
-            var listCount = pizzaorderMana.GetToppingOrderListCount();
+            var listCount = toppingOrderMana.GetToppingOrderListCount();
             Assert.AreEqual(listCount, 2);
 
-            pizzaorderMana.RemoveToppingOrderList(1);
-            listCount = pizzaorderMana.GetToppingOrderListCount();
+            toppingOrderMana.RemoveToppingOrderList(1);
+            listCount = toppingOrderMana.GetToppingOrderListCount();
             Assert.AreEqual(listCount, 1);
+        }
+
+        [TestMethod]
+        public void PizzaTotalPricetTest()
+        {
+            toppingOrderMana.AddToppingOrderList(new PlainPizza());
+            toppingOrderMana.AddToppingOrderList(new Tuna());
+            toppingOrderMana.AddToppingOrderList(new Basil());
+
+
+            var PizzaMenuTotalPrice = toppingOrderMana.GetTotalToppingPrice();
+
+            var pizzaPrice = new PlainPizza().GetPrice();
+            var tunaPrice = new Tuna().GetPrice();
+            var basilPrice = new Basil().GetPrice();
+
+            var TotalPrice = pizzaPrice + tunaPrice + basilPrice;
+
+            Assert.AreEqual(PizzaMenuTotalPrice, TotalPrice);
         }
     }
 }

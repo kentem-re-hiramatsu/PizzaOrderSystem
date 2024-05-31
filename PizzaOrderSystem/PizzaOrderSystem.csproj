@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Consts.cs" />
     <Compile Include="Controller\PizzaOrderManagement.cs" />
+    <Compile Include="Controller\ToppingOrderManagement.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
