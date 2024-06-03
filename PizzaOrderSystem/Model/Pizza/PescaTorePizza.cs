@@ -1,12 +1,13 @@
-﻿using PizzaOrderSystem.Model.Topping;
+﻿using PizzaOrderSystem.Enum;
+using PizzaOrderSystem.Model.Topping;
 using System.Collections.Generic;
 
 namespace PizzaOrderSystem.Model.Pizza
 {
     public class PescaTorePizza : IMenuItem
     {
-        string _name = "ペスカトーレピザ";
-        int _price = 1800;
+        PizzaEnum _name = PizzaEnum.ペスカトーレピザ;
+        int _price = (int)PizzaEnum.ペスカトーレピザ;
         List<IMenuItem> _defaultToppingList = new List<IMenuItem>();
 
         public PescaTorePizza()
@@ -19,7 +20,7 @@ namespace PizzaOrderSystem.Model.Pizza
         {
             return _price;
         }
-        public string GetName()
+        public PizzaEnum GetName()
         {
             return _name;
         }

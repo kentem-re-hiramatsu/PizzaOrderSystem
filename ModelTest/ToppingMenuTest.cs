@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PizzaOrderSystem.Enum;
 using PizzaOrderSystem.Model.Topping;
 using System;
 
@@ -14,7 +15,7 @@ namespace ModelTest
             var name = cheese.GetName();
             var price = cheese.GetPrice();
 
-            Assert.AreEqual(name, "チーズ");
+            Assert.AreEqual(name, PizzaEnum.チーズ);
             Assert.AreEqual(price, 100);
         }
 
@@ -33,7 +34,7 @@ namespace ModelTest
             var name = friedGarlic.GetName();
             var price = friedGarlic.GetPrice();
 
-            Assert.AreEqual(name, "フライドガーリック");
+            Assert.AreEqual(name, PizzaEnum.フライドガーリック);
             Assert.AreEqual(price, 150);
         }
 
@@ -51,7 +52,7 @@ namespace ModelTest
             var name = mozzarellaCheese.GetName();
             var price = mozzarellaCheese.GetPrice();
 
-            Assert.AreEqual(name, "モッツァレラチーズ");
+            Assert.AreEqual(name, PizzaEnum.モッツァレラチーズ);
             Assert.AreEqual(price, 300);
         }
 
@@ -69,7 +70,7 @@ namespace ModelTest
             var name = seafoodMix.GetName();
             var price = seafoodMix.GetPrice();
 
-            Assert.AreEqual(name, "シーフードミックス");
+            Assert.AreEqual(name, PizzaEnum.シーフードミックス);
             Assert.AreEqual(price, 500);
         }
 
@@ -87,7 +88,7 @@ namespace ModelTest
             var name = scallops.GetName();
             var price = scallops.GetPrice();
 
-            Assert.AreEqual(name, "ホタテ");
+            Assert.AreEqual(name, PizzaEnum.ホタテ);
             Assert.AreEqual(price, 500);
         }
 
@@ -105,7 +106,7 @@ namespace ModelTest
             var name = basil.GetName();
             var price = basil.GetPrice();
 
-            Assert.AreEqual(name, "バジル");
+            Assert.AreEqual(name, PizzaEnum.バジル);
             Assert.AreEqual(price, 100);
         }
 
@@ -123,7 +124,7 @@ namespace ModelTest
             var name = tomato.GetName();
             var price = tomato.GetPrice();
 
-            Assert.AreEqual(name, "トマト");
+            Assert.AreEqual(name, PizzaEnum.トマト);
             Assert.AreEqual(price, 250);
         }
 
@@ -141,7 +142,7 @@ namespace ModelTest
             var name = tuna.GetName();
             var price = tuna.GetPrice();
 
-            Assert.AreEqual(name, "ツナ");
+            Assert.AreEqual(name, PizzaEnum.ツナ);
             Assert.AreEqual(price, 250);
         }
 
@@ -159,7 +160,7 @@ namespace ModelTest
             var name = corn.GetName();
             var price = corn.GetPrice();
 
-            Assert.AreEqual(name, "コーン");
+            Assert.AreEqual(name, PizzaEnum.コーン);
             Assert.AreEqual(price, 250);
         }
 
@@ -177,7 +178,7 @@ namespace ModelTest
             var name = bacon.GetName();
             var price = bacon.GetPrice();
 
-            Assert.AreEqual(name, "ベーコン");
+            Assert.AreEqual(name, PizzaEnum.ベーコン);
             Assert.AreEqual(price, 250);
         }
 

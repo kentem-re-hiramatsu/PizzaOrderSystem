@@ -49,6 +49,7 @@
     <Compile Include="Consts.cs" />
     <Compile Include="Controller\PizzaOrderManagement.cs" />
     <Compile Include="Controller\ToppingOrderManagement.cs" />
+    <Compile Include="Enum\PizzaEnum.cs" />
     <Compile Include="Model\Pizza\BambinoPizza.cs" />
     <Compile Include="Model\IMenuItem.cs" />
     <Compile Include="Model\Pizza\MargheritaPizza.cs" />

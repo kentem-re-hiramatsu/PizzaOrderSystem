@@ -1,8 +1,10 @@
-﻿namespace PizzaOrderSystem.Model.Pizza
+﻿using PizzaOrderSystem.Enum;
+
+namespace PizzaOrderSystem.Model.Pizza
 {
     public interface IMenuItem
     {
         int GetPrice();
-        string GetName();
+        PizzaEnum GetName();
     }
 }
