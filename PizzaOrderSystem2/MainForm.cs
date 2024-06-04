@@ -114,7 +114,8 @@ namespace PizzaOrderSystem2
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
-
+            toppingOrderMana.LoadDataFile(pizzaOrderMana);
+            MainFormRefreshScreen();
         }
     }
 }
