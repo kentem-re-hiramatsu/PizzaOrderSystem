@@ -51,88 +51,46 @@ namespace PizzaOrderSystem2
             }
             DetailsListView.Items.Clear();
 
-            //選択したら詳細にピザがAddされている状態→追加処理のときにピザとトッピング両方を追加
+            //リファクタリング
             DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Name.ToString()).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Price.ToString());
 
             IMenuItem toppingOrder = pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0);
 
+            PizzaMenu pizza = null;
+            int count;
             //リファクタリング??
             switch (toppingOrder.Name)
             {
                 case "プレーンピザ":
-                    PlainPizza plainPizza = (PlainPizza)toppingOrder;
-                    var count = plainPizza.GetCountDefaultToppingList();
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        DetailsListView.Items.Add(plainPizza.GetDefaultTopping(i).Name).SubItems.Add(plainPizza.GetDefaultTopping(i).Price.ToString());
-                    }
-
-                    for (int i = 1; i < pizzaOrderMana.GetPizzaOrder(index).GetToppingOrderListCount(); i++)
-                    {
-                        DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString());
-                    }
+                    pizza = (PlainPizza)toppingOrder;
                     break;
 
                 case "マルゲリータピザ":
-                    MargheritaPizza margheritaPizza = (MargheritaPizza)toppingOrder;
-                    count = margheritaPizza.GetCountDefaultToppingList();
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        DetailsListView.Items.Add(margheritaPizza.GetDefaultTopping(i).Name).SubItems.Add(margheritaPizza.GetDefaultTopping(i).Price.ToString());
-                    }
-
-                    for (int i = 1; i < pizzaOrderMana.GetPizzaOrder(index).GetToppingOrderListCount(); i++)
-                    {
-                        DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString());
-                    }
+                    pizza = (MargheritaPizza)toppingOrder;
                     break;
 
                 case "シーフードピザ":
-                    SeafoodPizza seafoodPizza = (SeafoodPizza)toppingOrder;
-                    count = seafoodPizza.GetCountDefaultToppingList();
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        DetailsListView.Items.Add(seafoodPizza.GetDefaultTopping(i).Name).SubItems.Add(seafoodPizza.GetDefaultTopping(i).Price.ToString());
-                    }
-
-                    for (int i = 1; i < pizzaOrderMana.GetPizzaOrder(index).GetToppingOrderListCount(); i++)
-                    {
-                        DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString());
-                    }
+                    pizza = (SeafoodPizza)toppingOrder;
                     break;
 
                 case "ペスカトーレピザ":
-                    PescaTorePizza pescaTorePizza = (PescaTorePizza)toppingOrder;
-                    count = pescaTorePizza.GetCountDefaultToppingList();
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        DetailsListView.Items.Add(pescaTorePizza.GetDefaultTopping(i).Name).SubItems.Add(pescaTorePizza.GetDefaultTopping(i).Price.ToString());
-                    }
-
-                    for (int i = 1; i < pizzaOrderMana.GetPizzaOrder(index).GetToppingOrderListCount(); i++)
-                    {
-                        DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString());
-                    }
+                    pizza = (PescaTorePizza)toppingOrder;
                     break;
 
                 case "バンビーノピザ":
-                    BambinoPizza bambinoPizza = (BambinoPizza)toppingOrder;
-                    count = bambinoPizza.GetCountDefaultToppingList();
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        DetailsListView.Items.Add(bambinoPizza.GetDefaultTopping(i).Name).SubItems.Add(bambinoPizza.GetDefaultTopping(i).Price.ToString());
-                    }
-
-                    for (int i = 1; i < pizzaOrderMana.GetPizzaOrder(index).GetToppingOrderListCount(); i++)
-                    {
-                        DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString());
-                    }
+                    pizza = (BambinoPizza)toppingOrder;
                     break;
+            }
+            count = pizza.GetCountDefaultToppingList();
+
+            for (int i = 0; i < count; i++)
+            {
+                DetailsListView.Items.Add(pizza.GetDefaultTopping(i).Name).SubItems.Add(pizza.GetDefaultTopping(i).Price.ToString());
+            }
+
+            for (int i = 1; i < pizzaOrderMana.GetPizzaOrder(index).GetToppingOrderListCount(); i++)
+            {
+                DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString());
             }
         }
 
@@ -153,6 +111,11 @@ namespace PizzaOrderSystem2
         {
             DeleteButton.Enabled = OrderListView.SelectedItems.Count > 0;
             Changebutton.Enabled = OrderListView.SelectedItems.Count > 0;
+        }
+
+        private void MainForm_Load(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

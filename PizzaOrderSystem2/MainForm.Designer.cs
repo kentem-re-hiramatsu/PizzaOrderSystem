@@ -177,6 +177,7 @@
             this.Controls.Add(this.OrderButton);
             this.Name = "MainForm";
             this.Text = "ピザ注文リスト";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
