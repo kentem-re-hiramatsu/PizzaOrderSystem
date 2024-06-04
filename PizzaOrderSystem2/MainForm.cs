@@ -44,21 +44,20 @@ namespace PizzaOrderSystem2
         private void OrderListView_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             ChangeButtonState();
+
             var index = 0;
+
             if (OrderListView.SelectedItems.Count > 0)
             {
                 index = OrderListView.SelectedItems[0].Index;
             }
             DetailsListView.Items.Clear();
 
-            //リファクタリング
-            DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Name.ToString()).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Price.ToString());
-
             IMenuItem toppingOrder = pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0);
 
             PizzaMenu pizza = null;
             int count;
-            //リファクタリング??
+
             switch (toppingOrder.Name)
             {
                 case "プレーンピザ":
@@ -82,6 +81,7 @@ namespace PizzaOrderSystem2
                     break;
             }
             count = pizza.GetCountDefaultToppingList();
+            DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Name.ToString()).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Price.ToString());
 
             for (int i = 0; i < count; i++)
             {
