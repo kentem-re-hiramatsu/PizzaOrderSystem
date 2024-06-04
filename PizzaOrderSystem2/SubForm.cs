@@ -4,6 +4,7 @@ using Models.Pizza;
 using Models.Topping;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace sub
@@ -63,6 +64,11 @@ namespace sub
 
             OkButton.Enabled = e.CurrentValue == 0;
 
+            for (int i = 0; i < 10; i++)
+            {
+                ToppingListView.Items[i].Tag = true;
+            }
+
             //リファクタリングできそう？
             switch (e.Index)
             {
@@ -74,14 +80,15 @@ namespace sub
                         if (i == 0 || i == 6)
                         {
                             ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].BackColor = Color.Gray;
                             ToppingListView.Items[i].Tag = false;
                         }
                         else
                         {
                             ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].BackColor = Color.White;
                             ToppingListView.Items[i].Tag = true;
                         }
-
                     }
                     break;
 
@@ -93,14 +100,15 @@ namespace sub
                         if (i == 0 || i == 2 || i == 5 || i == 6)
                         {
                             ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].BackColor = Color.Gray;
                             ToppingListView.Items[i].Tag = false;
                         }
                         else
                         {
                             ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].BackColor = Color.White;
                             ToppingListView.Items[i].Tag = true;
                         }
-
                     }
                     break;
 
@@ -112,14 +120,15 @@ namespace sub
                         if (i == 0 || i == 3)
                         {
                             ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].BackColor = Color.Gray;
                             ToppingListView.Items[i].Tag = false;
                         }
                         else
                         {
                             ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].BackColor = Color.White;
                             ToppingListView.Items[i].Tag = true;
                         }
-
                     }
                     break;
 
@@ -131,14 +140,15 @@ namespace sub
                         if (i == 0 || i == 3 || i == 4)
                         {
                             ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].BackColor = Color.Gray;
                             ToppingListView.Items[i].Tag = false;
                         }
                         else
                         {
                             ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].BackColor = Color.White;
                             ToppingListView.Items[i].Tag = true;
                         }
-
                     }
                     break;
 
@@ -150,11 +160,13 @@ namespace sub
                         if (i == 0 || i == 6 || i == 7 || i == 8 || i == 9)
                         {
                             ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].BackColor = Color.Gray;
                             ToppingListView.Items[i].Tag = false;
                         }
                         else
                         {
                             ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].BackColor = Color.White;
                             ToppingListView.Items[i].Tag = true;
                         }
                     }
@@ -164,6 +176,10 @@ namespace sub
 
         private void ToppingListView_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            if (!(bool)ToppingListView.Items[e.Index].Tag)
+            {
+                e.NewValue = CheckState.Checked;
+            }
 
         }
 
