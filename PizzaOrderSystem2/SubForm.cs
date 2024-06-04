@@ -29,22 +29,22 @@ namespace sub
         {
             //あとでリファクタリング！！
             //Managerにいれる　SubItemsは使わない
-            MainMenuListView.Items.Add(new PlainPizza().GetName().ToString()).SubItems.Add($"￥{new PlainPizza().GetPrice()}");
-            MainMenuListView.Items.Add(new MargheritaPizza().GetName().ToString()).SubItems.Add($"￥{new MargheritaPizza().GetPrice()}");
-            MainMenuListView.Items.Add(new SeafoodPizza().GetName().ToString()).SubItems.Add($"￥{new SeafoodPizza().GetPrice()}");
-            MainMenuListView.Items.Add(new PescaTorePizza().GetName().ToString()).SubItems.Add($"￥{new PescaTorePizza().GetPrice()}");
-            MainMenuListView.Items.Add(new BambinoPizza().GetName().ToString()).SubItems.Add($"￥{new BambinoPizza().GetPrice()}");
+            MainMenuListView.Items.Add(new PlainPizza().Name.ToString()).SubItems.Add($"￥{new PlainPizza().Price}");
+            MainMenuListView.Items.Add(new MargheritaPizza().Name.ToString()).SubItems.Add($"￥{new MargheritaPizza().Price}");
+            MainMenuListView.Items.Add(new SeafoodPizza().Name.ToString()).SubItems.Add($"￥{new SeafoodPizza().Price}");
+            MainMenuListView.Items.Add(new PescaTorePizza().Name.ToString()).SubItems.Add($"￥{new PescaTorePizza().Price}");
+            MainMenuListView.Items.Add(new BambinoPizza().Name.ToString()).SubItems.Add($"￥{new BambinoPizza().Price}");
 
-            ToppingListView.Items.Add(new Cheese().GetName().ToString()).SubItems.Add($"￥{new Cheese().GetPrice()}");
-            ToppingListView.Items.Add(new FriedGarlic().GetName().ToString()).SubItems.Add($"￥{new FriedGarlic().GetPrice()}");
-            ToppingListView.Items.Add(new MozzarellaCheese().GetName().ToString()).SubItems.Add($"￥{new MozzarellaCheese().GetPrice()}");
-            ToppingListView.Items.Add(new SeafoodMix().GetName().ToString()).SubItems.Add($"￥{new SeafoodMix().GetPrice()}");
-            ToppingListView.Items.Add(new Scallops().GetName().ToString()).SubItems.Add($"￥{new Scallops().GetPrice()}");
-            ToppingListView.Items.Add(new Basil().GetName().ToString()).SubItems.Add($"￥{new Basil().GetPrice()}");
-            ToppingListView.Items.Add(new Tomato().GetName().ToString()).SubItems.Add($"￥{new Tomato().GetPrice()}");
-            ToppingListView.Items.Add(new Tuna().GetName().ToString()).SubItems.Add($"￥{new Tuna().GetPrice()}");
-            ToppingListView.Items.Add(new Corn().GetName().ToString()).SubItems.Add($"￥{new Corn().GetPrice()}");
-            ToppingListView.Items.Add(new Bacon().GetName().ToString()).SubItems.Add($"￥{new Bacon().GetPrice()}");
+            ToppingListView.Items.Add(new Cheese().Name.ToString()).SubItems.Add($"￥{new Cheese().Price}");
+            ToppingListView.Items.Add(new FriedGarlic().Name.ToString()).SubItems.Add($"￥{new FriedGarlic().Price}");
+            ToppingListView.Items.Add(new MozzarellaCheese().Name.ToString()).SubItems.Add($"￥{new MozzarellaCheese().Price}");
+            ToppingListView.Items.Add(new SeafoodMix().Name.ToString()).SubItems.Add($"￥{new SeafoodMix().Price}");
+            ToppingListView.Items.Add(new Scallops().Name.ToString()).SubItems.Add($"￥{new Scallops().Price}");
+            ToppingListView.Items.Add(new Basil().Name.ToString()).SubItems.Add($"￥{new Basil().Price}");
+            ToppingListView.Items.Add(new Tomato().Name.ToString()).SubItems.Add($"￥{new Tomato().Price}");
+            ToppingListView.Items.Add(new Tuna().Name.ToString()).SubItems.Add($"￥{new Tuna().Price}");
+            ToppingListView.Items.Add(new Corn().Name.ToString()).SubItems.Add($"￥{new Corn().Price}");
+            ToppingListView.Items.Add(new Bacon().Name.ToString()).SubItems.Add($"￥{new Bacon().Price}");
 
             MainMenuListView.Items[0].Checked = true;
         }

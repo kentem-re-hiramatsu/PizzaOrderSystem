@@ -47,9 +47,9 @@ namespace PizzaOrderSystemTest.ManagerTest
 
             var PizzaMenuTotalPrice = toppingOrderMana.GetTotalToppingPrice();
 
-            var pizzaPrice = new PlainPizza().GetPrice();
-            var tunaPrice = new Tuna().GetPrice();
-            var basilPrice = new Basil().GetPrice();
+            var pizzaPrice = new PlainPizza().Price;
+            var tunaPrice = new Tuna().Price;
+            var basilPrice = new Basil().Price;
 
             var TotalPrice = pizzaPrice + tunaPrice + basilPrice;
 

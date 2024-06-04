@@ -37,7 +37,7 @@ namespace Models.Manager
 
             for (int i = 0; i < GetToppingOrderListCount(); i++)
             {
-                total += _toppingOrderList[i].GetPrice();
+                total += _toppingOrderList[i].Price;
             }
             return total;
         }

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts.cs" />
+    <Compile Include="Enum\PizzaEnum.cs" />
+    <Compile Include="Enum\ToppingEnum.cs" />
     <Compile Include="IMenuItem.cs" />
     <Compile Include="Manager\PizzaOrderManagement.cs" />
     <Compile Include="Manager\ToppingOrderManagement.cs" />
