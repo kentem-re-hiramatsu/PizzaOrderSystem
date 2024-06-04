@@ -3,6 +3,7 @@ using Models.Manager;
 using Models.Pizza;
 using Models.Topping;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace sub
@@ -16,7 +17,6 @@ namespace sub
         {
             InitializeComponent();
             _pizzaOrderMana = pizzaOrderMana;
-            //_toppingOrderMana = toppingOrderMana;
         }
 
         private void SubForm_Load(object sender, EventArgs e)
@@ -48,6 +48,7 @@ namespace sub
             MainMenuListView.Items[0].Checked = true;
         }
 
+        //ピザ単一選択
         private void MainMenuListView_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int changedItemIndex = e.Index;
@@ -60,96 +61,103 @@ namespace sub
                 }
             }
 
-
             OkButton.Enabled = e.CurrentValue == 0;
 
-            //あとでリファクタリング！！
+            //リファクタリングできそう？
             switch (e.Index)
             {
-                //プレーンピザ
                 case 0:
                     _pizzaName = "プレーンピザ";
 
-                    ToppingListView.Items[0].Checked = true;
-                    ToppingListView.Items[6].Checked = true;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        if (i == 0 || i == 6)
+                        {
+                            ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].Tag = false;
+                        }
+                        else
+                        {
+                            ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].Tag = true;
+                        }
 
-                    ToppingListView.Items[1].Checked = false;
-                    ToppingListView.Items[2].Checked = false;
-                    ToppingListView.Items[3].Checked = false;
-                    ToppingListView.Items[4].Checked = false;
-                    ToppingListView.Items[5].Checked = false;
-                    ToppingListView.Items[7].Checked = false;
-                    ToppingListView.Items[8].Checked = false;
-                    ToppingListView.Items[9].Checked = false;
-
+                    }
                     break;
 
-                //マルゲリータピザ
                 case 1:
                     _pizzaName = "マルゲリータピザ";
 
-                    ToppingListView.Items[0].Checked = true;
-                    ToppingListView.Items[2].Checked = true;
-                    ToppingListView.Items[5].Checked = true;
-                    ToppingListView.Items[6].Checked = true;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        if (i == 0 || i == 2 || i == 5 || i == 6)
+                        {
+                            ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].Tag = false;
+                        }
+                        else
+                        {
+                            ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].Tag = true;
+                        }
 
-                    ToppingListView.Items[1].Checked = false;
-                    ToppingListView.Items[3].Checked = false;
-                    ToppingListView.Items[4].Checked = false;
-                    ToppingListView.Items[7].Checked = false;
-                    ToppingListView.Items[8].Checked = false;
-                    ToppingListView.Items[9].Checked = false;
+                    }
                     break;
 
-                //シーフードピザ
                 case 2:
                     _pizzaName = "シーフードピザ";
 
-                    ToppingListView.Items[0].Checked = true;
-                    ToppingListView.Items[3].Checked = true;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        if (i == 0 || i == 3)
+                        {
+                            ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].Tag = false;
+                        }
+                        else
+                        {
+                            ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].Tag = true;
+                        }
 
-                    ToppingListView.Items[1].Checked = false;
-                    ToppingListView.Items[2].Checked = false;
-                    ToppingListView.Items[4].Checked = false;
-                    ToppingListView.Items[5].Checked = false;
-                    ToppingListView.Items[6].Checked = false;
-                    ToppingListView.Items[7].Checked = false;
-                    ToppingListView.Items[8].Checked = false;
-                    ToppingListView.Items[9].Checked = false;
+                    }
                     break;
 
-                //ペスカトーレピザ
                 case 3:
                     _pizzaName = "ペスカトーレピザ";
 
-                    ToppingListView.Items[0].Checked = true;
-                    ToppingListView.Items[3].Checked = true;
-                    ToppingListView.Items[4].Checked = true;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        if (i == 0 || i == 3 || i == 4)
+                        {
+                            ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].Tag = false;
+                        }
+                        else
+                        {
+                            ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].Tag = true;
+                        }
 
-                    ToppingListView.Items[1].Checked = false;
-                    ToppingListView.Items[2].Checked = false;
-                    ToppingListView.Items[5].Checked = false;
-                    ToppingListView.Items[6].Checked = false;
-                    ToppingListView.Items[7].Checked = false;
-                    ToppingListView.Items[8].Checked = false;
-                    ToppingListView.Items[9].Checked = false;
+                    }
                     break;
 
-                //バンビーノピザ
                 case 4:
                     _pizzaName = "バンビーノピザ";
 
-                    ToppingListView.Items[0].Checked = true;
-                    ToppingListView.Items[6].Checked = true;
-                    ToppingListView.Items[7].Checked = true;
-                    ToppingListView.Items[8].Checked = true;
-                    ToppingListView.Items[9].Checked = true;
-
-                    ToppingListView.Items[1].Checked = false;
-                    ToppingListView.Items[2].Checked = false;
-                    ToppingListView.Items[3].Checked = false;
-                    ToppingListView.Items[4].Checked = false;
-                    ToppingListView.Items[5].Checked = false;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        if (i == 0 || i == 6 || i == 7 || i == 8 || i == 9)
+                        {
+                            ToppingListView.Items[i].Checked = true;
+                            ToppingListView.Items[i].Tag = false;
+                        }
+                        else
+                        {
+                            ToppingListView.Items[i].Checked = false;
+                            ToppingListView.Items[i].Tag = true;
+                        }
+                    }
                     break;
             }
         }
@@ -168,6 +176,19 @@ namespace sub
         {
             IMenuItem pizza = null;
             var toppingOrderMana = new ToppingOrderManagement();
+            var toppings = new List<(int, ToppingMenu toppingMenu)>
+            {
+                (0,new Cheese()),
+                (1,new FriedGarlic()),
+                (2,new MozzarellaCheese()),
+                (3,new SeafoodMix()),
+                (4,new Scallops()),
+                (5,new Basil()),
+                (6,new Tomato()),
+                (7,new Tuna()),
+                (8,new Corn()),
+                (9,new Bacon()),
+            };
 
             switch (_pizzaName)
             {
@@ -193,6 +214,12 @@ namespace sub
             }
             toppingOrderMana.AddToppingOrderList(pizza);
             _pizzaOrderMana.AddPizzaOrderList(toppingOrderMana);
+
+            foreach (var (index, topping) in toppings)
+            {
+                if (ToppingListView.Items[index].Checked && (bool)ToppingListView.Items[index].Tag)
+                    toppingOrderMana.AddToppingOrderList(topping);
+            }
             Close();
         }
     }

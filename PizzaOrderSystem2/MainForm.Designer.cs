@@ -138,6 +138,7 @@
             this.DeleteButton.TabIndex = 11;
             this.DeleteButton.Text = "取消";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // Changebutton
             // 
