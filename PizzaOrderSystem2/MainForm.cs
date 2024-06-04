@@ -51,15 +51,16 @@ namespace PizzaOrderSystem2
             }
             DetailsListView.Items.Clear();
 
+            //選択したら詳細にピザがAddされている状態→追加処理のときにピザとトッピング両方を追加
             DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).GetName().ToString()).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).GetPrice().ToString());
 
-            IMenuItem tmp = pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0);
+            IMenuItem toppingOrder = pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0);
 
-            //リファクタリング
-            switch (tmp.GetName())
+            //リファクタリング??
+            switch (toppingOrder.GetName())
             {
                 case "プレーンピザ":
-                    PlainPizza plainPizza = (PlainPizza)tmp;
+                    PlainPizza plainPizza = (PlainPizza)toppingOrder;
                     var count = plainPizza.GetCountDefaultToppingList();
 
                     for (int i = 0; i < count; i++)
@@ -74,7 +75,7 @@ namespace PizzaOrderSystem2
                     break;
 
                 case "マルゲリータピザ":
-                    MargheritaPizza margheritaPizza = (MargheritaPizza)tmp;
+                    MargheritaPizza margheritaPizza = (MargheritaPizza)toppingOrder;
                     count = margheritaPizza.GetCountDefaultToppingList();
 
                     for (int i = 0; i < count; i++)
@@ -89,7 +90,7 @@ namespace PizzaOrderSystem2
                     break;
 
                 case "シーフードピザ":
-                    SeafoodPizza seafoodPizza = (SeafoodPizza)tmp;
+                    SeafoodPizza seafoodPizza = (SeafoodPizza)toppingOrder;
                     count = seafoodPizza.GetCountDefaultToppingList();
 
                     for (int i = 0; i < count; i++)
@@ -104,7 +105,7 @@ namespace PizzaOrderSystem2
                     break;
 
                 case "ペスカトーレピザ":
-                    PescaTorePizza pescaTorePizza = (PescaTorePizza)tmp;
+                    PescaTorePizza pescaTorePizza = (PescaTorePizza)toppingOrder;
                     count = pescaTorePizza.GetCountDefaultToppingList();
 
                     for (int i = 0; i < count; i++)
@@ -119,7 +120,7 @@ namespace PizzaOrderSystem2
                     break;
 
                 case "バンビーノピザ":
-                    BambinoPizza bambinoPizza = (BambinoPizza)tmp;
+                    BambinoPizza bambinoPizza = (BambinoPizza)toppingOrder;
                     count = bambinoPizza.GetCountDefaultToppingList();
 
                     for (int i = 0; i < count; i++)

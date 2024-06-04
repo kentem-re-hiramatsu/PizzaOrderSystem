@@ -17,14 +17,7 @@ namespace Models.Topping
             _price = defaultPrice;
         }
 
-        public override string GetName()
-        {
-            return _name;
-        }
-
-        public override int GetPrice()
-        {
-            return _price;
-        }
+        public override string Name { get { return _name; } }
+        public override int Price { get { return _price; } }
     }
 }

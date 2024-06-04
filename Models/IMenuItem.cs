@@ -2,7 +2,7 @@
 {
     public interface IMenuItem
     {
-        int GetPrice();
-        string GetName();
+        int Price { get; }
+        string Name { get; }
     }
 }

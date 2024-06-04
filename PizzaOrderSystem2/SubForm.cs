@@ -128,7 +128,6 @@ namespace sub
             {
                 e.NewValue = CheckState.Checked;
             }
-
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
