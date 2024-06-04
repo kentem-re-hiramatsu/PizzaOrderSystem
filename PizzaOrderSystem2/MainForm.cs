@@ -33,6 +33,7 @@ namespace PizzaOrderSystem2
         private void MainFormRefreshScreen()
         {
             OrderListView.Items.Clear();
+            DetailsListView.Items.Clear();
             for (int i = 0; i < pizzaOrderMana.GetPizzaOrderListCount(); i++)
             {
                 OrderListView.Items.Add(pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(0).GetName().ToString()).SubItems.Add(pizzaOrderMana.GetPizzaOrder(i).GetTotalToppingPrice().ToString());
