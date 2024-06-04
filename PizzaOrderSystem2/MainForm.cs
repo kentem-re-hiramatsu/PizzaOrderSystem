@@ -36,7 +36,7 @@ namespace PizzaOrderSystem2
             DetailsListView.Items.Clear();
             for (int i = 0; i < pizzaOrderMana.GetPizzaOrderListCount(); i++)
             {
-                OrderListView.Items.Add(pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(0).Name.ToString()).SubItems.Add(pizzaOrderMana.GetPizzaOrder(i).GetTotalToppingPrice().ToString());
+                OrderListView.Items.Add(new ListViewItem(new string[] { pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(0).Name.ToString(), pizzaOrderMana.GetPizzaOrder(i).GetTotalToppingPrice().ToString() }));
             }
             TotalAmountLabel.Text = $"合計： ￥{pizzaOrderMana.GetCalculatePizzaTotalPrice()}";
         }
@@ -81,16 +81,15 @@ namespace PizzaOrderSystem2
                     break;
             }
             count = pizza.GetCountDefaultToppingList();
-            DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Name.ToString()).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Price.ToString());
-
+            DetailsListView.Items.Add(new ListViewItem(new string[] { pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Name.ToString(), pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Price.ToString() }));
             for (int i = 0; i < count; i++)
             {
-                DetailsListView.Items.Add(pizza.GetDefaultTopping(i).Name).SubItems.Add(pizza.GetDefaultTopping(i).Price.ToString());
+                DetailsListView.Items.Add(new ListViewItem(new string[] { pizza.GetDefaultTopping(i).Name, pizza.GetDefaultTopping(i).Price.ToString() }));
             }
 
             for (int i = 1; i < pizzaOrderMana.GetPizzaOrder(index).GetToppingOrderListCount(); i++)
             {
-                DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString());
+                DetailsListView.Items.Add(new ListViewItem(new string[] { pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name, pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString() }));
             }
         }
 
