@@ -43,12 +43,14 @@ namespace PizzaOrderSystem2
 
         private void OrderListView_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            ChangeButtonState();
             var index = 0;
             if (OrderListView.SelectedItems.Count > 0)
             {
                 index = OrderListView.SelectedItems[0].Index;
             }
             DetailsListView.Items.Clear();
+
             DetailsListView.Items.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).GetName().ToString()).SubItems.Add(pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).GetPrice().ToString());
 
             IMenuItem tmp = pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0);
@@ -143,6 +145,13 @@ namespace PizzaOrderSystem2
             }
             pizzaOrderMana.RemovePizzaOrderList(index);
             MainFormRefreshScreen();
+            ChangeButtonState();
+        }
+
+        public void ChangeButtonState()
+        {
+            DeleteButton.Enabled = OrderListView.SelectedItems.Count > 0;
+            Changebutton.Enabled = OrderListView.SelectedItems.Count > 0;
         }
     }
 }

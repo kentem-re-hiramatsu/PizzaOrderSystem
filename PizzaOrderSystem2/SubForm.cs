@@ -13,7 +13,7 @@ namespace sub
     {
         private string _pizzaName;
         private PizzaOrderManagement _pizzaOrderMana;
-        //ToppingOrderManagement _toppingOrderMana = new ToppingOrderManagement();
+
         public SubForm(PizzaOrderManagement pizzaOrderMana)
         {
             InitializeComponent();
@@ -49,11 +49,10 @@ namespace sub
             MainMenuListView.Items[0].Checked = true;
         }
 
-        //ピザ単一選択
         private void MainMenuListView_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int changedItemIndex = e.Index;
-
+            //ピザ単一選択
             foreach (ListViewItem item in MainMenuListView.Items)
             {
                 if (!MainMenuListView.Items[changedItemIndex].Checked)
@@ -69,108 +68,57 @@ namespace sub
                 ToppingListView.Items[i].Tag = true;
             }
 
-            //リファクタリングできそう？
+            var defaultToppingList = new List<int>();
+
             switch (e.Index)
             {
                 case 0:
                     _pizzaName = "プレーンピザ";
-
-                    for (int i = 0; i < 10; i++)
-                    {
-                        if (i == 0 || i == 6)
-                        {
-                            ToppingListView.Items[i].Checked = true;
-                            ToppingListView.Items[i].BackColor = Color.Gray;
-                            ToppingListView.Items[i].Tag = false;
-                        }
-                        else
-                        {
-                            ToppingListView.Items[i].Checked = false;
-                            ToppingListView.Items[i].BackColor = Color.White;
-                            ToppingListView.Items[i].Tag = true;
-                        }
-                    }
+                    defaultToppingList.Add(0);
+                    defaultToppingList.Add(6);
                     break;
 
                 case 1:
                     _pizzaName = "マルゲリータピザ";
-
-                    for (int i = 0; i < 10; i++)
-                    {
-                        if (i == 0 || i == 2 || i == 5 || i == 6)
-                        {
-                            ToppingListView.Items[i].Checked = true;
-                            ToppingListView.Items[i].BackColor = Color.Gray;
-                            ToppingListView.Items[i].Tag = false;
-                        }
-                        else
-                        {
-                            ToppingListView.Items[i].Checked = false;
-                            ToppingListView.Items[i].BackColor = Color.White;
-                            ToppingListView.Items[i].Tag = true;
-                        }
-                    }
+                    defaultToppingList.Add(0);
+                    defaultToppingList.Add(2);
+                    defaultToppingList.Add(5);
+                    defaultToppingList.Add(6);
                     break;
 
                 case 2:
                     _pizzaName = "シーフードピザ";
-
-                    for (int i = 0; i < 10; i++)
-                    {
-                        if (i == 0 || i == 3)
-                        {
-                            ToppingListView.Items[i].Checked = true;
-                            ToppingListView.Items[i].BackColor = Color.Gray;
-                            ToppingListView.Items[i].Tag = false;
-                        }
-                        else
-                        {
-                            ToppingListView.Items[i].Checked = false;
-                            ToppingListView.Items[i].BackColor = Color.White;
-                            ToppingListView.Items[i].Tag = true;
-                        }
-                    }
+                    defaultToppingList.Add(0);
+                    defaultToppingList.Add(3);
                     break;
 
                 case 3:
                     _pizzaName = "ペスカトーレピザ";
-
-                    for (int i = 0; i < 10; i++)
-                    {
-                        if (i == 0 || i == 3 || i == 4)
-                        {
-                            ToppingListView.Items[i].Checked = true;
-                            ToppingListView.Items[i].BackColor = Color.Gray;
-                            ToppingListView.Items[i].Tag = false;
-                        }
-                        else
-                        {
-                            ToppingListView.Items[i].Checked = false;
-                            ToppingListView.Items[i].BackColor = Color.White;
-                            ToppingListView.Items[i].Tag = true;
-                        }
-                    }
+                    defaultToppingList.Add(0);
+                    defaultToppingList.Add(3);
+                    defaultToppingList.Add(4);
                     break;
 
                 case 4:
                     _pizzaName = "バンビーノピザ";
-
-                    for (int i = 0; i < 10; i++)
-                    {
-                        if (i == 0 || i == 6 || i == 7 || i == 8 || i == 9)
-                        {
-                            ToppingListView.Items[i].Checked = true;
-                            ToppingListView.Items[i].BackColor = Color.Gray;
-                            ToppingListView.Items[i].Tag = false;
-                        }
-                        else
-                        {
-                            ToppingListView.Items[i].Checked = false;
-                            ToppingListView.Items[i].BackColor = Color.White;
-                            ToppingListView.Items[i].Tag = true;
-                        }
-                    }
+                    defaultToppingList.Add(0);
+                    defaultToppingList.Add(6);
+                    defaultToppingList.Add(7);
+                    defaultToppingList.Add(8);
+                    defaultToppingList.Add(9);
                     break;
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                ToppingListView.Items[i].Checked = false;
+                ToppingListView.Items[i].BackColor = Color.White;
+                ToppingListView.Items[i].Tag = true;
+            }
+            foreach (int defaultToppin in defaultToppingList)
+            {
+                ToppingListView.Items[defaultToppin].Checked = true;
+                ToppingListView.Items[defaultToppin].BackColor = Color.Gray;
+                ToppingListView.Items[defaultToppin].Tag = false;
             }
         }
 
