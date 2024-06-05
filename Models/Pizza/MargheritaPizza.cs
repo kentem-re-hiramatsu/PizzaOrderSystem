@@ -19,5 +19,4 @@ namespace Models.Pizza
             _defaultToppingList.Add(new Basil(0));
         }
     }
-
 }

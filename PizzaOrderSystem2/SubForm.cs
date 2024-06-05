@@ -14,10 +14,15 @@ namespace sub
         private string _pizzaName;
         private PizzaOrderManagement _pizzaOrderMana;
 
+        private List<PizzaMenu> _pizzaMenuList = new List<PizzaMenu>();
+        private List<ToppingMenu> _toppingMenuList = new List<ToppingMenu>();
+
         public SubForm(PizzaOrderManagement pizzaOrderMana)
         {
             InitializeComponent();
             _pizzaOrderMana = pizzaOrderMana;
+            GetPizzaMenuList();
+            GetToppingMenuList();
         }
 
         private void SubForm_Load(object sender, EventArgs e)
@@ -27,35 +32,13 @@ namespace sub
 
         private void RefreshScreen()
         {
-            var pizzaList = new PizzaMenu[]
+            for (int i = 0; i < _pizzaMenuList.Count; i++)
             {
-                new PlainPizza(),
-                new MargheritaPizza(),
-                new SeafoodPizza(),
-                new PescaTorePizza(),
-                new BambinoPizza()
-            };
-
-            var toppingList = new ToppingMenu[]
-            {
-                new Cheese(),
-                new FriedGarlic(),
-                new MozzarellaCheese(),
-                new SeafoodMix(),
-                new Scallops(),
-                new Basil(),
-                new Tomato(),
-                new Tuna(),
-                new Corn(),
-                new Bacon(),
-            };
-            for (int i = 0; i < pizzaList.Length; i++)
-            {
-                MainMenuListView.Items.Add(new ListViewItem(new string[] { pizzaList[i].Name, pizzaList[i].Price.ToString() }));
+                MainMenuListView.Items.Add(new ListViewItem(new string[] { _pizzaMenuList[i].Name, _pizzaMenuList[i].Price.ToString() }));
             }
-            for (int i = 0; i < toppingList.Length; i++)
+            for (int i = 0; i < _toppingMenuList.Count; i++)
             {
-                ToppingListView.Items.Add(new ListViewItem(new string[] { toppingList[i].Name, toppingList[i].Price.ToString() }));
+                ToppingListView.Items.Add(new ListViewItem(new string[] { _toppingMenuList[i].Name, _toppingMenuList[i].Price.ToString() }));
             }
 
             MainMenuListView.Items[0].Checked = true;
@@ -198,6 +181,22 @@ namespace sub
                     toppingOrderMana.AddToppingOrderList(topping);
             }
             Close();
+        }
+
+        public void GetPizzaMenuList()
+        {
+            for (int i = 0; i < _pizzaOrderMana.GetPizzaMenuListCount(); i++)
+            {
+                _pizzaMenuList.Add(_pizzaOrderMana.GetPizzaMenu(i));
+            }
+        }
+
+        public void GetToppingMenuList()
+        {
+            for (int i = 0; i < _pizzaOrderMana.GetToppingMenuListCount(); i++)
+            {
+                _toppingMenuList.Add(_pizzaOrderMana.GetToppingMenu(i));
+            }
         }
     }
 }

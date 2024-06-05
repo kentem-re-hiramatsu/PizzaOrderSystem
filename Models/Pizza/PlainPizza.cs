@@ -17,5 +17,4 @@ namespace Models.Pizza
             _defaultToppingList.Add(new Tomato(0));
         }
     }
-
 }

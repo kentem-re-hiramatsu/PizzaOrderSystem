@@ -83,6 +83,7 @@ namespace PizzaOrderSystem2
             }
             count = pizza.GetCountDefaultToppingList();
             DetailsListView.Items.Add(new ListViewItem(new string[] { pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Name.ToString(), pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Price.ToString() }));
+
             for (int i = 0; i < count; i++)
             {
                 DetailsListView.Items.Add(new ListViewItem(new string[] { pizza.GetDefaultTopping(i).Name, pizza.GetDefaultTopping(i).Price.ToString() }));

@@ -18,5 +18,4 @@ namespace Models.Pizza
             _defaultToppingList.Add(new Scallops(0));
         }
     }
-
 }

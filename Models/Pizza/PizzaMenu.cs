@@ -22,6 +22,5 @@ namespace Models.Pizza
         }
 
         public abstract void SetDefaultTopping();
-
     }
 }
