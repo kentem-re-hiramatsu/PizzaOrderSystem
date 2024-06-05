@@ -2,7 +2,9 @@
 {
     public abstract class PizzaMenu : IMenuItem
     {
-        public abstract int GetPrice();
-        public abstract string GetName();
+        public abstract string Name { get; }
+        public abstract int Price { get; }
+        public abstract int GetCountDefaultToppingList();
+        public abstract IMenuItem GetDefaultTopping(int index);
     }
 }

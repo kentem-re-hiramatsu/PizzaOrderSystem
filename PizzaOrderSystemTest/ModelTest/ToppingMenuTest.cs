@@ -11,8 +11,8 @@ namespace PizzaOrderSystemTest
         public void CheeseTest()
         {
             var cheese = new Cheese();
-            var name = cheese.GetName();
-            var price = cheese.GetPrice();
+            var name = cheese.Name;
+            var price = cheese.Price;
 
             Assert.AreEqual(name, "チーズ");
             Assert.AreEqual(price, 100);
@@ -30,8 +30,8 @@ namespace PizzaOrderSystemTest
         public void FriedGarlicTest()
         {
             var friedGarlic = new FriedGarlic();
-            var name = friedGarlic.GetName();
-            var price = friedGarlic.GetPrice();
+            var name = friedGarlic.Name;
+            var price = friedGarlic.Price;
 
             Assert.AreEqual(name, "フライドガーリック");
             Assert.AreEqual(price, 150);
@@ -48,8 +48,8 @@ namespace PizzaOrderSystemTest
         public void MozzarellaCheeseTest()
         {
             var mozzarellaCheese = new MozzarellaCheese();
-            var name = mozzarellaCheese.GetName();
-            var price = mozzarellaCheese.GetPrice();
+            var name = mozzarellaCheese.Name;
+            var price = mozzarellaCheese.Price;
 
             Assert.AreEqual(name, "モッツァレラチーズ");
             Assert.AreEqual(price, 300);
@@ -66,8 +66,8 @@ namespace PizzaOrderSystemTest
         public void SeafoodMixTest()
         {
             var seafoodMix = new SeafoodMix();
-            var name = seafoodMix.GetName();
-            var price = seafoodMix.GetPrice();
+            var name = seafoodMix.Name;
+            var price = seafoodMix.Price;
 
             Assert.AreEqual(name, "シーフードミックス");
             Assert.AreEqual(price, 500);
@@ -84,8 +84,8 @@ namespace PizzaOrderSystemTest
         public void ScallopsTest()
         {
             var scallops = new Scallops();
-            var name = scallops.GetName();
-            var price = scallops.GetPrice();
+            var name = scallops.Name;
+            var price = scallops.Price;
 
             Assert.AreEqual(name, "ホタテ");
             Assert.AreEqual(price, 500);
@@ -102,8 +102,8 @@ namespace PizzaOrderSystemTest
         public void BasilTest()
         {
             var basil = new Basil();
-            var name = basil.GetName();
-            var price = basil.GetPrice();
+            var name = basil.Name;
+            var price = basil.Price;
 
             Assert.AreEqual(name, "バジル");
             Assert.AreEqual(price, 100);
@@ -120,8 +120,8 @@ namespace PizzaOrderSystemTest
         public void TomatoTest()
         {
             var tomato = new Tomato();
-            var name = tomato.GetName();
-            var price = tomato.GetPrice();
+            var name = tomato.Name;
+            var price = tomato.Price;
 
             Assert.AreEqual(name, "トマト");
             Assert.AreEqual(price, 250);
@@ -138,8 +138,8 @@ namespace PizzaOrderSystemTest
         public void TunaTest()
         {
             var tuna = new Tuna();
-            var name = tuna.GetName();
-            var price = tuna.GetPrice();
+            var name = tuna.Name;
+            var price = tuna.Price;
 
             Assert.AreEqual(name, "ツナ");
             Assert.AreEqual(price, 250);
@@ -156,8 +156,8 @@ namespace PizzaOrderSystemTest
         public void CornTest()
         {
             var corn = new Corn();
-            var name = corn.GetName();
-            var price = corn.GetPrice();
+            var name = corn.Name;
+            var price = corn.Price;
 
             Assert.AreEqual(name, "コーン");
             Assert.AreEqual(price, 250);
@@ -174,8 +174,8 @@ namespace PizzaOrderSystemTest
         public void BaconTest()
         {
             var bacon = new Bacon();
-            var name = bacon.GetName();
-            var price = bacon.GetPrice();
+            var name = bacon.Name;
+            var price = bacon.Price;
 
             Assert.AreEqual(name, "ベーコン");
             Assert.AreEqual(price, 250);

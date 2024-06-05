@@ -16,20 +16,16 @@ namespace Models.Pizza
             _defaultToppingList.Add(new MozzarellaCheese(0));
             _defaultToppingList.Add(new Basil(0));
         }
-        public override int GetPrice()
-        {
-            return _price;
-        }
-        public override string GetName()
-        {
-            return _name;
-        }
-        public int GetCountDefaultToppingList()
+
+        public override string Name { get { return _name; } }
+        public override int Price { get { return _price; } }
+
+        public override int GetCountDefaultToppingList()
         {
             return _defaultToppingList.Count;
         }
 
-        public IMenuItem GetDefaultTopping(int index)
+        public override IMenuItem GetDefaultTopping(int index)
         {
             return _defaultToppingList[index];
         }

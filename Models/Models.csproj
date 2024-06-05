@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts.cs" />
+    <Compile Include="Enum\Enums.cs" />
+    <Compile Include="Enum\PizzaEnum.cs" />
+    <Compile Include="Enum\ToppingEnum.cs" />
     <Compile Include="IMenuItem.cs" />
     <Compile Include="Manager\PizzaOrderManagement.cs" />
     <Compile Include="Manager\ToppingOrderManagement.cs" />
@@ -63,6 +66,9 @@
     <Compile Include="Topping\Tomato.cs" />
     <Compile Include="Topping\ToppingMenu.cs" />
     <Compile Include="Topping\Tuna.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\PizzaData.text" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

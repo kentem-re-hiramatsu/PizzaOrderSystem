@@ -132,6 +132,7 @@
             // 
             // DeleteButton
             // 
+            this.DeleteButton.Enabled = false;
             this.DeleteButton.Location = new System.Drawing.Point(225, 26);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(100, 40);
@@ -142,6 +143,7 @@
             // 
             // Changebutton
             // 
+            this.Changebutton.Enabled = false;
             this.Changebutton.Location = new System.Drawing.Point(119, 26);
             this.Changebutton.Name = "Changebutton";
             this.Changebutton.Size = new System.Drawing.Size(100, 40);
@@ -175,6 +177,8 @@
             this.Controls.Add(this.OrderButton);
             this.Name = "MainForm";
             this.Text = "ピザ注文リスト";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
