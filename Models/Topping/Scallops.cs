@@ -4,20 +4,18 @@ namespace Models.Topping
 {
     public class Scallops : ToppingMenu
     {
-        private string _name = "ホタテ";
-        private int _price = 500;
-
-        public Scallops() { }
-        public Scallops(int defaultPrice)
+        public Scallops(int defaultPrice = 500)
         {
-            if (defaultPrice != 0)
+            _name = "ホタテ";
+
+            if (defaultPrice == 0 || defaultPrice == 500)
+            {
+                _price = defaultPrice;
+            }
+            else
             {
                 throw new Exception(Consts.ERROR_MESSAGE_DEFAULT_PRICE);
             }
-            _price = defaultPrice;
         }
-        public override string Name { get { return _name; } }
-        public override int Price { get { return _price; } }
     }
-
 }

@@ -4,21 +4,18 @@ namespace Models.Topping
 {
     public class SeafoodMix : ToppingMenu
     {
-        private string _name = "シーフードミックス";
-        private int _price = 500;
-
-        public SeafoodMix() { }
-        public SeafoodMix(int defaultPrice)
+        public SeafoodMix(int defaultPrice = 500)
         {
-            if (defaultPrice != 0)
+            _name = "シーフードミックス";
+
+            if (defaultPrice == 0 || defaultPrice == 500)
+            {
+                _price = defaultPrice;
+            }
+            else
             {
                 throw new Exception(Consts.ERROR_MESSAGE_DEFAULT_PRICE);
             }
-            _price = defaultPrice;
         }
-
-        public override string Name { get { return _name; } }
-        public override int Price { get { return _price; } }
     }
-
 }

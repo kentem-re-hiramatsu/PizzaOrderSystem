@@ -4,20 +4,18 @@ namespace Models.Topping
 {
     public class Basil : ToppingMenu
     {
-        private string _name = "バジル";
-        private int _price = 100;
-
-        public Basil() { }
-        public Basil(int defaultPrice)
+        public Basil(int defaultPrice = 100)
         {
-            if (defaultPrice != 0)
+            _name = "バジル";
+
+            if (defaultPrice == 0 || defaultPrice == 100)
+            {
+                _price = defaultPrice;
+            }
+            else
             {
                 throw new Exception(Consts.ERROR_MESSAGE_DEFAULT_PRICE);
             }
-            _price = defaultPrice;
         }
-        public override string Name { get { return _name; } }
-        public override int Price { get { return _price; } }
     }
-
 }

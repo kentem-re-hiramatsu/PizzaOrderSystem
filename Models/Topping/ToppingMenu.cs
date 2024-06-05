@@ -2,7 +2,10 @@
 {
     public abstract class ToppingMenu : IMenuItem
     {
-        public abstract string Name { get; }
-        public abstract int Price { get; }
+        protected string _name;
+        protected int _price;
+
+        public string Name { get { return _name; } }
+        public int Price { get { return _price; } }
     }
 }
