@@ -79,6 +79,7 @@ namespace PizzaOrderSystem2
                 case "バンビーノピザ":
                     pizza = (BambinoPizza)toppingOrder;
                     break;
+                default: break;
             }
             count = pizza.GetCountDefaultToppingList();
             DetailsListView.Items.Add(new ListViewItem(new string[] { pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Name.ToString(), pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Price.ToString() }));
@@ -116,6 +117,11 @@ namespace PizzaOrderSystem2
         {
             toppingOrderMana.LoadDataFile(pizzaOrderMana);
             MainFormRefreshScreen();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            toppingOrderMana.SavePizzaDataFile(pizzaOrderMana);
         }
     }
 }

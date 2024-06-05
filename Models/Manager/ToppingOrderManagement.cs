@@ -88,6 +88,7 @@ namespace Models.Manager
                     case "バンビーノピザ":
                         top.AddToppingOrderList(new BambinoPizza());
                         break;
+                    default: break;
                 }
                 for (int j = 1; j < pizzaData.Length; j++)
                 {
@@ -132,9 +133,33 @@ namespace Models.Manager
                         case "ベーコン":
                             top.AddToppingOrderList(new Bacon());
                             break;
+                        default: break;
                     }
                 }
                 pizzaOrderMana.AddPizzaOrderList(top);
+            }
+        }
+        public void SavePizzaDataFile(PizzaOrderManagement pizzaOrderMana)
+        {
+            var pizzaOrderListCount = pizzaOrderMana.GetPizzaOrderListCount();
+
+            File.WriteAllText(_pizzaDataFilePath, "");
+
+            for (int i = 0; i < pizzaOrderListCount; i++)
+            {
+                var toppingListCount = pizzaOrderMana.GetPizzaOrder(i).GetToppingOrderListCount();
+
+                for (int j = 0; j < toppingListCount; j++)
+                {
+                    if (j == toppingListCount - 1)
+                    {
+                        File.AppendAllText(_pizzaDataFilePath, pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(j).Name + Environment.NewLine);
+                    }
+                    else
+                    {
+                        File.AppendAllText(_pizzaDataFilePath, $"{pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(j).Name},");
+                    }
+                }
             }
         }
     }

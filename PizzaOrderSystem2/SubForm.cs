@@ -85,13 +85,13 @@ namespace sub
             switch (e.Index)
             {
                 case 0:
-                    _pizzaName = "プレーンピザ";
+                    _pizzaName = new PlainPizza().Name;
                     defaultToppingList.Add(0);
                     defaultToppingList.Add(6);
                     break;
 
                 case 1:
-                    _pizzaName = "マルゲリータピザ";
+                    _pizzaName = new MargheritaPizza().Name;
                     defaultToppingList.Add(0);
                     defaultToppingList.Add(2);
                     defaultToppingList.Add(5);
@@ -99,26 +99,27 @@ namespace sub
                     break;
 
                 case 2:
-                    _pizzaName = "シーフードピザ";
+                    _pizzaName = new SeafoodPizza().Name;
                     defaultToppingList.Add(0);
                     defaultToppingList.Add(3);
                     break;
 
                 case 3:
-                    _pizzaName = "ペスカトーレピザ";
+                    _pizzaName = new PescaTorePizza().Name;
                     defaultToppingList.Add(0);
                     defaultToppingList.Add(3);
                     defaultToppingList.Add(4);
                     break;
 
                 case 4:
-                    _pizzaName = "バンビーノピザ";
+                    _pizzaName = new BambinoPizza().Name;
                     defaultToppingList.Add(0);
                     defaultToppingList.Add(6);
                     defaultToppingList.Add(7);
                     defaultToppingList.Add(8);
                     defaultToppingList.Add(9);
                     break;
+                default: break;
             }
             for (int i = 0; i < 10; i++)
             {
@@ -186,6 +187,7 @@ namespace sub
                 case "バンビーノピザ":
                     pizza = new BambinoPizza();
                     break;
+                default: break;
             }
             toppingOrderMana.AddToppingOrderList(pizza);
             _pizzaOrderMana.AddPizzaOrderList(toppingOrderMana);
