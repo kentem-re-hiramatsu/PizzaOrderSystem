@@ -9,7 +9,6 @@ namespace PizzaOrderSystem2
     public partial class MainForm : Form
     {
         PizzaOrderManagement pizzaOrderMana = new PizzaOrderManagement();
-        ToppingOrderManagement toppingOrderMana = new ToppingOrderManagement();
         public MainForm()
         {
             InitializeComponent();
@@ -30,34 +29,49 @@ namespace PizzaOrderSystem2
             Close();
         }
 
+        /// <summary>
+        /// 注文リストビューと詳細リストビューを更新
+        /// </summary>
         private void MainFormRefreshScreen()
         {
+            //注文リストと詳細をクリア
             OrderListView.Items.Clear();
             DetailsListView.Items.Clear();
-            for (int i = 0; i < pizzaOrderMana.GetPizzaOrderListCount(); i++)
+
+            //注文リストViewにピザ追加
+            foreach (IMenuItem pizza in pizzaOrderMana.GetPizzaOrderList())
             {
-                OrderListView.Items.Add(new ListViewItem(new string[] { pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(0).Name.ToString(), pizzaOrderMana.GetPizzaOrder(i).GetTotalToppingPrice().ToString() }));
+                OrderListView.Items.Add(new ListViewItem(new string[] { pizza.Name, (pizza.Price + ((PizzaMenu)pizza).GetTotalToppingPrice()).ToString() }));
             }
-            TotalAmountLabel.Text = $"合計： ￥{pizzaOrderMana.GetCalculatePizzaTotalPrice()}";
+
+            //注文合計更新
+            TotalAmountLabel.Text = $"合計： ￥{pizzaOrderMana.GetPizzaTotalPrice()}";
         }
 
+        /// <summary>
+        /// ピザを選択した時に詳細を出力する処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OrderListView_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             ChangeButtonState();
 
             var index = 0;
 
+            //ピザを選択しているか判断
             if (OrderListView.SelectedItems.Count > 0)
             {
                 index = OrderListView.SelectedItems[0].Index;
             }
             DetailsListView.Items.Clear();
 
-            IMenuItem toppingOrder = pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0);
+            IMenuItem toppingOrder = pizzaOrderMana.GetPizzaOrder(index);
 
             PizzaMenu pizza = null;
             int count;
 
+            //リファクタリング
             switch (toppingOrder.Name)
             {
                 case "プレーンピザ":
@@ -81,17 +95,13 @@ namespace PizzaOrderSystem2
                     break;
                 default: break;
             }
-            count = pizza.GetCountDefaultToppingList();
-            DetailsListView.Items.Add(new ListViewItem(new string[] { pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Name.ToString(), pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(0).Price.ToString() }));
 
+            count = pizza.GetCountToppingList();
+
+            //ピザ選択時詳細リストビューに追加する処理
             for (int i = 0; i < count; i++)
             {
-                DetailsListView.Items.Add(new ListViewItem(new string[] { pizza.GetDefaultTopping(i).Name, pizza.GetDefaultTopping(i).Price.ToString() }));
-            }
-
-            for (int i = 1; i < pizzaOrderMana.GetPizzaOrder(index).GetToppingOrderListCount(); i++)
-            {
-                DetailsListView.Items.Add(new ListViewItem(new string[] { pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Name, pizzaOrderMana.GetPizzaOrder(index).GetToppingOrder(i).Price.ToString() }));
+                DetailsListView.Items.Add(new ListViewItem(new string[] { pizza.GetTopping(i).Name, pizza.GetTopping(i).Price.ToString() }));
             }
         }
 
@@ -116,13 +126,28 @@ namespace PizzaOrderSystem2
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
-            toppingOrderMana.LoadDataFile(pizzaOrderMana);
-            MainFormRefreshScreen();
+            //toppingOrderMana.LoadDataFile(pizzaOrderMana);
+            //MainFormRefreshScreen();
         }
 
+        //ERROR修正未完
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            toppingOrderMana.SavePizzaDataFile(pizzaOrderMana);
+            //toppingOrderMana.SavePizzaDataFile(pizzaOrderMana);
+        }
+
+        private void Changebutton_Click(object sender, System.EventArgs e)
+        {
+            //int index;
+            //index = OrderListView.SelectedItems[0].Index;
+
+            //var changeForm = new ChangeForm(pizzaOrderMana, index);
+
+            //if (DialogResult.OK == changeForm.ShowDialog())
+            //{
+            //    MainFormRefreshScreen();
+            //}
+            //MainFormRefreshScreen();
         }
     }
 }

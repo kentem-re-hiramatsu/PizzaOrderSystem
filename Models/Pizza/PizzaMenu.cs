@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Models.Topping;
+using System.Collections.Generic;
 
 namespace Models.Pizza
 {
@@ -6,19 +7,35 @@ namespace Models.Pizza
     {
         protected string _name;
         protected int _price;
-        protected List<IMenuItem> _defaultToppingList = new List<IMenuItem>();
+        protected List<IMenuItem> _toppingList = new List<IMenuItem>();
 
         public string Name { get { return _name; } }
         public int Price { get { return _price; } }
 
-        public int GetCountDefaultToppingList()
+        public int GetCountToppingList()
         {
-            return _defaultToppingList.Count;
+            return _toppingList.Count;
         }
 
-        public IMenuItem GetDefaultTopping(int index)
+        public IMenuItem GetTopping(int index)
         {
-            return _defaultToppingList[index];
+            return _toppingList[index];
+        }
+
+        public void SetTopping(ToppingMenu topping)
+        {
+            _toppingList.Add(topping);
+        }
+
+        public int GetTotalToppingPrice()
+        {
+            int totalPrice = 0;
+
+            foreach (var item in _toppingList)
+            {
+                totalPrice += item.Price;
+            }
+            return totalPrice;
         }
 
         public abstract void SetDefaultTopping();

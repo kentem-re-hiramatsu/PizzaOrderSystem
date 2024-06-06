@@ -13,8 +13,8 @@ namespace Models.Pizza
 
         public override void SetDefaultTopping()
         {
-            _defaultToppingList.Add(new Cheese(0));
-            _defaultToppingList.Add(new Tomato(0));
+            _toppingList.Add(new Cheese(0));
+            _toppingList.Add(new Tomato(0));
         }
     }
 }

@@ -8,7 +8,7 @@ namespace PizzaOrderSystemTest.ManagerTest
     [TestClass]
     public class PizzaOrderListTest
     {
-        PizzaOrderManagement pizzaOrderMana = new PizzaOrderManagement();
+        PizzaOrderManagement2 pizzaOrderMana = new PizzaOrderManagement2();
         ToppingOrderManagement toppingOrderMana = new ToppingOrderManagement();
 
         [TestMethod]

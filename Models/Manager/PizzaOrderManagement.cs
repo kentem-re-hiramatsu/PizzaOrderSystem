@@ -1,18 +1,21 @@
 ﻿using Models.Pizza;
 using Models.Topping;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Models.Manager
 {
     public class PizzaOrderManagement
     {
-        private List<ToppingOrderManagement> _pizzaOrderList;
+        private List<IMenuItem> _pizzaOrderList;
         private List<PizzaMenu> _pizzaMenuList;
         private List<ToppingMenu> _toppingMenuList;
+        private string _pizzaDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../Models/Data/PizzaData.text");
 
         public PizzaOrderManagement()
         {
-            _pizzaOrderList = new List<ToppingOrderManagement>();
+            _pizzaOrderList = new List<IMenuItem>();
             _pizzaMenuList = new List<PizzaMenu>();
             _toppingMenuList = new List<ToppingMenu>();
 
@@ -20,14 +23,18 @@ namespace Models.Manager
             SetToppingMenuList();
         }
 
-        public void AddPizzaOrderList(ToppingOrderManagement pizzaMenu)
+        public void AddPizzaOrderList(IMenuItem pizzaMenu)
         {
             _pizzaOrderList.Add(pizzaMenu);
         }
 
-        public ToppingOrderManagement GetPizzaOrder(int index)
+        public IMenuItem GetPizzaOrder(int index)
         {
             return _pizzaOrderList[index];
+        }
+        public IReadOnlyCollection<IMenuItem> GetPizzaOrderList()
+        {
+            return _pizzaOrderList;
         }
 
         public int GetPizzaOrderListCount()
@@ -40,21 +47,23 @@ namespace Models.Manager
             _pizzaOrderList.RemoveAt(index);
         }
 
-        public int GetCalculatePizzaTotalPrice()
+        public int GetPizzaTotalPrice()
         {
             int totalPrice = 0;
 
             for (int i = 0; i < GetPizzaOrderListCount(); i++)
             {
-                totalPrice += _pizzaOrderList[i].GetTotalToppingPrice();
+                totalPrice += _pizzaOrderList[i].Price + ((PizzaMenu)_pizzaOrderList[i]).GetTotalToppingPrice();
             }
 
             return totalPrice;
         }
+
         public PizzaMenu GetPizzaMenu(int index)
         {
             return _pizzaMenuList[index];
         }
+
         private void SetPizzaMenuList()
         {
             _pizzaMenuList.Add(new PlainPizza());
@@ -74,10 +83,16 @@ namespace Models.Manager
             return _toppingMenuList[index];
         }
 
+        public IReadOnlyCollection<ToppingMenu> GetToppingMenuList()
+        {
+            return _toppingMenuList;
+        }
+
         public int GetToppingMenuListCount()
         {
             return _toppingMenuList.Count;
         }
+
         private void SetToppingMenuList()
         {
             _toppingMenuList.Add(new Cheese());
@@ -91,5 +106,130 @@ namespace Models.Manager
             _toppingMenuList.Add(new Corn());
             _toppingMenuList.Add(new Bacon());
         }
+
+        public PizzaEnum GetPizzaEnum(int index)
+        {
+            for (int i = 0; i < _pizzaMenuList.Count; i++)
+            {
+                if (index == (int)(PizzaEnum)i)
+                    return (PizzaEnum)i;
+            }
+            return 0;
+        }
+        ///ERROR修正未完成
+        //public void LoadDataFile()
+        //{
+        //    var pizzaList = new List<string>();
+
+        //    using (StreamReader streamReader = new StreamReader(_pizzaDataFilePath, Encoding.UTF8))
+        //    {
+        //        while (streamReader.EndOfStream == false)
+        //        {
+        //            string line = streamReader.ReadLine();
+        //            pizzaList.Add(line);
+        //        }
+        //    }
+
+        //    var pizzaCount = pizzaList.Count;
+
+        //    for (int i = 0; i < pizzaCount; i++)
+        //    {
+        //        string[] pizzaData = pizzaList[i].Split(',');
+
+        //        switch (pizzaData[0])
+        //        {
+        //            case "プレーンピザ":
+        //                AddPizzaOrderList(new PlainPizza());
+        //                break;
+
+        //            case "マルゲリータピザ":
+        //                AddPizzaOrderList(new MargheritaPizza());
+        //                break;
+
+        //            case "シーフードピザ":
+        //                AddPizzaOrderList(new SeafoodPizza());
+        //                break;
+
+        //            case "ペスカトーレピザ":
+        //                AddPizzaOrderList(new PescaTorePizza());
+        //                break;
+
+        //            case "バンビーノピザ":
+        //                AddPizzaOrderList(new BambinoPizza());
+        //                break;
+        //            default: break;
+        //        }
+        //        for (int j = 1; j < pizzaData.Length; j++)
+        //        {
+        //            switch (pizzaData[j])
+        //            {
+        //                case "チーズ":
+        //                    (PizzaMenu)AddPizzaOrderList();
+        //                    break;
+
+        //                case "フライドガーリック":
+        //                    AddPizzaOrderList(new FriedGarlic());
+        //                    break;
+
+        //                case "モッツァレラチーズ":
+        //                    AddPizzaOrderList(new MozzarellaCheese());
+        //                    break;
+
+        //                case "シーフードミックス":
+        //                    AddPizzaOrderList(new SeafoodMix());
+        //                    break;
+
+        //                case "ホタテ":
+        //                    AddPizzaOrderList(new Scallops());
+        //                    break;
+
+        //                case "バジル":
+        //                    AddPizzaOrderList(new Basil());
+        //                    break;
+
+        //                case "トマト":
+        //                    AddPizzaOrderList(new Tomato());
+        //                    break;
+
+        //                case "ツナ":
+        //                    AddPizzaOrderList(new Tuna());
+        //                    break;
+
+        //                case "コーン":
+        //                    AddPizzaOrderList(new Corn());
+        //                    break;
+
+        //                case "ベーコン":
+        //                    AddPizzaOrderList(new Bacon());
+        //                    break;
+        //                default: break;
+        //            }
+        //        }
+        //        pizzaOrderMana.AddPizzaOrderList(top);
+        //    }
+        //}
+        //public void SavePizzaDataFile()
+        //{
+        //    var pizzaOrderListCount = pizzaOrderMana.GetPizzaOrderListCount();
+
+        //    File.WriteAllText(_pizzaDataFilePath, "");
+
+        //    for (int i = 0; i < pizzaOrderListCount; i++)
+        //    {
+        //        var toppingListCount = pizzaOrderMana.GetPizzaOrder(i).GetToppingOrderListCount();
+
+        //        for (int j = 0; j < toppingListCount; j++)
+        //        {
+        //            if (j == toppingListCount - 1)
+        //            {
+        //                File.AppendAllText(_pizzaDataFilePath, pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(j).Name + Environment.NewLine);
+        //            }
+        //            else
+        //            {
+        //                File.AppendAllText(_pizzaDataFilePath, $"{pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(j).Name},");
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

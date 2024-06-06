@@ -1,6 +1,6 @@
-﻿namespace sub
+﻿namespace WindowsFormsApp1
 {
-    partial class SubForm
+    partial class ChangeForm
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -43,20 +43,20 @@
             // OkButton
             // 
             this.OkButton.Enabled = false;
-            this.OkButton.Location = new System.Drawing.Point(263, 427);
+            this.OkButton.Location = new System.Drawing.Point(265, 438);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(100, 40);
-            this.OkButton.TabIndex = 11;
+            this.OkButton.TabIndex = 17;
             this.OkButton.Text = "OK";
             this.OkButton.UseVisualStyleBackColor = true;
             this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(157, 427);
+            this.CancelButton.Location = new System.Drawing.Point(159, 438);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(100, 40);
-            this.CancelButton.TabIndex = 10;
+            this.CancelButton.TabIndex = 16;
             this.CancelButton.Text = "キャンセル";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -68,13 +68,13 @@
             this.columnHeader3,
             this.columnHeader4});
             this.ToppingListView.HideSelection = false;
-            this.ToppingListView.Location = new System.Drawing.Point(12, 201);
+            this.ToppingListView.Location = new System.Drawing.Point(14, 212);
             this.ToppingListView.Name = "ToppingListView";
             this.ToppingListView.Size = new System.Drawing.Size(351, 220);
-            this.ToppingListView.TabIndex = 9;
+            this.ToppingListView.TabIndex = 15;
             this.ToppingListView.UseCompatibleStateImageBehavior = false;
             this.ToppingListView.View = System.Windows.Forms.View.Details;
-            this.ToppingListView.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ToppingListView_ItemCheck);
+            this.ToppingListView.SelectedIndexChanged += new System.EventHandler(this.ToppingListView_SelectedIndexChanged);
             // 
             // columnHeader3
             // 
@@ -93,14 +93,14 @@
             this.columnHeader1,
             this.columnHeader2});
             this.MainMenuListView.HideSelection = false;
-            this.MainMenuListView.Location = new System.Drawing.Point(12, 35);
+            this.MainMenuListView.Location = new System.Drawing.Point(14, 46);
             this.MainMenuListView.MultiSelect = false;
             this.MainMenuListView.Name = "MainMenuListView";
             this.MainMenuListView.Size = new System.Drawing.Size(351, 140);
-            this.MainMenuListView.TabIndex = 8;
+            this.MainMenuListView.TabIndex = 14;
             this.MainMenuListView.UseCompatibleStateImageBehavior = false;
             this.MainMenuListView.View = System.Windows.Forms.View.Details;
-            this.MainMenuListView.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.MainMenuListView_ItemCheck_1);
+            this.MainMenuListView.SelectedIndexChanged += new System.EventHandler(this.MainMenuListView_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -116,23 +116,23 @@
             // 
             this.ToppingLabel.AutoSize = true;
             this.ToppingLabel.Font = new System.Drawing.Font("MS UI Gothic", 10F);
-            this.ToppingLabel.Location = new System.Drawing.Point(9, 184);
+            this.ToppingLabel.Location = new System.Drawing.Point(11, 195);
             this.ToppingLabel.Name = "ToppingLabel";
             this.ToppingLabel.Size = new System.Drawing.Size(56, 14);
-            this.ToppingLabel.TabIndex = 7;
+            this.ToppingLabel.TabIndex = 13;
             this.ToppingLabel.Text = "トッピング";
             // 
             // MainMenuLabel
             // 
             this.MainMenuLabel.AutoSize = true;
             this.MainMenuLabel.Font = new System.Drawing.Font("MS UI Gothic", 10F);
-            this.MainMenuLabel.Location = new System.Drawing.Point(9, 8);
+            this.MainMenuLabel.Location = new System.Drawing.Point(11, 19);
             this.MainMenuLabel.Name = "MainMenuLabel";
             this.MainMenuLabel.Size = new System.Drawing.Size(77, 14);
-            this.MainMenuLabel.TabIndex = 6;
+            this.MainMenuLabel.TabIndex = 12;
             this.MainMenuLabel.Text = "メインメニュー";
             // 
-            // SubForm
+            // ChangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -143,9 +143,9 @@
             this.Controls.Add(this.MainMenuListView);
             this.Controls.Add(this.ToppingLabel);
             this.Controls.Add(this.MainMenuLabel);
-            this.Name = "SubForm";
-            this.Text = "注文画面";
-            this.Load += new System.EventHandler(this.SubForm_Load);
+            this.Name = "ChangeForm";
+            this.Text = "変更画面";
+            this.Load += new System.EventHandler(this.ChangeForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

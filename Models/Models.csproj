@@ -46,6 +46,7 @@
     <Compile Include="Enum\ToppingEnum.cs" />
     <Compile Include="IMenuItem.cs" />
     <Compile Include="Manager\PizzaOrderManagement.cs" />
+    <Compile Include="Manager\PizzaOrderManagement2.cs" />
     <Compile Include="Manager\ToppingOrderManagement.cs" />
     <Compile Include="Pizza\BambinoPizza.cs" />
     <Compile Include="Pizza\MargheritaPizza.cs" />

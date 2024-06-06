@@ -150,6 +150,7 @@
             this.Changebutton.TabIndex = 10;
             this.Changebutton.Text = "変更";
             this.Changebutton.UseVisualStyleBackColor = true;
+            this.Changebutton.Click += new System.EventHandler(this.Changebutton_Click);
             // 
             // OrderButton
             // 
