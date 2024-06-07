@@ -1,5 +1,6 @@
 ﻿using Models.Topping;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Models.Pizza
 {
@@ -30,12 +31,7 @@ namespace Models.Pizza
 
         public int GetPizzaTotalPrice()
         {
-            int totalPrice = 0;
-
-            foreach (var topping in _toppingList)
-            {
-                totalPrice += topping.Price;
-            }
+            int totalPrice = _toppingList.Select(x => x.Price).Sum();
 
             return totalPrice + _price;
         }

@@ -97,6 +97,7 @@ namespace sub
                     item.Checked = false;
                 }
             }
+
             //すべてのトッピングを初期化
             for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
             {
@@ -118,9 +119,9 @@ namespace sub
                 var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(e.Index);
 
                 //任意のDefaultトッピングを追加
-                for (int i = 0; i < pizzaInstance.ToppingList.Count; i++)
+                foreach (var pizza in pizzaInstance.ToppingList)
                 {
-                    defaultToppings.Add(pizzaInstance.GetTopping(i));
+                    defaultToppings.Add(pizza);
                 }
 
                 //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理

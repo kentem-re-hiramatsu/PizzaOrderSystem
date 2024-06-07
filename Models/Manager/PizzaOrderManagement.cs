@@ -3,6 +3,7 @@ using Models.Topping;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Models.Manager
 {
@@ -61,14 +62,7 @@ namespace Models.Manager
         /// <returns></returns>
         public int GetTotalPrice()
         {
-            int totalPrice = 0;
-
-            for (int i = 0; i < _pizzaOrderList.Count; i++)
-            {
-                totalPrice += ((PizzaMenu)_pizzaOrderList[i]).GetPizzaTotalPrice();
-            }
-
-            return totalPrice;
+            return _pizzaOrderList.Select(x => ((PizzaMenu)x).GetPizzaTotalPrice()).Sum();
         }
 
         /// <summary>
