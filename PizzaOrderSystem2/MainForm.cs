@@ -103,14 +103,14 @@ namespace PizzaOrderSystem2
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
-            //toppingOrderMana.LoadDataFile(pizzaOrderMana);
-            //MainFormRefreshScreen();
+            //pizzaOrderMana.LoadDataFile();
+            MainFormRefreshScreen();
         }
 
         //ERROR修正未完
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //toppingOrderMana.SavePizzaDataFile(pizzaOrderMana);
+            pizzaOrderMana.SavePizzaDataFile();
         }
 
         private void Changebutton_Click(object sender, System.EventArgs e)

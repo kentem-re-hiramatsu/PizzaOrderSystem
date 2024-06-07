@@ -112,7 +112,7 @@ namespace Models.Manager
         //{
         //    var pizzaList = new List<string>();
 
-        //    using (StreamReader streamReader = new StreamReader(_pizzaDataFilePath, Encoding.UTF8))
+        //    using (StreamReader streamReader = new StreamReader(_pizzaDataFilePath, System.Text.Encoding.UTF8))
         //    {
         //        while (streamReader.EndOfStream == false)
         //        {
@@ -199,28 +199,28 @@ namespace Models.Manager
         //        pizzaOrderMana.AddPizzaOrderList(top);
         //    }
         //}
-        //public void SavePizzaDataFile()
-        //{
-        //    var pizzaOrderListCount = pizzaOrderMana.GetPizzaOrderListCount();
+        public void SavePizzaDataFile()
+        {
+            var pizzaOrderListCount = GetPizzaOrderListCount();
 
-        //    File.WriteAllText(_pizzaDataFilePath, "");
+            File.WriteAllText(_pizzaDataFilePath, "");
 
-        //    for (int i = 0; i < pizzaOrderListCount; i++)
-        //    {
-        //        var toppingListCount = pizzaOrderMana.GetPizzaOrder(i).GetToppingOrderListCount();
-
-        //        for (int j = 0; j < toppingListCount; j++)
-        //        {
-        //            if (j == toppingListCount - 1)
-        //            {
-        //                File.AppendAllText(_pizzaDataFilePath, pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(j).Name + Environment.NewLine);
-        //            }
-        //            else
-        //            {
-        //                File.AppendAllText(_pizzaDataFilePath, $"{pizzaOrderMana.GetPizzaOrder(i).GetToppingOrder(j).Name},");
-        //            }
-        //        }
-        //    }
-        //}
+            for (int i = 0; i < pizzaOrderListCount; i++)
+            {
+                var toppingListCount = ((PizzaMenu)GetPizzaOrder(i)).GetCountToppingList();
+                File.AppendAllText(_pizzaDataFilePath, $"{((PizzaMenu)GetPizzaOrder(i)).Name},");
+                for (int j = 0; j < toppingListCount; j++)
+                {
+                    if (j == toppingListCount - 1)
+                    {
+                        File.AppendAllText(_pizzaDataFilePath, ((PizzaMenu)GetPizzaOrder(i)).GetTopping(j).Name + Environment.NewLine);
+                    }
+                    else
+                    {
+                        File.AppendAllText(_pizzaDataFilePath, $"{((PizzaMenu)GetPizzaOrder(i)).GetTopping(j).Name},");
+                    }
+                }
+            }
+        }
     }
 }
