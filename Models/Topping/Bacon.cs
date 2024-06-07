@@ -8,13 +8,13 @@ namespace Models.Topping
         {
             _name = "ベーコン";
 
-            if (defaultPrice == 0 || defaultPrice == 250)
+            if (defaultPrice == -1)
             {
                 _price = defaultPrice;
             }
             else
             {
-                throw new Exception(Consts.ERROR_MESSAGE_DEFAULT_PRICE);
+                throw new Exception(Consts.ERROR_MESSAGE);
             }
         }
     }

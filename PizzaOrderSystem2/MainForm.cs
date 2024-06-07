@@ -8,7 +8,7 @@ namespace PizzaOrderSystem2
 {
     public partial class MainForm : Form
     {
-        PizzaOrderManagement pizzaOrderMana = new PizzaOrderManagement();
+        private PizzaOrderManagement _pizzaOrderMana = new PizzaOrderManagement();
         public MainForm()
         {
             InitializeComponent();
@@ -16,7 +16,7 @@ namespace PizzaOrderSystem2
 
         private void OrderButton_Click(object sender, System.EventArgs e)
         {
-            var subForm = new SubForm(pizzaOrderMana);
+            var subForm = new SubForm(_pizzaOrderMana);
             if (DialogResult.OK == subForm.ShowDialog())
             {
                 MainFormRefreshScreen();
@@ -39,13 +39,13 @@ namespace PizzaOrderSystem2
             DetailsListView.Items.Clear();
 
             //注文リストViewにピザ追加
-            foreach (IMenuItem pizza in pizzaOrderMana.GetPizzaOrderList())
+            foreach (IMenuItem pizza in _pizzaOrderMana.GetPizzaOrderList())
             {
                 OrderListView.Items.Add(new ListViewItem(new string[] { pizza.Name, (pizza.Price + ((PizzaMenu)pizza).GetTotalToppingPrice()).ToString() }));
             }
 
             //注文合計更新
-            TotalAmountLabel.Text = $"合計： ￥{pizzaOrderMana.GetPizzaTotalPrice()}";
+            TotalAmountLabel.Text = $"合計： ￥{_pizzaOrderMana.GetPizzaTotalPrice()}";
         }
 
         /// <summary>
@@ -57,17 +57,12 @@ namespace PizzaOrderSystem2
         {
             ChangeButtonState();
 
-            var index = 0;
+            int index = GetSelectedIndex();
 
-            //ピザを選択しているか判断
-            if (OrderListView.SelectedItems.Count > 0)
-            {
-                index = OrderListView.SelectedItems[0].Index;
-            }
             DetailsListView.Items.Clear();
 
             //選択したピザを取得
-            IMenuItem pizzaOrder = pizzaOrderMana.GetPizzaOrder(index);
+            IMenuItem pizzaOrder = _pizzaOrderMana.GetPizzaOrder(index);
 
             PizzaMenu pizza = (PizzaMenu)pizzaOrder;
 
@@ -82,14 +77,9 @@ namespace PizzaOrderSystem2
 
         private void DeleteButton_Click(object sender, System.EventArgs e)
         {
-            int index = 0;
+            int index = GetSelectedIndex();
 
-            //選択されたか
-            if (OrderListView.SelectedItems.Count > 0)
-            {
-                index = OrderListView.SelectedItems[0].Index;
-            }
-            pizzaOrderMana.RemovePizzaOrderList(index);
+            _pizzaOrderMana.RemovePizzaOrderList(index);
             MainFormRefreshScreen();
             ChangeButtonState();
         }
@@ -103,14 +93,29 @@ namespace PizzaOrderSystem2
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
-            pizzaOrderMana.LoadDataFile();
+            _pizzaOrderMana.LoadDataFile();
             MainFormRefreshScreen();
         }
 
         //ERROR修正未完
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            pizzaOrderMana.SavePizzaDataFile();
+            _pizzaOrderMana.SavePizzaDataFile();
+        }
+
+        /// <summary>
+        /// 選択されたリストビューのindexを返す
+        /// </summary>
+        /// <returns></returns>
+        public int GetSelectedIndex()
+        {
+            int index = 0;
+
+            if (OrderListView.SelectedItems.Count > 0)
+            {
+                index = OrderListView.SelectedItems[0].Index;
+            }
+            return index;
         }
 
         private void Changebutton_Click(object sender, System.EventArgs e)
