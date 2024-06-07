@@ -12,6 +12,7 @@ namespace Models.Manager
         private List<IMenuItem> _pizzaOrderList;
         private List<PizzaMenu> _pizzaMenuList;
         private List<ToppingMenu> _toppingMenuList;
+
         public IReadOnlyCollection<IMenuItem> PizzaOrderList { get { return _pizzaOrderList; } }
         public IReadOnlyCollection<PizzaMenu> PizzaMenuList { get { return _pizzaMenuList; } }
         public IReadOnlyCollection<ToppingMenu> ToppingMenuList { get { return _toppingMenuList; } }

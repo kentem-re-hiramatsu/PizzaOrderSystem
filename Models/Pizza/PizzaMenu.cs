@@ -36,6 +36,6 @@ namespace Models.Pizza
             return totalPrice + _price;
         }
 
-        public abstract void SetDefaultTopping();
+        protected abstract void SetDefaultTopping();
     }
 }

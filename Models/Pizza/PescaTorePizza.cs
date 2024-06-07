@@ -13,7 +13,7 @@ namespace Models.Pizza
             _price = DEFAULTPRICE;
         }
 
-        public override void SetDefaultTopping()
+        protected override void SetDefaultTopping()
         {
             _toppingList.Add(new Cheese(0));
             _toppingList.Add(new SeafoodMix(0));
