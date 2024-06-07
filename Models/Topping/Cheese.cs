@@ -8,7 +8,7 @@ namespace Models.Topping
         {
             _name = "チーズ";
 
-            if (defaultPrice == -1)
+            if (defaultPrice != -1)
             {
                 _price = defaultPrice;
             }

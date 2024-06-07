@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Models.Topping
 {
     public class Tomato : ToppingMenu
@@ -7,7 +8,7 @@ namespace Models.Topping
         {
             _name = "トマト";
 
-            if (defaultPrice == -1)
+            if (defaultPrice != -1)
             {
                 _price = defaultPrice;
             }
