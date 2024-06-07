@@ -4,11 +4,10 @@ namespace Models.Pizza
 {
     public class MargheritaPizza : PizzaMenu
     {
-        public MargheritaPizza()
+        public MargheritaPizza() : base()
         {
             _name = "マルゲリータピザ";
             _price = 1500;
-            SetDefaultTopping();
         }
 
         public override void SetDefaultTopping()

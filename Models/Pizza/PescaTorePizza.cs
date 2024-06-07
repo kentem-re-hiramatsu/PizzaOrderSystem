@@ -4,11 +4,10 @@ namespace Models.Pizza
 {
     public class PescaTorePizza : PizzaMenu
     {
-        public PescaTorePizza()
+        public PescaTorePizza() : base()
         {
             _name = "ペスカトーレピザ";
             _price = 1800;
-            SetDefaultTopping();
         }
 
         public override void SetDefaultTopping()

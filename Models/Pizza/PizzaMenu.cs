@@ -12,6 +12,11 @@ namespace Models.Pizza
         public string Name { get { return _name; } }
         public int Price { get { return _price; } }
 
+        public PizzaMenu()
+        {
+            SetDefaultTopping();
+        }
+
         public int GetCountToppingList()
         {
             return _toppingList.Count;
