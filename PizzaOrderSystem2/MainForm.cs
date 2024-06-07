@@ -103,7 +103,7 @@ namespace PizzaOrderSystem2
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
-            //pizzaOrderMana.LoadDataFile();
+            pizzaOrderMana.LoadDataFile();
             MainFormRefreshScreen();
         }
 

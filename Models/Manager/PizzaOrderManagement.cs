@@ -64,6 +64,18 @@ namespace Models.Manager
             return _pizzaMenuList[index];
         }
 
+        public int GetPizzaMenuIndex(string name)
+        {
+            for (int i = 0; i < GetPizzaMenuListCount(); i++)
+            {
+                if (name == GetPizzaMenu(i).Name)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         private void SetPizzaMenuList()
         {
             _pizzaMenuList.Add(new PlainPizza());
@@ -81,6 +93,17 @@ namespace Models.Manager
         public ToppingMenu GetToppingMenu(int index)
         {
             return _toppingMenuList[index];
+        }
+        public int GetToppingIndex(string name)
+        {
+            for (int i = 0; i < GetToppingMenuListCount(); i++)
+            {
+                if (name == GetToppingMenu(i).Name)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         public IReadOnlyCollection<ToppingMenu> GetToppingMenuList()
@@ -108,116 +131,64 @@ namespace Models.Manager
         }
 
         ///ERROR修正未完成
-        //public void LoadDataFile()
-        //{
-        //    var pizzaList = new List<string>();
+        public void LoadDataFile()
+        {
+            var pizzaList = new List<string>();
 
-        //    using (StreamReader streamReader = new StreamReader(_pizzaDataFilePath, System.Text.Encoding.UTF8))
-        //    {
-        //        while (streamReader.EndOfStream == false)
-        //        {
-        //            string line = streamReader.ReadLine();
-        //            pizzaList.Add(line);
-        //        }
-        //    }
+            using (StreamReader streamReader = new StreamReader(_pizzaDataFilePath, System.Text.Encoding.UTF8))
+            {
+                while (streamReader.EndOfStream == false)
+                {
+                    string line = streamReader.ReadLine();
+                    pizzaList.Add(line);
+                }
+            }
 
-        //    var pizzaCount = pizzaList.Count;
+            var pizzaCount = pizzaList.Count;
 
-        //    for (int i = 0; i < pizzaCount; i++)
-        //    {
-        //        string[] pizzaData = pizzaList[i].Split(',');
+            for (int i = 0; i < pizzaCount; i++)
+            {
+                string[] pizzaData = pizzaList[i].Split(',');
 
-        //        switch (pizzaData[0])
-        //        {
-        //            case "プレーンピザ":
-        //                AddPizzaOrderList(new PlainPizza());
-        //                break;
+                var pizzaOrdermana = new PizzaOrderManagement();
 
-        //            case "マルゲリータピザ":
-        //                AddPizzaOrderList(new MargheritaPizza());
-        //                break;
+                var pizza = pizzaOrdermana.GetPizzaMenu(int.Parse(pizzaData[0]));
 
-        //            case "シーフードピザ":
-        //                AddPizzaOrderList(new SeafoodPizza());
-        //                break;
+                var Count = pizza.GetCountToppingList() + 1;
 
-        //            case "ペスカトーレピザ":
-        //                AddPizzaOrderList(new PescaTorePizza());
-        //                break;
+                ToppingMenu topping = null;
 
-        //            case "バンビーノピザ":
-        //                AddPizzaOrderList(new BambinoPizza());
-        //                break;
-        //            default: break;
-        //        }
-        //        for (int j = 1; j < pizzaData.Length; j++)
-        //        {
-        //            switch (pizzaData[j])
-        //            {
-        //                case "チーズ":
-        //                    (PizzaMenu)AddPizzaOrderList();
-        //                    break;
-
-        //                case "フライドガーリック":
-        //                    AddPizzaOrderList(new FriedGarlic());
-        //                    break;
-
-        //                case "モッツァレラチーズ":
-        //                    AddPizzaOrderList(new MozzarellaCheese());
-        //                    break;
-
-        //                case "シーフードミックス":
-        //                    AddPizzaOrderList(new SeafoodMix());
-        //                    break;
-
-        //                case "ホタテ":
-        //                    AddPizzaOrderList(new Scallops());
-        //                    break;
-
-        //                case "バジル":
-        //                    AddPizzaOrderList(new Basil());
-        //                    break;
-
-        //                case "トマト":
-        //                    AddPizzaOrderList(new Tomato());
-        //                    break;
-
-        //                case "ツナ":
-        //                    AddPizzaOrderList(new Tuna());
-        //                    break;
-
-        //                case "コーン":
-        //                    AddPizzaOrderList(new Corn());
-        //                    break;
-
-        //                case "ベーコン":
-        //                    AddPizzaOrderList(new Bacon());
-        //                    break;
-        //                default: break;
-        //            }
-        //        }
-        //        pizzaOrderMana.AddPizzaOrderList(top);
-        //    }
-        //}
+                for (int j = Count; j < pizzaData.Length; j++)
+                {
+                    topping = GetToppingMenu(int.Parse(pizzaData[j]));
+                    pizza.SetTopping(topping);
+                }
+                AddPizzaOrderList(pizza);
+            }
+        }
         public void SavePizzaDataFile()
         {
             var pizzaOrderListCount = GetPizzaOrderListCount();
 
             File.WriteAllText(_pizzaDataFilePath, "");
-
             for (int i = 0; i < pizzaOrderListCount; i++)
             {
                 var toppingListCount = ((PizzaMenu)GetPizzaOrder(i)).GetCountToppingList();
-                File.AppendAllText(_pizzaDataFilePath, $"{((PizzaMenu)GetPizzaOrder(i)).Name},");
+                var pizzaIndex = GetPizzaMenuIndex(((PizzaMenu)GetPizzaOrder(i)).Name);
+
+                File.AppendAllText(_pizzaDataFilePath, $"{pizzaIndex},");
+
                 for (int j = 0; j < toppingListCount; j++)
                 {
+                    var toppingindex = GetToppingIndex(((PizzaMenu)GetPizzaOrder(i)).GetTopping(j).Name);
+
                     if (j == toppingListCount - 1)
                     {
-                        File.AppendAllText(_pizzaDataFilePath, ((PizzaMenu)GetPizzaOrder(i)).GetTopping(j).Name + Environment.NewLine);
+                        File.AppendAllText(_pizzaDataFilePath, (toppingindex + Environment.NewLine));
                     }
                     else
                     {
-                        File.AppendAllText(_pizzaDataFilePath, $"{((PizzaMenu)GetPizzaOrder(i)).GetTopping(j).Name},");
+                        File.AppendAllText(_pizzaDataFilePath, $"{toppingindex},");
                     }
                 }
             }
