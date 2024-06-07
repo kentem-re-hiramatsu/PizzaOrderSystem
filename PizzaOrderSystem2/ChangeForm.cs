@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
         }
         public void GetPizzaMenuList()
         {
-            for (int i = 0; i < _pizzaOrderMana.GetPizzaMenuListCount(); i++)
+            for (int i = 0; i < _pizzaOrderMana.PizzaMenuList.Count; i++)
             {
                 _pizzaMenuList.Add(_pizzaOrderMana.GetPizzaMenu(i));
             }
@@ -51,7 +51,7 @@ namespace WindowsFormsApp1
 
         public void GetToppingMenuList()
         {
-            for (int i = 0; i < _pizzaOrderMana.GetToppingMenuListCount(); i++)
+            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
             {
                 _toppingMenuList.Add(_pizzaOrderMana.GetToppingMenu(i));
             }

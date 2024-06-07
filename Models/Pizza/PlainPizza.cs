@@ -4,10 +4,13 @@ namespace Models.Pizza
 {
     public class PlainPizza : PizzaMenu
     {
+        const string NAME = "プレーンピザ";
+        const int DEFAULTPRICE = 1200;
+
         public PlainPizza() : base()
         {
-            _name = "プレーンピザ";
-            _price = 1200;
+            _name = NAME;
+            _price = DEFAULTPRICE;
         }
 
         public override void SetDefaultTopping()

@@ -13,7 +13,7 @@ namespace PizzaOrderSystemTest
 
             Assert.AreEqual("プレーンピザ", plainPizza.Name);
             Assert.AreEqual(1200, plainPizza.Price);
-            Assert.AreEqual(2, plainPizza.GetCountToppingList());
+            Assert.AreEqual(2, plainPizza.ToppingList.Count);
 
             Assert.AreEqual("チーズ", plainPizza.GetTopping(0).Name);
             Assert.AreEqual(0, plainPizza.GetTopping(0).Price);
@@ -29,7 +29,7 @@ namespace PizzaOrderSystemTest
 
             Assert.AreEqual("マルゲリータピザ", margheritaPizza.Name);
             Assert.AreEqual(1500, margheritaPizza.Price);
-            Assert.AreEqual(4, margheritaPizza.GetCountToppingList());
+            Assert.AreEqual(4, margheritaPizza.ToppingList.Count);
 
             Assert.AreEqual("チーズ", margheritaPizza.GetTopping(0).Name);
             Assert.AreEqual(0, margheritaPizza.GetTopping(0).Price);
@@ -51,7 +51,7 @@ namespace PizzaOrderSystemTest
 
             Assert.AreEqual("シーフードピザ", seafoodPizza.Name);
             Assert.AreEqual(1400, seafoodPizza.Price);
-            Assert.AreEqual(2, seafoodPizza.GetCountToppingList());
+            Assert.AreEqual(2, seafoodPizza.ToppingList.Count);
 
             Assert.AreEqual("チーズ", seafoodPizza.GetTopping(0).Name);
             Assert.AreEqual(0, seafoodPizza.GetTopping(0).Price);
@@ -67,7 +67,7 @@ namespace PizzaOrderSystemTest
 
             Assert.AreEqual("ペスカトーレピザ", pescaTorePizza.Name);
             Assert.AreEqual(1800, pescaTorePizza.Price);
-            Assert.AreEqual(3, pescaTorePizza.GetCountToppingList());
+            Assert.AreEqual(3, pescaTorePizza.ToppingList.Count);
 
             Assert.AreEqual("チーズ", pescaTorePizza.GetTopping(0).Name);
             Assert.AreEqual(0, pescaTorePizza.GetTopping(0).Price);
@@ -86,7 +86,7 @@ namespace PizzaOrderSystemTest
 
             Assert.AreEqual("バンビーノピザ", bambinoPizza.Name);
             Assert.AreEqual(1600, bambinoPizza.Price);
-            Assert.AreEqual(5, bambinoPizza.GetCountToppingList());
+            Assert.AreEqual(5, bambinoPizza.ToppingList.Count);
 
             Assert.AreEqual("チーズ", bambinoPizza.GetTopping(0).Name);
             Assert.AreEqual(0, bambinoPizza.GetTopping(0).Price);

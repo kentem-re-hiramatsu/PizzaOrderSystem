@@ -39,13 +39,13 @@ namespace PizzaOrderSystem2
             DetailsListView.Items.Clear();
 
             //注文リストViewにピザ追加
-            foreach (IMenuItem pizza in _pizzaOrderMana.GetPizzaOrderList())
+            foreach (IMenuItem pizza in _pizzaOrderMana.PizzaOrderList)
             {
-                OrderListView.Items.Add(new ListViewItem(new string[] { pizza.Name, (pizza.Price + ((PizzaMenu)pizza).GetTotalToppingPrice()).ToString() }));
+                OrderListView.Items.Add(new ListViewItem(new string[] { pizza.Name, ((PizzaMenu)pizza).GetPizzaTotalPrice().ToString() }));
             }
 
             //注文合計更新
-            TotalAmountLabel.Text = $"合計： ￥{_pizzaOrderMana.GetPizzaTotalPrice()}";
+            TotalAmountLabel.Text = $"合計： ￥{_pizzaOrderMana.GetTotalPrice()}";
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace PizzaOrderSystem2
 
             PizzaMenu pizza = (PizzaMenu)pizzaOrder;
 
-            int count = pizza.GetCountToppingList();
+            int count = pizza.ToppingList.Count;
 
             //ピザ選択時詳細リストビューに追加する処理
             for (int i = 0; i < count; i++)

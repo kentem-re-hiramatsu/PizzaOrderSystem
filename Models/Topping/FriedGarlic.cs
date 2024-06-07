@@ -4,9 +4,12 @@ namespace Models.Topping
 {
     public class FriedGarlic : ToppingMenu
     {
-        public FriedGarlic(int defaultPrice = 150)
+        const int DEFAULTPRICE = 150;
+        const string NAME = "フライドガーリック";
+
+        public FriedGarlic(int defaultPrice = DEFAULTPRICE)
         {
-            _name = "フライドガーリック";
+            _name = NAME;
 
             if (defaultPrice != -1)
             {

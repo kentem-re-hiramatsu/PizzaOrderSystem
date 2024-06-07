@@ -11,6 +11,10 @@ namespace Models.Manager
         private List<IMenuItem> _pizzaOrderList;
         private List<PizzaMenu> _pizzaMenuList;
         private List<ToppingMenu> _toppingMenuList;
+        public IReadOnlyCollection<IMenuItem> PizzaOrderList { get { return _pizzaOrderList; } }
+        public IReadOnlyCollection<PizzaMenu> PizzaMenuList { get { return _pizzaMenuList; } }
+        public IReadOnlyCollection<ToppingMenu> ToppingMenuList { get { return _toppingMenuList; } }
+
         private string _pizzaDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../Models/Data/PizzaData.text");
 
         public PizzaOrderManagement()
@@ -43,24 +47,6 @@ namespace Models.Manager
         }
 
         /// <summary>
-        /// 注文リストを返す
-        /// </summary>
-        /// <returns></returns>
-        public IReadOnlyCollection<IMenuItem> GetPizzaOrderList()
-        {
-            return _pizzaOrderList;
-        }
-
-        /// <summary>
-        /// 注文された数を返す
-        /// </summary>
-        /// <returns></returns>
-        public int GetPizzaOrderListCount()
-        {
-            return _pizzaOrderList.Count;
-        }
-
-        /// <summary>
         /// 選択されたピザの削除
         /// </summary>
         /// <param name="index"></param>
@@ -73,13 +59,13 @@ namespace Models.Manager
         /// すべてのピザの合計金額を返す
         /// </summary>
         /// <returns></returns>
-        public int GetPizzaTotalPrice()
+        public int GetTotalPrice()
         {
             int totalPrice = 0;
 
-            for (int i = 0; i < GetPizzaOrderListCount(); i++)
+            for (int i = 0; i < _pizzaOrderList.Count; i++)
             {
-                totalPrice += _pizzaOrderList[i].Price + ((PizzaMenu)_pizzaOrderList[i]).GetTotalToppingPrice();
+                totalPrice += ((PizzaMenu)_pizzaOrderList[i]).GetPizzaTotalPrice();
             }
 
             return totalPrice;
@@ -102,7 +88,7 @@ namespace Models.Manager
         /// <returns></returns>
         public int GetPizzaMenuIndex(string name)
         {
-            for (int i = 0; i < GetPizzaMenuListCount(); i++)
+            for (int i = 0; i < _pizzaMenuList.Count; i++)
             {
                 if (name == GetPizzaMenu(i).Name)
                 {
@@ -125,15 +111,6 @@ namespace Models.Manager
         }
 
         /// <summary>
-        /// ピザの種類の数を返す
-        /// </summary>
-        /// <returns></returns>
-        public int GetPizzaMenuListCount()
-        {
-            return _pizzaMenuList.Count;
-        }
-
-        /// <summary>
         /// トッピングのインスタンスを返す
         /// </summary>
         /// <param name="index"></param>
@@ -150,7 +127,7 @@ namespace Models.Manager
         /// <returns></returns>
         public int GetToppingMenuIndex(string name)
         {
-            for (int i = 0; i < GetToppingMenuListCount(); i++)
+            for (int i = 0; i < _toppingMenuList.Count; i++)
             {
                 if (name == GetToppingMenu(i).Name)
                 {
@@ -158,24 +135,6 @@ namespace Models.Manager
                 }
             }
             return -1;
-        }
-
-        /// <summary>
-        /// トッピングリストを返す
-        /// </summary>
-        /// <returns></returns>
-        public IReadOnlyCollection<ToppingMenu> GetToppingMenuList()
-        {
-            return _toppingMenuList;
-        }
-
-        /// <summary>
-        /// トッピングの種類の数を返す
-        /// </summary>
-        /// <returns></returns>
-        public int GetToppingMenuListCount()
-        {
-            return _toppingMenuList.Count;
         }
 
         /// <summary>
@@ -224,7 +183,7 @@ namespace Models.Manager
                 var pizza = pizzaOrdermana.GetPizzaMenu(int.Parse(pizzaData[0]));
 
                 //Defaultトッピングの数を取得
-                var Count = pizza.GetCountToppingList() + 1;
+                var Count = pizza.ToppingList.Count + 1;
 
                 ToppingMenu topping = null;
 
@@ -243,12 +202,10 @@ namespace Models.Manager
         /// </summary>
         public void SavePizzaDataFile()
         {
-            var pizzaOrderListCount = GetPizzaOrderListCount();
-
             File.WriteAllText(_pizzaDataFilePath, "");
-            for (int i = 0; i < pizzaOrderListCount; i++)
+            for (int i = 0; i < _pizzaOrderList.Count; i++)
             {
-                var toppingListCount = ((PizzaMenu)GetPizzaOrder(i)).GetCountToppingList();
+                var toppingListCount = ((PizzaMenu)GetPizzaOrder(i)).ToppingList.Count;
                 var pizzaIndex = GetPizzaMenuIndex(((PizzaMenu)GetPizzaOrder(i)).Name);
 
                 File.AppendAllText(_pizzaDataFilePath, $"{pizzaIndex},");

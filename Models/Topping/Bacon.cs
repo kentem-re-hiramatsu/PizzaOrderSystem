@@ -4,9 +4,12 @@ namespace Models.Topping
 {
     public class Bacon : ToppingMenu
     {
-        public Bacon(int defaultPrice = 250)
+        const int DEFAULTPRICE = 250;
+        const string NAME = "ベーコン";
+
+        public Bacon(int defaultPrice = DEFAULTPRICE)
         {
-            _name = "ベーコン";
+            _name = NAME;
 
             if (defaultPrice != -1)
             {

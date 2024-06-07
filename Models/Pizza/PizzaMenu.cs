@@ -7,19 +7,15 @@ namespace Models.Pizza
     {
         protected string _name;
         protected int _price;
-        protected List<IMenuItem> _toppingList = new List<IMenuItem>();
+        protected List<ToppingMenu> _toppingList = new List<ToppingMenu>();
 
         public string Name { get { return _name; } }
         public int Price { get { return _price; } }
+        public IReadOnlyCollection<ToppingMenu> ToppingList { get { return _toppingList; } }
 
         public PizzaMenu()
         {
             SetDefaultTopping();
-        }
-
-        public int GetCountToppingList()
-        {
-            return _toppingList.Count;
         }
 
         public IMenuItem GetTopping(int index)
@@ -32,15 +28,16 @@ namespace Models.Pizza
             _toppingList.Add(topping);
         }
 
-        public int GetTotalToppingPrice()
+        public int GetPizzaTotalPrice()
         {
             int totalPrice = 0;
 
-            foreach (var item in _toppingList)
+            foreach (var topping in _toppingList)
             {
-                totalPrice += item.Price;
+                totalPrice += topping.Price;
             }
-            return totalPrice;
+
+            return totalPrice + _price;
         }
 
         public abstract void SetDefaultTopping();

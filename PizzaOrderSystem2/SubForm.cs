@@ -32,13 +32,13 @@ namespace sub
         private void RefreshScreen()
         {
             ///メインメニューのリストビューを更新
-            foreach (var topping in _pizzaOrderMana.GetToppingMenuList())
+            foreach (var topping in _pizzaOrderMana.PizzaMenuList)
             {
                 MainMenuListView.Items.Add(new ListViewItem(new string[] { topping.Name, topping.Price.ToString() }));
             }
 
             ///トッピングメニューのリストビューを更新
-            foreach (var pizza in _pizzaOrderMana.GetPizzaOrderList())
+            foreach (var pizza in _pizzaOrderMana.ToppingMenuList)
             {
                 ToppingListView.Items.Add(new ListViewItem(new string[] { pizza.Name, pizza.Price.ToString() }));
             }
@@ -72,7 +72,7 @@ namespace sub
             var pizzaInstance = pizzaOrderMana.GetPizzaMenu(slectedIndex);
 
             //全トッピング分繰り返す
-            for (int i = 0; i < _pizzaOrderMana.GetToppingMenuList().Count; i++)
+            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
             {
                 //トッピング選択とTagがFalse(Defaultトッピングじゃないとき)にピザの中にトッピングを追加する
                 if (ToppingListView.Items[i].Checked && (bool)ToppingListView.Items[i].Tag)
@@ -98,7 +98,7 @@ namespace sub
                 }
             }
             //すべてのトッピングを初期化
-            for (int i = 0; i < _pizzaOrderMana.GetToppingMenuList().Count; i++)
+            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
             {
                 ToppingListView.Items[i].Checked = false;
                 ToppingListView.Items[i].BackColor = Color.White;
@@ -118,13 +118,13 @@ namespace sub
                 var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(e.Index);
 
                 //任意のDefaultトッピングを追加
-                for (int i = 0; i < pizzaInstance.GetCountToppingList(); i++)
+                for (int i = 0; i < pizzaInstance.ToppingList.Count; i++)
                 {
                     defaultToppings.Add(pizzaInstance.GetTopping(i));
                 }
 
                 //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
-                for (int i = 0; i < _pizzaOrderMana.GetToppingMenuList().Count; i++)
+                for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
                 {
                     for (int j = 0; j < defaultToppings.Count; j++)
                     {
