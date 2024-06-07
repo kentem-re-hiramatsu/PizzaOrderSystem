@@ -11,7 +11,6 @@ namespace sub
 {
     public partial class SubForm : Form
     {
-        private PizzaEnum _pizzaName;
         private PizzaOrderManagement _pizzaOrderMana;
         private List<IMenuItem> _defotopping = new List<IMenuItem>();
 
@@ -21,7 +20,6 @@ namespace sub
         int count = 0;
         //ピザを選択したときのインデックス
         int slectedIndex = 0;
-
 
         public SubForm()
         {
@@ -78,8 +76,9 @@ namespace sub
         /// <param name="e"></param>
         private void OkButton_Click(object sender, EventArgs e)
         {
+            var pizzaOrderMana = new PizzaOrderManagement();
             //GetPizzaMenuから選択しているピザのインスタンスを取得
-            var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(slectedIndex);
+            var pizzaInstance = pizzaOrderMana.GetPizzaMenu(slectedIndex);
 
             //全トッピング分繰り返す
             for (int i = 0; i < _toppingMenuList.Count; i++)
@@ -123,43 +122,44 @@ namespace sub
                     item.Checked = false;
                 }
             }
-            //チェックをしたときと外したときに処理が走るので一回目だけ処理をさせるようにした
+            //すべてのトッピングを初期化
+            for (int i = 0; i < _pizzaOrderMana.GetToppingMenuListCount(); i++)
+            {
+                ToppingListView.Items[i].Checked = false;
+                ToppingListView.Items[i].BackColor = Color.White;
+                ToppingListView.Items[i].Tag = true;
+            }
+
+            //チェックをしたときと外したときに処理が走るので一回目だけ処理をさせる
             if (count == 0)
             {
                 count++;
                 slectedIndex = e.Index;
                 OkButton.Enabled = e.CurrentValue == 0;
-                _pizzaName = _pizzaOrderMana.GetPizzaEnum(e.Index);
 
-                //すべてのトッピングを初期化
-                for (int i = 0; i < _pizzaOrderMana.GetToppingMenuListCount(); i++)
-                {
-                    ToppingListView.Items[i].Checked = false;
-                    ToppingListView.Items[i].BackColor = Color.White;
-                    ToppingListView.Items[i].Tag = true;
-                }
+                var defaultToppings = new List<IMenuItem>();
 
-                var defotopping = new List<IMenuItem>();
+                //選択したピザのインスタンスをリストから取得
                 var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(e.Index);
 
                 //任意のDefaultトッピングを追加
                 for (int i = 0; i < pizzaInstance.GetCountToppingList(); i++)
                 {
-                    defotopping.Add(pizzaInstance.GetTopping(i));
+                    defaultToppings.Add(pizzaInstance.GetTopping(i));
                 }
 
-                //リファクタリングできる
-                //任意のピザのDefaultトッピングと全トッピングを比較する
+                //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
                 for (int i = 0; i < _pizzaOrderMana.GetToppingMenuListCount(); i++)
                 {
-                    for (int j = 0; j < defotopping.Count; j++)
+                    for (int j = 0; j < defaultToppings.Count; j++)
                     {
-                        if (defotopping[j].Name == ToppingListView.Items[i].Text)
+                        if (defaultToppings[j].Name == ToppingListView.Items[i].Text)
                         {
-                            _defotopping.Add(defotopping[j]);
+                            _defotopping.Add(defaultToppings[j]);
                             ToppingListView.Items[i].Checked = true;
                             ToppingListView.Items[i].BackColor = Color.Gray;
                             ToppingListView.Items[i].Tag = false;
+                            break;
                         }
                     }
                 }
@@ -167,12 +167,6 @@ namespace sub
             else
             {
                 count = 0;
-                for (int i = 0; i < _pizzaOrderMana.GetToppingMenuListCount(); i++)
-                {
-                    ToppingListView.Items[i].Checked = false;
-                    ToppingListView.Items[i].BackColor = Color.White;
-                    ToppingListView.Items[i].Tag = true;
-                }
             }
         }
     }

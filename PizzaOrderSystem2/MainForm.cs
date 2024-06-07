@@ -66,37 +66,12 @@ namespace PizzaOrderSystem2
             }
             DetailsListView.Items.Clear();
 
-            IMenuItem toppingOrder = pizzaOrderMana.GetPizzaOrder(index);
+            //選択したピザを取得
+            IMenuItem pizzaOrder = pizzaOrderMana.GetPizzaOrder(index);
 
-            PizzaMenu pizza = null;
-            int count;
+            PizzaMenu pizza = (PizzaMenu)pizzaOrder;
 
-            //リファクタリング
-            switch (toppingOrder.Name)
-            {
-                case "プレーンピザ":
-                    pizza = (PlainPizza)toppingOrder;
-                    break;
-
-                case "マルゲリータピザ":
-                    pizza = (MargheritaPizza)toppingOrder;
-                    break;
-
-                case "シーフードピザ":
-                    pizza = (SeafoodPizza)toppingOrder;
-                    break;
-
-                case "ペスカトーレピザ":
-                    pizza = (PescaTorePizza)toppingOrder;
-                    break;
-
-                case "バンビーノピザ":
-                    pizza = (BambinoPizza)toppingOrder;
-                    break;
-                default: break;
-            }
-
-            count = pizza.GetCountToppingList();
+            int count = pizza.GetCountToppingList();
 
             //ピザ選択時詳細リストビューに追加する処理
             for (int i = 0; i < count; i++)
@@ -109,6 +84,7 @@ namespace PizzaOrderSystem2
         {
             int index = 0;
 
+            //選択されたか
             if (OrderListView.SelectedItems.Count > 0)
             {
                 index = OrderListView.SelectedItems[0].Index;
@@ -120,6 +96,7 @@ namespace PizzaOrderSystem2
 
         public void ChangeButtonState()
         {
+            //ピザが選択されたら削除・変更ボタンを活性化
             DeleteButton.Enabled = OrderListView.SelectedItems.Count > 0;
             Changebutton.Enabled = OrderListView.SelectedItems.Count > 0;
         }

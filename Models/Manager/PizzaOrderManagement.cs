@@ -107,15 +107,6 @@ namespace Models.Manager
             _toppingMenuList.Add(new Bacon());
         }
 
-        public PizzaEnum GetPizzaEnum(int index)
-        {
-            for (int i = 0; i < _pizzaMenuList.Count; i++)
-            {
-                if (index == (int)(PizzaEnum)i)
-                    return (PizzaEnum)i;
-            }
-            return 0;
-        }
         ///ERROR修正未完成
         //public void LoadDataFile()
         //{
