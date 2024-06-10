@@ -29,17 +29,6 @@ namespace Models.Pizza
             _toppingList.Add(topping);
         }
 
-        public void Reamove(string name)
-        {
-            for (int i = 0; i < _toppingList.Count; i++)
-            {
-                if (_toppingList[i].Name == name)
-                {
-                    _toppingList.RemoveAt(i);
-                }
-            }
-        }
-
         public int GetPizzaTotalPrice()
         {
             int totalPrice = _toppingList.Select(x => x.Price).Sum();

@@ -3,7 +3,6 @@ using Models.Manager;
 using Models.Pizza;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -25,63 +24,22 @@ namespace WindowsFormsApp1
 
         private void OkButton_Click(object sender, System.EventArgs e)
         {
-            var previousToppingList = new List<string>();
-            var currentToppingList = new List<string>();
+            var pizzaOrderMana = new PizzaOrderManagement();
 
-            //ピザが変更されているか
-            if (MainMenuListView.Items[_pizzaindex].Text == _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name)
+            //GetPizzaMenuから選択しているピザのインスタンスを取得
+            var pizzaInstance = pizzaOrderMana.GetPizzaMenu(_pizzaindex);
+
+            //全トッピング分繰り返す
+            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
             {
-                //変更前のトッピングを取得
-                foreach (var topping in ((PizzaMenu)_pizzaOrderMana.GetPizzaOrder(_selectedIndex)).ToppingList)
+                //トッピング選択とTagがFalse(Defaultトッピングじゃないとき)にピザの中にトッピングを追加する
+                if (ToppingListView.Items[i].Checked && (bool)ToppingListView.Items[i].Tag)
                 {
-                    previousToppingList.Add(topping.Name);
-                }
-
-                //現在のトッピングを取得
-                for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
-                {
-                    if (ToppingListView.Items[i].Checked)
-                    {
-                        currentToppingList.Add(_pizzaOrderMana.GetToppingMenu(i).Name);
-                    }
-                }
-
-                //外されたトッピングを検索
-                var removedTopping = previousToppingList.Where(name => !currentToppingList.Contains(name)).ToList();
-
-                //外されたトッピングを削除
-                foreach (var topping in removedTopping)
-                {
-                    ((PizzaMenu)_pizzaOrderMana.GetPizzaOrder(_selectedIndex)).Reamove(topping);
-                }
-
-                //追加されたトッピングを検索
-                var addedTopping = currentToppingList.Where(name => !previousToppingList.Contains(name)).ToList();
-
-                //追加されたトッピングを追加
-                foreach (string add in addedTopping)
-                {
-                    var topping = _pizzaOrderMana.GetToppingMenu(_pizzaOrderMana.GetToppingMenuIndex(add));
-                    ((PizzaMenu)_pizzaOrderMana.GetPizzaOrder(_selectedIndex)).SetTopping(topping);
+                    pizzaInstance.SetTopping(_pizzaOrderMana.GetToppingMenu(i));
                 }
             }
-            else
-            {
-                var pizzaOrderMana = new PizzaOrderManagement();
-                //GetPizzaMenuから選択しているピザのインスタンスを取得
-                var pizzaInstance = pizzaOrderMana.GetPizzaMenu(_pizzaindex);
+            _pizzaOrderMana.ChangePizza(_selectedIndex, pizzaInstance);
 
-                //全トッピング分繰り返す
-                for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
-                {
-                    //トッピング選択とTagがFalse(Defaultトッピングじゃないとき)にピザの中にトッピングを追加する
-                    if (ToppingListView.Items[i].Checked && (bool)ToppingListView.Items[i].Tag)
-                    {
-                        pizzaInstance.SetTopping(_pizzaOrderMana.GetToppingMenu(i));
-                    }
-                }
-                _pizzaOrderMana.ChangePizza(_selectedIndex, pizzaInstance);
-            }
             Close();
         }
 
