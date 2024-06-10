@@ -113,5 +113,10 @@ namespace PizzaOrderSystemTest.ManagerTest
             topping = pizzaOrderMana.GetToppingMenuIndex("ベーコン");
             Assert.AreEqual(9, topping);
         }
+
+        [TestMethod]
+        public void PizzaChangedTest()
+        {
+        }
     }
 }

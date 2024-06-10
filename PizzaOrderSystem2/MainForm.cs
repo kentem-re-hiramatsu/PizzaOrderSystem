@@ -3,6 +3,7 @@ using Models.Manager;
 using Models.Pizza;
 using sub;
 using System.Windows.Forms;
+using WindowsFormsApp1;
 
 namespace PizzaOrderSystem2
 {
@@ -95,7 +96,6 @@ namespace PizzaOrderSystem2
             MainFormRefreshScreen();
         }
 
-        //ERROR修正未完
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _pizzaOrderMana.SavePizzaDataFile();
@@ -114,6 +114,17 @@ namespace PizzaOrderSystem2
                 index = OrderListView.SelectedItems[0].Index;
             }
             return index;
+        }
+
+        private void Changebutton_Click(object sender, System.EventArgs e)
+        {
+            var changeForm = new ChangeForm(_pizzaOrderMana, GetSelectedIndex());
+
+            if (DialogResult.OK == changeForm.ShowDialog())
+            {
+                MainFormRefreshScreen();
+            }
+            MainFormRefreshScreen();
         }
     }
 }

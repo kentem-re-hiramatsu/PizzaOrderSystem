@@ -74,6 +74,7 @@
             this.ToppingListView.TabIndex = 15;
             this.ToppingListView.UseCompatibleStateImageBehavior = false;
             this.ToppingListView.View = System.Windows.Forms.View.Details;
+            this.ToppingListView.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ToppingListView_ItemCheck);
             this.ToppingListView.SelectedIndexChanged += new System.EventHandler(this.ToppingListView_SelectedIndexChanged);
             // 
             // columnHeader3
@@ -100,6 +101,7 @@
             this.MainMenuListView.TabIndex = 14;
             this.MainMenuListView.UseCompatibleStateImageBehavior = false;
             this.MainMenuListView.View = System.Windows.Forms.View.Details;
+            this.MainMenuListView.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.MainMenuListView_ItemCheck);
             this.MainMenuListView.SelectedIndexChanged += new System.EventHandler(this.MainMenuListView_SelectedIndexChanged);
             // 
             // columnHeader1
