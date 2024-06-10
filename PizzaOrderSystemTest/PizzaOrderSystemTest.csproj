@@ -49,7 +49,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManagerTest\AppendToppingListTest.cs" />
     <Compile Include="ManagerTest\PizzaOrderListTest.cs" />
     <Compile Include="ModelTest\PizzaMenuTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

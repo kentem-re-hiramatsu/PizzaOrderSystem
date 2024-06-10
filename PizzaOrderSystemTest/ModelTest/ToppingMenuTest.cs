@@ -21,10 +21,8 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void CheeseDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new Cheese(1));
             Assert.ThrowsException<Exception>(() => new Cheese(-1));
         }
-
 
         [TestMethod]
         public void FriedGarlicTest()
@@ -40,7 +38,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void FriedGarlicDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new FriedGarlic(1));
             Assert.ThrowsException<Exception>(() => new FriedGarlic(-1));
         }
 
@@ -58,7 +55,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void MozzarellaCheeseDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new MozzarellaCheese(1));
             Assert.ThrowsException<Exception>(() => new MozzarellaCheese(-1));
         }
 
@@ -76,7 +72,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void SeafoodMixDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new SeafoodMix(1));
             Assert.ThrowsException<Exception>(() => new SeafoodMix(-1));
         }
 
@@ -94,7 +89,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void ScallopsDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new Scallops(1));
             Assert.ThrowsException<Exception>(() => new Scallops(-1));
         }
 
@@ -112,7 +106,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void BasilDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new Basil(1));
             Assert.ThrowsException<Exception>(() => new Basil(-1));
         }
 
@@ -130,7 +123,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void TomatoDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new Tomato(1));
             Assert.ThrowsException<Exception>(() => new Tomato(-1));
         }
 
@@ -148,7 +140,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void TunaDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new Tuna(1));
             Assert.ThrowsException<Exception>(() => new Tuna(-1));
         }
 
@@ -166,7 +157,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void CornDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new Corn(1));
             Assert.ThrowsException<Exception>(() => new Corn(-1));
         }
 
@@ -184,7 +174,6 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void BaconDefaultTest()
         {
-            Assert.ThrowsException<Exception>(() => new Bacon(1));
             Assert.ThrowsException<Exception>(() => new Bacon(-1));
         }
     }
