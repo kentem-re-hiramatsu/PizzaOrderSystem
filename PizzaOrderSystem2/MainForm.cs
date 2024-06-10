@@ -115,19 +115,5 @@ namespace PizzaOrderSystem2
             }
             return index;
         }
-
-        private void Changebutton_Click(object sender, System.EventArgs e)
-        {
-            //int index;
-            //index = OrderListView.SelectedItems[0].Index;
-
-            //var changeForm = new ChangeForm(pizzaOrderMana, index);
-
-            //if (DialogResult.OK == changeForm.ShowDialog())
-            //{
-            //    MainFormRefreshScreen();
-            //}
-            //MainFormRefreshScreen();
-        }
     }
 }
