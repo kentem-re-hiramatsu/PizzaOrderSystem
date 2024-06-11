@@ -11,13 +11,13 @@ namespace Models.Topping
         {
             _name = NAME;
 
-            if (defaultPrice != -1)
+            if (defaultPrice < 0)
             {
-                _price = defaultPrice;
+                throw new Exception(Consts.ERROR_MESSAGE);
             }
             else
             {
-                throw new Exception(Consts.ERROR_MESSAGE);
+                _price = defaultPrice;
             }
         }
     }
