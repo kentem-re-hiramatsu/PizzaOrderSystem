@@ -1,5 +1,4 @@
-﻿using Models;
-using Models.Manager;
+﻿using Models.Manager;
 using Models.Pizza;
 using sub;
 using System.Windows.Forms;
@@ -40,9 +39,9 @@ namespace PizzaOrderSystem2
             DetailsListView.Items.Clear();
 
             //注文リストViewにピザ追加
-            foreach (IMenuItem pizza in _pizzaOrderMana.PizzaOrderList)
+            foreach (var pizza in _pizzaOrderMana.PizzaOrderList)
             {
-                OrderListView.Items.Add(new ListViewItem(new string[] { pizza.Name, ((PizzaMenu)pizza).GetPizzaTotalPrice().ToString() }));
+                OrderListView.Items.Add(new ListViewItem(new string[] { pizza.Name, pizza.GetPizzaTotalPrice().ToString() }));
             }
 
             //注文合計更新

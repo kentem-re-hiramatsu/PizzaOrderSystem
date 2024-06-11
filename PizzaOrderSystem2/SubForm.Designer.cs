@@ -100,7 +100,7 @@
             this.MainMenuListView.TabIndex = 8;
             this.MainMenuListView.UseCompatibleStateImageBehavior = false;
             this.MainMenuListView.View = System.Windows.Forms.View.Details;
-            this.MainMenuListView.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.MainMenuListView_ItemCheck_1);
+            this.MainMenuListView.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.MainMenuListView_ItemCheck);
             // 
             // columnHeader1
             // 

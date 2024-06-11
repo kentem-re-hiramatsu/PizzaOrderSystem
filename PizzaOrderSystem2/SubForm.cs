@@ -1,8 +1,10 @@
-﻿using Models;
-using Models.Manager;
+﻿using Models.Manager;
+using Models.Pizza;
+using Models.Topping;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace sub
@@ -11,7 +13,6 @@ namespace sub
     {
         private PizzaOrderManagement _pizzaOrderMana;
 
-        private int count = 0;
         //ピザを選択したときのインデックス
         private int slectedIndex = 0;
 
@@ -61,6 +62,78 @@ namespace sub
         }
 
         /// <summary>
+        /// 同じトッピングが含まれているか
+        /// </summary>
+        /// <returns></returns>
+        public PizzaMenu ContainsSameTopping()
+        {
+            var pizzaOrderMana = new PizzaOrderManagement();
+            var toppings = new List<string>();
+            PizzaMenu pizzaInstance = null;
+
+            //チェックされているトッピングを取得
+            foreach (ListViewItem topping in ToppingListView.Items)
+            {
+                if (topping.Checked)
+                    toppings.Add(topping.Text);
+            }
+
+            for (int i = pizzaOrderMana.PizzaMenuList.Count - 1; 0 <= i; i--)
+            {
+                var count = pizzaOrderMana.GetPizzaMenu(i).ToppingList.Count;
+                var defaulttoppings = new List<string>();
+
+                for (int j = 0; j < count; j++)
+                {
+                    defaulttoppings.Add(pizzaOrderMana.GetPizzaMenu(i).GetTopping(j).Name);
+                }
+
+                //任意のピザのデフォルトトッピングが選択されているトッピングすべて含まれているか
+                if (defaulttoppings.All(topping => toppings.Contains(topping)))
+                {
+                    if ((pizzaOrderMana.GetPizzaMenu(slectedIndex).Name == pizzaOrderMana.GetPizzaMenu(i).Name))
+                        break;
+
+                    pizzaInstance = pizzaOrderMana.GetPizzaMenu(i);
+                    break;
+                }
+            }
+
+            //新しいピザをのデフォルトトッピングのタグを変更
+            if (pizzaInstance != null)
+            {
+                var defaultToppings = new List<ToppingMenu>();
+
+                //任意のDefaultトッピングを追加
+                foreach (var pizza in pizzaInstance.ToppingList)
+                {
+                    defaultToppings.Add(pizza);
+                }
+
+                //すべてのトッピングを初期化
+                for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+                {
+                    ToppingListView.Items[i].Tag = true;
+                }
+
+                //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
+                for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+                {
+                    for (int j = 0; j < defaultToppings.Count; j++)
+                    {
+                        if (defaultToppings[j].Name == ToppingListView.Items[i].Text)
+                        {
+                            ToppingListView.Items[i].Tag = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return pizzaInstance;
+        }
+
+        /// <summary>
         /// Okボタンが押されたらピザを注文リストに追加する処理
         /// </summary>
         /// <param name="sender"></param>
@@ -70,6 +143,13 @@ namespace sub
             var pizzaOrderMana = new PizzaOrderManagement();
             //GetPizzaMenuから選択しているピザのインスタンスを取得
             var pizzaInstance = pizzaOrderMana.GetPizzaMenu(slectedIndex);
+            bool isPizzaChanged = false;
+
+            if (ContainsSameTopping() != null)
+            {
+                pizzaInstance = ContainsSameTopping();
+                isPizzaChanged = true;
+            }
 
             //全トッピング分繰り返す
             for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
@@ -82,10 +162,13 @@ namespace sub
             }
             _pizzaOrderMana.AddPizzaOrderList(pizzaInstance);
 
+            if (isPizzaChanged)
+                MessageBox.Show($"{pizzaInstance.Name}に変更されました。");
+
             Close();
         }
 
-        private void MainMenuListView_ItemCheck_1(object sender, ItemCheckEventArgs e)
+        private void MainMenuListView_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int changedItemIndex = e.Index;
 
@@ -99,29 +182,28 @@ namespace sub
             }
 
             //すべてのトッピングを初期化
-            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+            foreach (ListViewItem topping in ToppingListView.Items)
             {
-                ToppingListView.Items[i].Checked = false;
-                ToppingListView.Items[i].BackColor = Color.White;
-                ToppingListView.Items[i].Tag = true;
+                topping.Checked = false;
+                topping.BackColor = Color.White;
+                topping.Tag = true;
             }
 
             //チェックをしたときと外したときに処理が走るので一回目だけ処理をさせる
-            if (count == 0)
+            if (e.CurrentValue == 0)
             {
-                count++;
                 slectedIndex = e.Index;
                 OkButton.Enabled = e.CurrentValue == 0;
 
-                var defaultToppings = new List<IMenuItem>();
+                var defaultToppings = new List<ToppingMenu>();
 
                 //選択したピザのインスタンスをリストから取得
                 var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(e.Index);
 
                 //任意のDefaultトッピングを追加
-                foreach (var pizza in pizzaInstance.ToppingList)
+                foreach (var topping in pizzaInstance.ToppingList)
                 {
-                    defaultToppings.Add(pizza);
+                    defaultToppings.Add(topping);
                 }
 
                 //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
@@ -138,10 +220,6 @@ namespace sub
                         }
                     }
                 }
-            }
-            else
-            {
-                count = 0;
             }
         }
     }
