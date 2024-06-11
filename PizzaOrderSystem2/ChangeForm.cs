@@ -1,8 +1,10 @@
 ﻿using Models;
 using Models.Manager;
 using Models.Pizza;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -14,7 +16,6 @@ namespace WindowsFormsApp1
 
         private int _pizzaindex;
 
-        private int count = 0;
         public ChangeForm(PizzaOrderManagement pizzaOrderMana, int selectedIndex)
         {
             InitializeComponent();
@@ -22,23 +23,101 @@ namespace WindowsFormsApp1
             _selectedIndex = selectedIndex;
         }
 
-        private void OkButton_Click(object sender, System.EventArgs e)
+        /// <summary>
+        /// 同じトッピングが含まれているか
+        /// </summary>
+        /// <returns></returns>
+        public PizzaMenu ContainsSameTopping()
+        {
+            var pizzaOrderMana = new PizzaOrderManagement();
+            var toppings = new List<string>();
+            PizzaMenu pizzaInstance = null;
+
+            //チェックされているトッピングを取得
+            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+            {
+                if (ToppingListView.Items[i].Checked)
+                {
+                    toppings.Add(ToppingListView.Items[i].Text);
+                }
+            }
+
+            for (int i = pizzaOrderMana.PizzaMenuList.Count - 1; 0 <= i; i--)
+            {
+                var count = pizzaOrderMana.GetPizzaMenu(i).ToppingList.Count;
+                var defaulttoppings = new List<string>();
+
+                for (int j = 0; j < count; j++)
+                {
+                    defaulttoppings.Add(pizzaOrderMana.GetPizzaMenu(i).GetTopping(j).Name);
+                }
+
+                //任意のピザのデフォルトトッピングが選択されているトッピングすべて含まれているか
+                if (defaulttoppings.All(topping => toppings.Contains(topping)))
+                {
+                    if ((pizzaOrderMana.GetPizzaMenu(_pizzaindex).Name == pizzaOrderMana.GetPizzaMenu(i).Name))
+                        break;
+
+                    pizzaInstance = pizzaOrderMana.GetPizzaMenu(i);
+                    break;
+                }
+            }
+
+            //新しいピザをのデフォルトトッピングのタグを変更
+            if (pizzaInstance != null)
+            {
+                var defaultToppings = new List<IMenuItem>();
+
+                //任意のDefaultトッピングを追加
+                foreach (var pizza in pizzaInstance.ToppingList)
+                {
+                    defaultToppings.Add(pizza);
+                }
+
+                //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
+                for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+                {
+                    for (int j = 0; j < defaultToppings.Count; j++)
+                    {
+                        if (defaultToppings[j].Name == ToppingListView.Items[i].Text)
+                        {
+                            ToppingListView.Items[i].Tag = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return pizzaInstance;
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
         {
             var pizzaOrderMana = new PizzaOrderManagement();
 
             //GetPizzaMenuから選択しているピザのインスタンスを取得
             var pizzaInstance = pizzaOrderMana.GetPizzaMenu(_pizzaindex);
+            bool isPizzaChanged = false;
+
+            if (ContainsSameTopping() != null)
+            {
+                pizzaInstance = ContainsSameTopping();
+                isPizzaChanged = true;
+            }
 
             //全トッピング分繰り返す
-            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+            foreach (ListViewItem topping in ToppingListView.Items)
             {
                 //トッピング選択とTagがFalse(Defaultトッピングじゃないとき)にピザの中にトッピングを追加する
-                if (ToppingListView.Items[i].Checked && (bool)ToppingListView.Items[i].Tag)
+                if (topping.Checked && (bool)topping.Tag)
                 {
-                    pizzaInstance.SetTopping(_pizzaOrderMana.GetToppingMenu(i));
+                    pizzaInstance.SetTopping(_pizzaOrderMana.GetToppingMenu(topping.Index));
                 }
             }
             _pizzaOrderMana.ChangePizza(_selectedIndex, pizzaInstance);
+
+            if (isPizzaChanged)
+                MessageBox.Show($"{pizzaInstance.Name}に変更されました。");
 
             Close();
         }
@@ -60,13 +139,13 @@ namespace WindowsFormsApp1
 
         private void RefreshScreen()
         {
-            for (int i = 0; i < _pizzaOrderMana.PizzaMenuList.Count; i++)
+            foreach (var pizza in _pizzaOrderMana.PizzaMenuList)
             {
-                MainMenuListView.Items.Add(new ListViewItem(new string[] { _pizzaOrderMana.GetPizzaMenu(i).Name, _pizzaOrderMana.GetPizzaMenu(i).Price.ToString() }));
+                MainMenuListView.Items.Add(new ListViewItem(new string[] { pizza.Name, pizza.Price.ToString() }));
             }
-            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+            foreach (var topping in _pizzaOrderMana.ToppingMenuList)
             {
-                ToppingListView.Items.Add(new ListViewItem(new string[] { _pizzaOrderMana.GetToppingMenu(i).Name, _pizzaOrderMana.GetToppingMenu(i).Price.ToString() }));
+                ToppingListView.Items.Add(new ListViewItem(new string[] { topping.Name, topping.Price.ToString() }));
             }
         }
 
@@ -81,16 +160,17 @@ namespace WindowsFormsApp1
         /// </summary>
         public void SetSelectedPizzaDetails()
         {
-            for (int i = 0; i < _pizzaOrderMana.PizzaMenuList.Count; i++)
+            foreach (ListViewItem pizza in MainMenuListView.Items)
             {
-                MainMenuListView.Items[i].Checked = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name == _pizzaOrderMana.GetPizzaMenu(i).Name;
-                MainMenuListView.Items[i].Tag = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name == _pizzaOrderMana.GetPizzaMenu(i).Name;
+                pizza.Checked = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name == pizza.Text;
+                pizza.Tag = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name == pizza.Text;
             }
+
             for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
             {
-                for (int j = 0; j < ((PizzaMenu)_pizzaOrderMana.GetPizzaOrder(_selectedIndex)).ToppingList.Count; j++)
+                for (int j = 0; j < _pizzaOrderMana.GetPizzaOrder(_selectedIndex).ToppingList.Count; j++)
                 {
-                    if (((PizzaMenu)_pizzaOrderMana.GetPizzaOrder(_selectedIndex)).GetTopping(j).Name == _pizzaOrderMana.GetToppingMenu(i).Name)
+                    if (_pizzaOrderMana.GetPizzaOrder(_selectedIndex).GetTopping(j).Name == _pizzaOrderMana.GetToppingMenu(i).Name)
                     {
                         ToppingListView.Items[i].Checked = true;
                         break;
@@ -121,9 +201,8 @@ namespace WindowsFormsApp1
             }
 
             //チェックをしたときと外したときに処理が走るので一回目だけ処理をさせる
-            if (count == 0)
+            if (e.CurrentValue == 0)
             {
-                count++;
                 _pizzaindex = e.Index;
                 OkButton.Enabled = e.CurrentValue == 0;
 
@@ -152,10 +231,6 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
-            }
-            else
-            {
-                count = 0;
             }
         }
 
