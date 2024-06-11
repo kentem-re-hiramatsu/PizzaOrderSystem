@@ -149,6 +149,11 @@ namespace Models.Manager
             _toppingMenuList.Add(new Bacon());
         }
 
+        /// <summary>
+        /// ピザ変更
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="pizzaMenu"></param>
         public void ChangePizza(int index, PizzaMenu pizzaMenu)
         {
             _pizzaOrderList[index] = pizzaMenu;

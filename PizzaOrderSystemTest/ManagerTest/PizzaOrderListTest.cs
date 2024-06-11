@@ -113,5 +113,26 @@ namespace PizzaOrderSystemTest.ManagerTest
             topping = pizzaOrderMana.GetToppingMenuIndex("ベーコン");
             Assert.AreEqual(9, topping);
         }
+
+        [TestMethod]
+        public void PizzaChangedTest()
+        {
+            var beforePlainPizza = new PlainPizza();
+            beforePlainPizza.SetTopping(new Bacon());
+            beforePlainPizza.SetTopping(new Corn());
+
+            pizzaOrderMana.AddPizzaOrderList(beforePlainPizza);
+            Assert.AreEqual(((PizzaMenu)pizzaOrderMana.GetPizzaOrder(0)).GetTopping(2).Name, new Bacon().Name);
+            Assert.AreEqual(((PizzaMenu)pizzaOrderMana.GetPizzaOrder(0)).GetTopping(3).Name, new Corn().Name);
+
+            var aftrerPlainPizza = new PlainPizza();
+            aftrerPlainPizza.SetTopping(new Bacon());
+            aftrerPlainPizza.SetTopping(new SeafoodMix());
+            pizzaOrderMana.ChangePizza(0, aftrerPlainPizza);
+
+            Assert.AreEqual(((PizzaMenu)pizzaOrderMana.GetPizzaOrder(0)).GetTopping(2).Name, new Bacon().Name);
+            Assert.AreEqual(((PizzaMenu)pizzaOrderMana.GetPizzaOrder(0)).GetTopping(3).Name, new SeafoodMix().Name);
+        }
+
     }
 }
