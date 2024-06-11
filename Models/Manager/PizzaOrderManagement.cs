@@ -9,11 +9,11 @@ namespace Models.Manager
 {
     public class PizzaOrderManagement
     {
-        private List<IMenuItem> _pizzaOrderList;
-        private List<PizzaMenu> _pizzaMenuList;
-        private List<ToppingMenu> _toppingMenuList;
+        private List<PizzaMenu> _pizzaOrderList = new List<PizzaMenu>();
+        private List<PizzaMenu> _pizzaMenuList = new List<PizzaMenu>();
+        private List<ToppingMenu> _toppingMenuList = new List<ToppingMenu>();
 
-        public IReadOnlyCollection<IMenuItem> PizzaOrderList { get { return _pizzaOrderList; } }
+        public IReadOnlyCollection<PizzaMenu> PizzaOrderList { get { return _pizzaOrderList; } }
         public IReadOnlyCollection<PizzaMenu> PizzaMenuList { get { return _pizzaMenuList; } }
         public IReadOnlyCollection<ToppingMenu> ToppingMenuList { get { return _toppingMenuList; } }
 
@@ -21,10 +21,6 @@ namespace Models.Manager
 
         public PizzaOrderManagement()
         {
-            _pizzaOrderList = new List<IMenuItem>();
-            _pizzaMenuList = new List<PizzaMenu>();
-            _toppingMenuList = new List<ToppingMenu>();
-
             SetPizzaMenuList();
             SetToppingMenuList();
         }
@@ -33,48 +29,33 @@ namespace Models.Manager
         /// 注文リストに注文したピザをリストに追加
         /// </summary>
         /// <param name="pizzaMenu"></param>
-        public void AddPizzaOrderList(IMenuItem pizzaMenu)
-        {
-            _pizzaOrderList.Add(pizzaMenu);
-        }
+        public void AddPizzaOrderList(PizzaMenu pizzaMenu) => _pizzaOrderList.Add(pizzaMenu);
 
         /// <summary>
         /// 選択したピザを返す
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public IMenuItem GetPizzaOrder(int index)
-        {
-            return _pizzaOrderList[index];
-        }
+        public PizzaMenu GetPizzaOrder(int index) => _pizzaOrderList[index];
 
         /// <summary>
         /// 選択されたピザの削除
         /// </summary>
         /// <param name="index"></param>
-        public void RemovePizzaOrderList(int index)
-        {
-            _pizzaOrderList.RemoveAt(index);
-        }
+        public void RemovePizzaOrderList(int index) => _pizzaOrderList.RemoveAt(index);
 
         /// <summary>
         /// すべてのピザの合計金額を返す
         /// </summary>
         /// <returns></returns>
-        public int GetTotalPrice()
-        {
-            return _pizzaOrderList.Select(x => ((PizzaMenu)x).GetPizzaTotalPrice()).Sum();
-        }
+        public int GetTotalPrice() => _pizzaOrderList.Select(x => x.GetPizzaTotalPrice()).Sum();
 
         /// <summary>
         /// indexをもとにピザのインスタンスを返す
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public PizzaMenu GetPizzaMenu(int index)
-        {
-            return _pizzaMenuList[index];
-        }
+        public PizzaMenu GetPizzaMenu(int index) => _pizzaMenuList[index];
 
         /// <summary>
         /// ピザの名前からリストのインデックスを返す
@@ -110,10 +91,7 @@ namespace Models.Manager
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public ToppingMenu GetToppingMenu(int index)
-        {
-            return _toppingMenuList[index];
-        }
+        public ToppingMenu GetToppingMenu(int index) => _toppingMenuList[index];
 
         /// <summary>
         /// トッピングの名前からリストのインデックスを返す
@@ -154,10 +132,7 @@ namespace Models.Manager
         /// </summary>
         /// <param name="index"></param>
         /// <param name="pizzaMenu"></param>
-        public void ChangePizza(int index, PizzaMenu pizzaMenu)
-        {
-            _pizzaOrderList[index] = pizzaMenu;
-        }
+        public void ChangePizza(int index, PizzaMenu pizzaMenu) => _pizzaOrderList[index] = pizzaMenu;
 
         /// <summary>
         /// ピザデータの読み込み
@@ -210,14 +185,14 @@ namespace Models.Manager
             File.WriteAllText(_pizzaDataFilePath, "");
             for (int i = 0; i < _pizzaOrderList.Count; i++)
             {
-                var toppingListCount = ((PizzaMenu)GetPizzaOrder(i)).ToppingList.Count;
-                var pizzaIndex = GetPizzaMenuIndex(((PizzaMenu)GetPizzaOrder(i)).Name);
+                var toppingListCount = (GetPizzaOrder(i)).ToppingList.Count;
+                var pizzaIndex = GetPizzaMenuIndex(GetPizzaOrder(i).Name);
 
                 File.AppendAllText(_pizzaDataFilePath, $"{pizzaIndex},");
 
                 for (int j = 0; j < toppingListCount; j++)
                 {
-                    var toppingindex = GetToppingMenuIndex(((PizzaMenu)GetPizzaOrder(i)).GetTopping(j).Name);
+                    var toppingindex = GetToppingMenuIndex(GetPizzaOrder(i).GetTopping(j).Name);
 
                     if (j == toppingListCount - 1)
                     {
