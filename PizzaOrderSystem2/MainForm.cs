@@ -61,16 +61,13 @@ namespace PizzaOrderSystem2
             DetailsListView.Items.Clear();
 
             //選択したピザを取得
-            IMenuItem pizzaOrder = _pizzaOrderMana.GetPizzaOrder(GetSelectedIndex());
-
-            PizzaMenu pizza = (PizzaMenu)pizzaOrder;
+            PizzaMenu pizzaOrder = _pizzaOrderMana.GetPizzaOrder(GetSelectedIndex());
 
             DetailsListView.Items.Add(new ListViewItem(new string[] { pizzaOrder.Name, pizzaOrder.Price.ToString() }));
 
-            //ピザ選択時詳細リストビューに追加する処理
-            for (int i = 0; i < pizza.ToppingList.Count; i++)
+            foreach (var topping in pizzaOrder.ToppingList)
             {
-                DetailsListView.Items.Add(new ListViewItem(new string[] { pizza.GetTopping(i).Name, pizza.GetTopping(i).Price.ToString() }));
+                DetailsListView.Items.Add(new ListViewItem(new string[] { topping.Name, topping.Price.ToString() }));
             }
         }
 
