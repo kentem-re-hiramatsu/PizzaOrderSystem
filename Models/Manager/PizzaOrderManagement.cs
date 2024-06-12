@@ -197,32 +197,35 @@ namespace Models.Manager
         public PizzaMenu ContainsSameTopping(List<int> toppings)
         {
             PizzaMenu pizzaInstance = null;
-            int tmpprice = 9999;
+            int lowPrice = int.MaxValue;
 
             for (int i = 0; i < PizzaMenuList.Count; i++)
             {
                 var defaulttoppings = new List<int>();
-                var count = _pizzaMenuList[i].ToppingList.Count;
-                int price = _pizzaMenuList[i].GetPizzaTotalPrice();
+                int pizzaTotalPrice = _pizzaMenuList[i].GetPizzaTotalPrice();
 
-                for (int j = 0; j < count; j++)
+                for (int j = 0; j < _pizzaMenuList[i].ToppingList.Count; j++)
                 {
                     defaulttoppings.Add(GetToppingMenuIndex(_pizzaMenuList[i].GetTopping(j).Name));
                 }
 
-                var tmp = toppings.Union(defaulttoppings);
+                //選択したトッピングとデフォルトトッピングの和集合
+                var unionToppings = toppings.Union(defaulttoppings);
 
-                var tmp2 = tmp.Except(defaulttoppings);
+                //和集合とデフォルトトッピングの差集合
+                var exceptTopping = unionToppings.Except(defaulttoppings);
 
-                foreach (var topping in tmp2)
+                //追加トッピングの価格を取得
+                foreach (var topping in exceptTopping)
                 {
-                    price += GetToppingMenu(topping).Price;
+                    pizzaTotalPrice += GetToppingMenu(topping).Price;
                 }
 
-                if (tmpprice > price)
+                //一番低いピザの価格と今回のピザの価格を比較
+                if (lowPrice > pizzaTotalPrice)
                 {
                     pizzaInstance = _pizzaMenuList[i];
-                    tmpprice = price;
+                    lowPrice = pizzaTotalPrice;
                 }
             }
             return pizzaInstance;
