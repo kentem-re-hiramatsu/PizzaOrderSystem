@@ -4,10 +4,10 @@ namespace Models.Topping
 {
     public class MozzarellaCheese : ToppingMenu
     {
-        const int DEFAULTPRICE = 300;
+        const int DEFAULT_PRICE = 300;
         const string NAME = "モッツァレラチーズ";
 
-        public MozzarellaCheese(int defaultPrice = DEFAULTPRICE)
+        public MozzarellaCheese(int defaultPrice = DEFAULT_PRICE)
         {
             _name = NAME;
 

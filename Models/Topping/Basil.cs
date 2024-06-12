@@ -4,10 +4,10 @@ namespace Models.Topping
 {
     public class Basil : ToppingMenu
     {
-        const int DEFAULTPRICE = 100;
+        const int DEFAULT_PRICE = 100;
         const string NAME = "バジル";
 
-        public Basil(int defaultPrice = DEFAULTPRICE)
+        public Basil(int defaultPrice = DEFAULT_PRICE)
         {
             _name = NAME;
 

@@ -19,22 +19,11 @@ namespace Models.Pizza
             SetDefaultTopping();
         }
 
-        public IMenuItem GetTopping(int index)
-        {
-            return _toppingList[index];
-        }
+        public ToppingMenu GetTopping(int index) => _toppingList[index];
 
-        public void SetTopping(ToppingMenu topping)
-        {
-            _toppingList.Add(topping);
-        }
+        public void SetTopping(ToppingMenu topping) => _toppingList.Add(topping);
 
-        public int GetPizzaTotalPrice()
-        {
-            int totalPrice = _toppingList.Select(x => x.Price).Sum();
-
-            return totalPrice + _price;
-        }
+        public int GetPizzaTotalPrice() => _toppingList.Sum(topping => topping.Price) + _price;
 
         protected abstract void SetDefaultTopping();
     }
