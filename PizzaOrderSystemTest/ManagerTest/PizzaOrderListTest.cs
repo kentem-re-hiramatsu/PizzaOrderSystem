@@ -2,6 +2,7 @@
 using Models.Manager;
 using Models.Pizza;
 using Models.Topping;
+using System.Collections.Generic;
 
 namespace PizzaOrderSystemTest.ManagerTest
 {
@@ -17,20 +18,20 @@ namespace PizzaOrderSystemTest.ManagerTest
             Assert.AreEqual(listCount, 0);
 
             pizzaOrderMana.AddPizzaOrderList(new PlainPizza());
-            pizzaOrderMana.AddPizzaOrderList(new SeafoodMix());
+            pizzaOrderMana.AddPizzaOrderList(new SeafoodPizza());
 
             listCount = pizzaOrderMana.PizzaOrderList.Count;
 
             Assert.AreEqual(listCount, 2);
             Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).Name, new PlainPizza().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(1).Name, new SeafoodMix().Name);
+            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(1).Name, new SeafoodPizza().Name);
         }
 
         [TestMethod]
         public void RemovePizzaOrderListTest()
         {
             pizzaOrderMana.AddPizzaOrderList(new PlainPizza());
-            pizzaOrderMana.AddPizzaOrderList(new SeafoodMix());
+            pizzaOrderMana.AddPizzaOrderList(new SeafoodPizza());
 
             var listCount = pizzaOrderMana.PizzaOrderList.Count;
             Assert.AreEqual(listCount, 2);
@@ -122,17 +123,132 @@ namespace PizzaOrderSystemTest.ManagerTest
             beforePlainPizza.SetTopping(new Corn());
 
             pizzaOrderMana.AddPizzaOrderList(beforePlainPizza);
-            Assert.AreEqual(((PizzaMenu)pizzaOrderMana.GetPizzaOrder(0)).GetTopping(2).Name, new Bacon().Name);
-            Assert.AreEqual(((PizzaMenu)pizzaOrderMana.GetPizzaOrder(0)).GetTopping(3).Name, new Corn().Name);
+            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).GetTopping(2).Name, new Bacon().Name);
+            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).GetTopping(3).Name, new Corn().Name);
 
             var aftrerPlainPizza = new PlainPizza();
             aftrerPlainPizza.SetTopping(new Bacon());
             aftrerPlainPizza.SetTopping(new SeafoodMix());
             pizzaOrderMana.ChangePizza(0, aftrerPlainPizza);
 
-            Assert.AreEqual(((PizzaMenu)pizzaOrderMana.GetPizzaOrder(0)).GetTopping(2).Name, new Bacon().Name);
-            Assert.AreEqual(((PizzaMenu)pizzaOrderMana.GetPizzaOrder(0)).GetTopping(3).Name, new SeafoodMix().Name);
+            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).GetTopping(2).Name, new Bacon().Name);
+            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).GetTopping(3).Name, new SeafoodMix().Name);
         }
 
+        [TestMethod]
+        public void PlainPizzaChangedTest()
+        {
+            var toppings = new List<string>
+            {
+                new Cheese().Name,
+                new Tomato().Name,
+                new Basil().Name,
+                new MozzarellaCheese().Name
+            };
+
+            var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new PlainPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new MargheritaPizza().Name);
+
+            toppings.RemoveRange(2, 2);
+            toppings.Add(new SeafoodMix().Name);
+
+            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new PlainPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new SeafoodPizza().Name);
+
+            toppings.RemoveRange(2, 1);
+            toppings.Add(new SeafoodMix().Name);
+            toppings.Add(new Scallops().Name);
+
+            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new PlainPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new PescaTorePizza().Name);
+
+            toppings.RemoveRange(2, 2);
+            toppings.Add(new Tuna().Name);
+            toppings.Add(new Corn().Name);
+            toppings.Add(new Bacon().Name);
+
+            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new PlainPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new BambinoPizza().Name);
+        }
+
+        [TestMethod]
+        public void MargheritaPizzaChangedTest()
+        {
+            var toppings = new List<string>
+            {
+                new Cheese().Name,
+                new Tomato().Name,
+                new Basil().Name,
+                new MozzarellaCheese().Name,
+                new SeafoodMix().Name,
+            };
+
+            var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new MargheritaPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new MargheritaPizza().Name);
+
+            toppings.Add(new Scallops().Name);
+
+            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new MargheritaPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new PescaTorePizza().Name);
+
+            toppings.RemoveRange(4, 1);
+            toppings.Add(new Tuna().Name);
+            toppings.Add(new Corn().Name);
+            toppings.Add(new Bacon().Name);
+
+            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new MargheritaPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new BambinoPizza().Name);
+        }
+
+        [TestMethod]
+        public void SeafoodPizzaChangedTest()
+        {
+            var toppings = new List<string>
+            {
+                new Cheese().Name,
+                new SeafoodMix().Name,
+                new Tomato().Name,
+                new MozzarellaCheese().Name,
+                new Basil().Name
+            };
+
+            var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new SeafoodPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new MargheritaPizza().Name);
+
+            toppings.RemoveRange(2, 3);
+            toppings.Add(new Scallops().Name);
+
+            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new SeafoodPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new PescaTorePizza().Name);
+
+            toppings.RemoveRange(2, 1);
+            toppings.Add(new Tomato().Name);
+            toppings.Add(new Tuna().Name);
+            toppings.Add(new Corn().Name);
+            toppings.Add(new Bacon().Name);
+
+            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new SeafoodPizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new BambinoPizza().Name);
+        }
+
+
+        [TestMethod]
+        public void PescaTorePizzaChangedTest()
+        {
+            var toppings = new List<string>
+            {
+                new Cheese().Name,
+                new SeafoodMix().Name,
+                new Scallops().Name,
+                new Cheese().Name,
+                new Tomato().Name,
+                new Tuna().Name,
+                new Corn().Name,
+                new Bacon().Name,
+            };
+
+            var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings, pizzaOrderMana.GetPizzaMenuIndex(new PescaTorePizza().Name));
+            Assert.AreEqual(pizzaInstance.Name, new BambinoPizza().Name);
+        }
     }
 }
