@@ -1,6 +1,5 @@
 ﻿using Models;
 using Models.Manager;
-using Models.Pizza;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -23,49 +22,32 @@ namespace WindowsFormsApp1
             _selectedIndex = selectedIndex;
         }
 
-        /// <summary>
-        /// 同じトッピングが含まれているか
-        /// </summary>
-        /// <returns></returns>
-        public PizzaMenu ContainsSameTopping()
+        private void OkButton_Click(object sender, EventArgs e)
         {
-            var pizzaOrderMana = new PizzaOrderManagement();
-            var toppings = new List<string>();
-            PizzaMenu pizzaInstance = null;
+            //GetPizzaMenuから選択しているピザのインスタンスを取得
+            var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(_pizzaindex);
+            bool isPizzaChanged = false;
+            var toppings = new List<int>();
 
             //チェックされているトッピングを取得
-            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+            foreach (ListViewItem item in ToppingListView.Items)
             {
-                if (ToppingListView.Items[i].Checked)
-                {
-                    toppings.Add(ToppingListView.Items[i].Text);
-                }
+                if (item.Checked)
+                    toppings.Add(item.Index);
             }
 
-            for (int i = pizzaOrderMana.PizzaMenuList.Count - 1; 0 <= i; i--)
+            //ピザが変更されているか
+            if (_pizzaOrderMana.ContainsSameTopping(toppings).Name != pizzaInstance.Name)
             {
-                var count = pizzaOrderMana.GetPizzaMenu(i).ToppingList.Count;
-                var defaulttoppings = new List<string>();
-
-                for (int j = 0; j < count; j++)
+                //すべてのトッピングを初期化
+                foreach (ListViewItem topping in ToppingListView.Items)
                 {
-                    defaulttoppings.Add(pizzaOrderMana.GetPizzaMenu(i).GetTopping(j).Name);
+                    topping.Tag = true;
                 }
 
-                //任意のピザのデフォルトトッピングが選択されているトッピングすべて含まれているか
-                if (defaulttoppings.All(topping => toppings.Contains(topping)))
-                {
-                    if ((pizzaOrderMana.GetPizzaMenu(_pizzaindex).Name == pizzaOrderMana.GetPizzaMenu(i).Name))
-                        break;
+                pizzaInstance = _pizzaOrderMana.ContainsSameTopping(toppings);
+                isPizzaChanged = true;
 
-                    pizzaInstance = pizzaOrderMana.GetPizzaMenu(i);
-                    break;
-                }
-            }
-
-            //新しいピザをのデフォルトトッピングのタグを変更
-            if (pizzaInstance != null)
-            {
                 var defaultToppings = new List<IMenuItem>();
 
                 //任意のDefaultトッピングを追加
@@ -88,23 +70,6 @@ namespace WindowsFormsApp1
                 }
             }
 
-            return pizzaInstance;
-        }
-
-        private void OkButton_Click(object sender, EventArgs e)
-        {
-            var pizzaOrderMana = new PizzaOrderManagement();
-
-            //GetPizzaMenuから選択しているピザのインスタンスを取得
-            var pizzaInstance = pizzaOrderMana.GetPizzaMenu(_pizzaindex);
-            bool isPizzaChanged = false;
-
-            if (ContainsSameTopping() != null)
-            {
-                pizzaInstance = ContainsSameTopping();
-                isPizzaChanged = true;
-            }
-
             //全トッピング分繰り返す
             foreach (ListViewItem topping in ToppingListView.Items)
             {
@@ -125,16 +90,6 @@ namespace WindowsFormsApp1
         private void CancelButton_Click(object sender, System.EventArgs e)
         {
             Close();
-        }
-
-        private void ToppingListView_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void MainMenuListView_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-
         }
 
         private void RefreshScreen()
@@ -160,23 +115,14 @@ namespace WindowsFormsApp1
         /// </summary>
         public void SetSelectedPizzaDetails()
         {
-            foreach (ListViewItem pizza in MainMenuListView.Items)
+            foreach (ListViewItem item in MainMenuListView.Items)
             {
-                pizza.Checked = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name == pizza.Text;
-                pizza.Tag = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name == pizza.Text;
+                item.Checked = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name == item.Text;
+                item.Tag = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).Name == item.Text;
             }
 
-            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
-            {
-                for (int j = 0; j < _pizzaOrderMana.GetPizzaOrder(_selectedIndex).ToppingList.Count; j++)
-                {
-                    if (_pizzaOrderMana.GetPizzaOrder(_selectedIndex).GetTopping(j).Name == _pizzaOrderMana.GetToppingMenu(i).Name)
-                    {
-                        ToppingListView.Items[i].Checked = true;
-                        break;
-                    }
-                }
-            }
+            foreach (ListViewItem item in ToppingListView.Items)
+                item.Checked = _pizzaOrderMana.GetPizzaOrder(_selectedIndex).ToppingList.Any(e => e.Name == item.Text);
         }
 
         private void MainMenuListView_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -193,14 +139,13 @@ namespace WindowsFormsApp1
             }
 
             //すべてのトッピングを初期化
-            for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+            foreach (ListViewItem topping in ToppingListView.Items)
             {
-                ToppingListView.Items[i].Checked = false;
-                ToppingListView.Items[i].BackColor = Color.White;
-                ToppingListView.Items[i].Tag = true;
+                topping.Checked = false;
+                topping.BackColor = Color.White;
+                topping.Tag = true;
             }
 
-            //チェックをしたときと外したときに処理が走るので一回目だけ処理をさせる
             if (e.CurrentValue == 0)
             {
                 _pizzaindex = e.Index;
@@ -218,17 +163,13 @@ namespace WindowsFormsApp1
                 }
 
                 //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
-                for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+                foreach (ListViewItem item in ToppingListView.Items)
                 {
-                    for (int j = 0; j < defaultToppings.Count; j++)
+                    if (defaultToppings.Any(x => x.Name == item.Text))
                     {
-                        if (defaultToppings[j].Name == ToppingListView.Items[i].Text)
-                        {
-                            ToppingListView.Items[i].Checked = true;
-                            ToppingListView.Items[i].BackColor = Color.Gray;
-                            ToppingListView.Items[i].Tag = false;
-                            break;
-                        }
+                        item.Checked = true;
+                        item.Tag = false;
+                        item.BackColor = Color.Gray;
                     }
                 }
             }
