@@ -21,6 +21,12 @@ namespace PizzaOrderSystem2
             {
                 MainFormRefreshScreen();
             }
+
+            //選択を外す
+            if (GetSelectedIndex() >= 0)
+            {
+                OrderListView.SelectedIndices.Clear();
+            }
             MainFormRefreshScreen();
         }
 
@@ -34,9 +40,6 @@ namespace PizzaOrderSystem2
         /// </summary>
         private void MainFormRefreshScreen()
         {
-            //選択を外す
-            OrderListView.SelectedIndices.Clear();
-
             //注文リストと詳細をクリア
             OrderListView.Items.Clear();
             DetailsListView.Items.Clear();
@@ -56,8 +59,6 @@ namespace PizzaOrderSystem2
         /// <summary>
         /// ピザを選択した時に詳細を出力する処理
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OrderListView_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             ChangeButtonState();
@@ -105,7 +106,6 @@ namespace PizzaOrderSystem2
         /// <summary>
         /// 選択されたリストビューのindexを返す
         /// </summary>
-        /// <returns></returns>
         public int GetSelectedIndex()
         {
             int index = 0;
@@ -124,6 +124,12 @@ namespace PizzaOrderSystem2
             if (DialogResult.OK == changeForm.ShowDialog())
             {
                 MainFormRefreshScreen();
+            }
+
+            //選択を外す
+            if (GetSelectedIndex() >= 0)
+            {
+                OrderListView.SelectedIndices.Clear();
             }
             MainFormRefreshScreen();
         }
