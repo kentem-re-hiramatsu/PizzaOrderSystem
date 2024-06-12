@@ -99,15 +99,11 @@ namespace sub
                 }
 
                 //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
-                for (int i = 0; i < _pizzaOrderMana.ToppingMenuList.Count; i++)
+                foreach (ListViewItem item in ToppingListView.Items)
                 {
-                    for (int j = 0; j < defaultToppings.Count; j++)
+                    if (defaultToppings.Any(x => x.Name == item.Text))
                     {
-                        if (defaultToppings[j].Name == ToppingListView.Items[i].Text)
-                        {
-                            ToppingListView.Items[i].Tag = false;
-                            break;
-                        }
+                        item.Tag = false;
                     }
                 }
             }
