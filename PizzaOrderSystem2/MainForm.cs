@@ -34,9 +34,14 @@ namespace PizzaOrderSystem2
         /// </summary>
         private void MainFormRefreshScreen()
         {
+            //選択を外す
+            OrderListView.SelectedIndices.Clear();
+
             //注文リストと詳細をクリア
             OrderListView.Items.Clear();
             DetailsListView.Items.Clear();
+
+            OrderListView.SelectedItems.Clear();
 
             //注文リストViewにピザ追加
             foreach (var pizza in _pizzaOrderMana.PizzaOrderList)
