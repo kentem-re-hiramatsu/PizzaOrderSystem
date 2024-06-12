@@ -17,7 +17,7 @@ namespace Models.Manager
         public IReadOnlyCollection<PizzaMenu> PizzaMenuList { get { return _pizzaMenuList; } }
         public IReadOnlyCollection<ToppingMenu> ToppingMenuList { get { return _toppingMenuList; } }
 
-        private string _pizzaDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../Models/Data/PizzaData.text");
+        private string _pizzaDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../Models/Data/data.csv");
 
         public PizzaOrderManagement()
         {
@@ -28,40 +28,31 @@ namespace Models.Manager
         /// <summary>
         /// 注文リストに注文したピザをリストに追加
         /// </summary>
-        /// <param name="pizzaMenu"></param>
         public void AddPizzaOrderList(PizzaMenu pizzaMenu) => _pizzaOrderList.Add(pizzaMenu);
 
         /// <summary>
         /// 選択したピザを返す
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
         public PizzaMenu GetPizzaOrder(int index) => _pizzaOrderList[index];
 
         /// <summary>
         /// 選択されたピザの削除
         /// </summary>
-        /// <param name="index"></param>
         public void RemovePizzaOrderList(int index) => _pizzaOrderList.RemoveAt(index);
 
         /// <summary>
         /// すべてのピザの合計金額を返す
         /// </summary>
-        /// <returns></returns>
-        public int GetTotalPrice() => _pizzaOrderList.Select(x => x.GetPizzaTotalPrice()).Sum();
+        public int GetTotalPrice() => _pizzaOrderList.Sum(x => x.GetPizzaTotalPrice());
 
         /// <summary>
         /// indexをもとにピザのインスタンスを返す
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
         public PizzaMenu GetPizzaMenu(int index) => _pizzaMenuList[index];
 
         /// <summary>
         /// ピザの名前からリストのインデックスを返す
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         public int GetPizzaMenuIndex(string name)
         {
             for (int i = 0; i < _pizzaMenuList.Count; i++)
@@ -89,15 +80,11 @@ namespace Models.Manager
         /// <summary>
         /// トッピングのインスタンスを返す
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
         public ToppingMenu GetToppingMenu(int index) => _toppingMenuList[index];
 
         /// <summary>
         /// トッピングの名前からリストのインデックスを返す
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         public int GetToppingMenuIndex(string name)
         {
             for (int i = 0; i < _toppingMenuList.Count; i++)
@@ -130,8 +117,6 @@ namespace Models.Manager
         /// <summary>
         /// ピザ変更
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="pizzaMenu"></param>
         public void ChangePizza(int index, PizzaMenu pizzaMenu) => _pizzaOrderList[index] = pizzaMenu;
 
         /// <summary>
@@ -204,6 +189,43 @@ namespace Models.Manager
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// ピザ変更
+        /// </summary>
+        public PizzaMenu ContainsSameTopping(List<int> toppings)
+        {
+            PizzaMenu pizzaInstance = null;
+            int tmpprice = 9999;
+
+            for (int i = 0; i < PizzaMenuList.Count; i++)
+            {
+                var defaulttoppings = new List<int>();
+                var count = _pizzaMenuList[i].ToppingList.Count;
+                int price = _pizzaMenuList[i].GetPizzaTotalPrice();
+
+                for (int j = 0; j < count; j++)
+                {
+                    defaulttoppings.Add(GetToppingMenuIndex(_pizzaMenuList[i].GetTopping(j).Name));
+                }
+
+                var tmp = toppings.Union(defaulttoppings);
+
+                var tmp2 = tmp.Except(defaulttoppings);
+
+                foreach (var topping in tmp2)
+                {
+                    price += GetToppingMenu(topping).Price;
+                }
+
+                if (tmpprice > price)
+                {
+                    pizzaInstance = _pizzaMenuList[i];
+                    tmpprice = price;
+                }
+            }
+            return pizzaInstance;
         }
     }
 }
