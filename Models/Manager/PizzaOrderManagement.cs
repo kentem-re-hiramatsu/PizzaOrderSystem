@@ -199,14 +199,14 @@ namespace Models.Manager
             PizzaMenu pizzaInstance = null;
             int lowPrice = int.MaxValue;
 
-            for (int i = 0; i < PizzaMenuList.Count; i++)
+            for (int i = 0; i < new PizzaOrderManagement().PizzaMenuList.Count; i++)
             {
                 var defaulttoppings = new List<int>();
-                int pizzaTotalPrice = _pizzaMenuList[i].GetPizzaTotalPrice();
+                int pizzaTotalPrice = new PizzaOrderManagement().GetPizzaMenu(i).GetPizzaTotalPrice();
 
-                for (int j = 0; j < _pizzaMenuList[i].ToppingList.Count; j++)
+                for (int j = 0; j < new PizzaOrderManagement().GetPizzaMenu(i).ToppingList.Count; j++)
                 {
-                    defaulttoppings.Add(GetToppingMenuIndex(_pizzaMenuList[i].GetTopping(j).Name));
+                    defaulttoppings.Add(GetToppingMenuIndex(new PizzaOrderManagement().GetPizzaMenu(i).GetTopping(j).Name));
                 }
 
                 //選択したトッピングとデフォルトトッピングの和集合
@@ -224,7 +224,7 @@ namespace Models.Manager
                 //一番低いピザの価格と今回のピザの価格を比較
                 if (lowPrice > pizzaTotalPrice)
                 {
-                    pizzaInstance = _pizzaMenuList[i];
+                    pizzaInstance = new PizzaOrderManagement().GetPizzaMenu(i);
                     lowPrice = pizzaTotalPrice;
                 }
             }
