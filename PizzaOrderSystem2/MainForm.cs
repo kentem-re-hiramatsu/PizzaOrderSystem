@@ -17,9 +17,7 @@ namespace PizzaOrderSystem2
         {
             var subForm = new SubForm(_pizzaOrderMana, GetSelectedIndex(), true);
             if (DialogResult.OK == subForm.ShowDialog())
-            {
                 MainFormRefreshScreen();
-            }
 
             DeselectListView();
             MainFormRefreshScreen();
@@ -105,9 +103,8 @@ namespace PizzaOrderSystem2
             int index = 0;
 
             if (OrderListView.SelectedItems.Count > 0)
-            {
                 index = OrderListView.SelectedItems[0].Index;
-            }
+
             return index;
         }
 
@@ -116,9 +113,7 @@ namespace PizzaOrderSystem2
             var changeForm = new SubForm(_pizzaOrderMana, GetSelectedIndex(), false);
 
             if (DialogResult.OK == changeForm.ShowDialog())
-            {
                 MainFormRefreshScreen();
-            }
 
             DeselectListView();
             MainFormRefreshScreen();
@@ -128,9 +123,7 @@ namespace PizzaOrderSystem2
         {
             //選択を外す
             if (GetSelectedIndex() >= 0)
-            {
                 OrderListView.SelectedIndices.Clear();
-            }
         }
 
     }

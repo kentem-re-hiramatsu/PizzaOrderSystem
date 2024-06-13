@@ -57,9 +57,7 @@ namespace sub
         {
             ///Defaultトッピングを選択を固定する処理
             if (!(bool)ToppingListView.Items[e.Index].Tag)
-            {
                 e.NewValue = CheckState.Checked;
-            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -100,9 +98,7 @@ namespace sub
                 foreach (ListViewItem item in ToppingListView.Items)
                 {
                     if (pizzaInstance.ToppingList.Any(x => x.Name == item.Text))
-                    {
                         item.Tag = false;
-                    }
                 }
             }
 
@@ -110,9 +106,7 @@ namespace sub
             {
                 //トッピング選択とTagがFalse(Defaultトッピングじゃないとき)にピザの中にトッピングを追加する
                 if (topping.Checked && (bool)topping.Tag)
-                {
                     pizzaInstance.SetTopping(_pizzaOrderMana.GetToppingMenu(topping.Index));
-                }
             }
 
             if (_buttonChecked)
@@ -134,9 +128,7 @@ namespace sub
             foreach (ListViewItem item in MainMenuListView.Items)
             {
                 if (!MainMenuListView.Items[changedItemIndex].Checked)
-                {
                     item.Checked = false;
-                }
             }
 
             //すべてのトッピングを初期化

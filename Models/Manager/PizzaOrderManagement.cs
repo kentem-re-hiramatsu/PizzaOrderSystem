@@ -58,9 +58,7 @@ namespace Models.Manager
             for (int i = 0; i < _pizzaMenuList.Count; i++)
             {
                 if (name == GetPizzaMenu(i).Name)
-                {
                     return i;
-                }
             }
             return -1;
         }
@@ -90,9 +88,7 @@ namespace Models.Manager
             for (int i = 0; i < _toppingMenuList.Count; i++)
             {
                 if (name == GetToppingMenu(i).Name)
-                {
                     return i;
-                }
             }
             return -1;
         }
