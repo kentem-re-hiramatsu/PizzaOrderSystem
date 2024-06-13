@@ -71,7 +71,7 @@ namespace Models.Manager
             _pizzaMenuList.Add(new PlainPizza());
             _pizzaMenuList.Add(new MargheritaPizza());
             _pizzaMenuList.Add(new SeafoodPizza());
-            _pizzaMenuList.Add(new PescaTorePizza());
+            _pizzaMenuList.Add(new PescatorePizza());
             _pizzaMenuList.Add(new BambinoPizza());
         }
 

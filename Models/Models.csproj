@@ -48,7 +48,7 @@
     <Compile Include="Manager\PizzaOrderManagement.cs" />
     <Compile Include="Pizza\BambinoPizza.cs" />
     <Compile Include="Pizza\MargheritaPizza.cs" />
-    <Compile Include="Pizza\PescaTorePizza.cs" />
+    <Compile Include="Pizza\PescatorePizza.cs" />
     <Compile Include="Pizza\PizzaMenu.cs" />
     <Compile Include="Pizza\PlainPizza.cs" />
     <Compile Include="Pizza\SeafoodPizza.cs" />
