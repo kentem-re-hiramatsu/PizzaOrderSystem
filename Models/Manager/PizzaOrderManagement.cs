@@ -139,7 +139,7 @@ namespace Models.Manager
                 string[] pizzaData = pizzaList[i].Split(',');
 
                 //GetPizzaMenuから任意のピザのインスタンス取得
-                var pizza = GetPizzaMenu(int.Parse(pizzaData[0])).DeepCopy();
+                var pizza = GetPizzaMenu(int.Parse(pizzaData[0])).Clone();
 
                 //Defaultトッピングの数を取得
                 var Count = pizza.ToppingList.Count + 1;
@@ -197,12 +197,12 @@ namespace Models.Manager
             for (int i = 0; i < PizzaMenuList.Count; i++)
             {
                 var defaultToppings = new List<int>();
-                var deepCopyPizza = GetPizzaMenu(i).DeepCopy();
-                int pizzaTotalPrice = deepCopyPizza.GetPizzaTotalPrice();
+                var ClonePizza = GetPizzaMenu(i).Clone();
+                int pizzaTotalPrice = ClonePizza.GetPizzaTotalPrice();
 
-                for (int j = 0; j < deepCopyPizza.ToppingList.Count; j++)
+                for (int j = 0; j < ClonePizza.ToppingList.Count; j++)
                 {
-                    defaultToppings.Add(GetToppingMenuIndex(deepCopyPizza.GetTopping(j).Name));
+                    defaultToppings.Add(GetToppingMenuIndex(ClonePizza.GetTopping(j).Name));
                 }
 
                 //選択したトッピングとデフォルトトッピングの和集合
@@ -220,7 +220,7 @@ namespace Models.Manager
                 //一番低いピザの価格と今回のピザの価格を比較
                 if (lowPrice > pizzaTotalPrice)
                 {
-                    pizzaInstance = deepCopyPizza;
+                    pizzaInstance = ClonePizza;
                     lowPrice = pizzaTotalPrice;
                 }
             }

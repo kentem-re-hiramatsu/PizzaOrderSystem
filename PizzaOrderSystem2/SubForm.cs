@@ -71,7 +71,7 @@ namespace sub
         private void OkButton_Click(object sender, EventArgs e)
         {
             //GetPizzaMenuから選択しているピザのインスタンスを取得
-            var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(_pizzaMenuSlectedIndex).DeepCopy();
+            var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(_pizzaMenuSlectedIndex).Clone();
             bool isPizzaChanged = false;
             var toppings = new List<int>();
 
@@ -147,7 +147,7 @@ namespace sub
                 var defaultToppings = new List<ToppingMenu>();
 
                 //選択したピザのインスタンスをリストから取得
-                var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(e.Index).DeepCopy();
+                var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(e.Index).Clone();
 
                 //任意のDefaultトッピングを追加
                 foreach (var topping in pizzaInstance.ToppingList)

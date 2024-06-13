@@ -13,7 +13,7 @@ namespace Models.Pizza
             _price = DEFAULTPRICE;
         }
 
-        public override PizzaMenu DeepCopy()
+        public override PizzaMenu Clone()
         {
             return new BambinoPizza();
         }
