@@ -15,20 +15,20 @@ namespace sub
         //ピザを選択したときのインデックス
         private int _pizzaMenuSlectedIndex = 0;
         private int _pizzaOrderSelectionIndex;
-        private bool _buttonCheck;
+        private bool _buttonChecked;
 
-        public SubForm(PizzaOrderManagement pizzaOrderMana, int selectedIndex, bool buttonCheck)
+        public SubForm(PizzaOrderManagement pizzaOrderMana, int selectedIndex, bool buttonChecked)
         {
             InitializeComponent();
             _pizzaOrderMana = pizzaOrderMana;
             _pizzaOrderSelectionIndex = selectedIndex;
-            _buttonCheck = buttonCheck;
+            _buttonChecked = buttonChecked;
         }
 
         private void SubForm_Load(object sender, EventArgs e)
         {
             RefreshScreen();
-            if (!_buttonCheck)
+            if (!_buttonChecked)
                 SetSelectedPizzaDetails();
         }
 
@@ -49,6 +49,7 @@ namespace sub
                 ToppingListView.Items.Add(new ListViewItem(new string[] { pizza.Name, pizza.Price.ToString() }));
             }
 
+            //初期設定
             MainMenuListView.Items[0].Checked = true;
         }
 
@@ -105,7 +106,6 @@ namespace sub
                 }
             }
 
-            //全トッピング分繰り返す
             foreach (ListViewItem topping in ToppingListView.Items)
             {
                 //トッピング選択とTagがFalse(Defaultトッピングじゃないとき)にピザの中にトッピングを追加する
@@ -115,7 +115,7 @@ namespace sub
                 }
             }
 
-            if (_buttonCheck)
+            if (_buttonChecked)
                 _pizzaOrderMana.AddPizzaOrderList(pizzaInstance);
             else
                 _pizzaOrderMana.ChangePizza(_pizzaOrderSelectionIndex, pizzaInstance);

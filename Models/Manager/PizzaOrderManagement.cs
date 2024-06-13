@@ -168,16 +168,17 @@ namespace Models.Manager
         public void SavePizzaDataFile()
         {
             File.WriteAllText(_pizzaDataFilePath, "");
-            for (int i = 0; i < _pizzaOrderList.Count; i++)
+
+            foreach (var pizza in PizzaOrderList)
             {
-                var toppingListCount = (GetPizzaOrder(i)).ToppingList.Count;
-                var pizzaIndex = GetPizzaMenuIndex(GetPizzaOrder(i).Name);
+                var toppingListCount = pizza.ToppingList.Count;
+                var pizzaIndex = GetPizzaMenuIndex(pizza.Name);
 
                 File.AppendAllText(_pizzaDataFilePath, $"{pizzaIndex},");
 
                 for (int j = 0; j < toppingListCount; j++)
                 {
-                    var toppingindex = GetToppingMenuIndex(GetPizzaOrder(i).GetTopping(j).Name);
+                    var toppingindex = GetToppingMenuIndex(pizza.GetTopping(j).Name);
 
                     if (j == toppingListCount - 1)
                     {
@@ -198,23 +199,23 @@ namespace Models.Manager
         {
             PizzaMenu pizzaInstance = null;
             int lowPrice = int.MaxValue;
-            var pizzaorder = new PizzaOrderManagement();
+            var pizzaOrder = new PizzaOrderManagement();
 
-            for (int i = 0; i < pizzaorder.PizzaMenuList.Count; i++)
+            for (int i = 0; i < pizzaOrder.PizzaMenuList.Count; i++)
             {
-                var defaulttoppings = new List<int>();
-                int pizzaTotalPrice = pizzaorder.GetPizzaMenu(i).GetPizzaTotalPrice();
+                var defaultToppings = new List<int>();
+                int pizzaTotalPrice = pizzaOrder.GetPizzaMenu(i).GetPizzaTotalPrice();
 
-                for (int j = 0; j < pizzaorder.GetPizzaMenu(i).ToppingList.Count; j++)
+                for (int j = 0; j < pizzaOrder.GetPizzaMenu(i).ToppingList.Count; j++)
                 {
-                    defaulttoppings.Add(GetToppingMenuIndex(pizzaorder.GetPizzaMenu(i).GetTopping(j).Name));
+                    defaultToppings.Add(GetToppingMenuIndex(pizzaOrder.GetPizzaMenu(i).GetTopping(j).Name));
                 }
 
                 //選択したトッピングとデフォルトトッピングの和集合
-                var unionToppings = toppings.Union(defaulttoppings);
+                var unionToppings = toppings.Union(defaultToppings);
 
                 //和集合とデフォルトトッピングの差集合
-                var exceptTopping = unionToppings.Except(defaulttoppings);
+                var exceptTopping = unionToppings.Except(defaultToppings);
 
                 //追加トッピングの価格を取得
                 foreach (var topping in exceptTopping)
@@ -225,7 +226,7 @@ namespace Models.Manager
                 //一番低いピザの価格と今回のピザの価格を比較
                 if (lowPrice > pizzaTotalPrice)
                 {
-                    pizzaInstance = pizzaorder.GetPizzaMenu(i);
+                    pizzaInstance = pizzaOrder.GetPizzaMenu(i);
                     lowPrice = pizzaTotalPrice;
                 }
             }
