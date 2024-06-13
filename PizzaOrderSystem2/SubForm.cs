@@ -1,5 +1,4 @@
-﻿using Models;
-using Models.Manager;
+﻿using Models.Manager;
 using Models.Topping;
 using System;
 using System.Collections.Generic;
@@ -96,18 +95,10 @@ namespace sub
                 pizzaInstance = _pizzaOrderMana.ContainsSameTopping(toppings);
                 isPizzaChanged = true;
 
-                var defaultToppings = new List<IMenuItem>();
-
-                //任意のDefaultトッピングを追加
-                foreach (var pizza in pizzaInstance.ToppingList)
-                {
-                    defaultToppings.Add(pizza);
-                }
-
                 //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
                 foreach (ListViewItem item in ToppingListView.Items)
                 {
-                    if (defaultToppings.Any(x => x.Name == item.Text))
+                    if (pizzaInstance.ToppingList.Any(x => x.Name == item.Text))
                     {
                         item.Tag = false;
                     }
