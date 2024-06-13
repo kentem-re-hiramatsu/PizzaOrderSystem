@@ -10,6 +10,7 @@ namespace Models.Pizza
         protected int _price;
         protected List<ToppingMenu> _toppingList = new List<ToppingMenu>();
 
+        public abstract PizzaMenu DeepCopy();
         public string Name { get { return _name; } }
         public int Price { get { return _price; } }
         public IReadOnlyCollection<ToppingMenu> ToppingList { get { return _toppingList; } }

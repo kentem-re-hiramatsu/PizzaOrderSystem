@@ -13,6 +13,11 @@ namespace Models.Pizza
             _price = DEFAULTPRICE;
         }
 
+        public override PizzaMenu DeepCopy()
+        {
+            return new SeafoodPizza();
+        }
+
         protected override void SetDefaultTopping()
         {
             _toppingList.Add(new Cheese(0));
