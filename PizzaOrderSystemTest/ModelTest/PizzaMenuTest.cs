@@ -63,7 +63,7 @@ namespace PizzaOrderSystemTest
         [TestMethod]
         public void PescaTorePizzaTest()
         {
-            var pescaTorePizza = new PescaTorePizza();
+            var pescaTorePizza = new PescatorePizza();
 
             Assert.AreEqual("ペスカトーレピザ", pescaTorePizza.Name);
             Assert.AreEqual(1800, pescaTorePizza.Price);

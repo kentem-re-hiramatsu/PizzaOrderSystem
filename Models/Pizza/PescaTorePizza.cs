@@ -2,12 +2,12 @@
 
 namespace Models.Pizza
 {
-    public class PescaTorePizza : PizzaMenu
+    public class PescatorePizza : PizzaMenu
     {
         const string NAME = "ペスカトーレピザ";
         const int DEFAULTPRICE = 1800;
 
-        public PescaTorePizza() : base()
+        public PescatorePizza() : base()
         {
             _name = NAME;
             _price = DEFAULTPRICE;
@@ -15,7 +15,7 @@ namespace Models.Pizza
 
         public override PizzaMenu Clone()
         {
-            return new PescaTorePizza();
+            return new PescatorePizza();
         }
 
         protected override void SetDefaultTopping()

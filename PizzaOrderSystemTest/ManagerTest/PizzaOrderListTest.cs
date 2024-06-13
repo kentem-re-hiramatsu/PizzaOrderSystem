@@ -73,7 +73,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(0).Name, new PlainPizza().Name);
             Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(1).Name, new MargheritaPizza().Name);
             Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(2).Name, new SeafoodPizza().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(3).Name, new PescaTorePizza().Name);
+            Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(3).Name, new PescatorePizza().Name);
             Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(4).Name, new BambinoPizza().Name);
         }
 
@@ -159,7 +159,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.ホタテ);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new PescaTorePizza().Name);
+            Assert.AreEqual(pizzaInstance.Name, new PescatorePizza().Name);
 
             toppings.RemoveRange(2, 2);
             toppings.Add((int)ToppingEnum.ツナ);
@@ -188,7 +188,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.ホタテ);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new PescaTorePizza().Name);
+            Assert.AreEqual(pizzaInstance.Name, new PescatorePizza().Name);
 
             toppings.RemoveRange(4, 1);
             toppings.Add((int)ToppingEnum.ツナ);
@@ -218,7 +218,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.ホタテ);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new PescaTorePizza().Name);
+            Assert.AreEqual(pizzaInstance.Name, new PescatorePizza().Name);
 
             toppings.RemoveRange(2, 1);
             toppings.Add((int)ToppingEnum.トマト);
