@@ -14,17 +14,23 @@ namespace sub
         private PizzaOrderManagement _pizzaOrderMana;
 
         //ピザを選択したときのインデックス
-        private int slectedIndex = 0;
+        private int _pizzaMenuSlectedIndex = 0;
+        private int _pizzaOrderSelectionIndex;
+        private bool _buttonCheck;
 
-        public SubForm(PizzaOrderManagement pizzaOrderMana)
+        public SubForm(PizzaOrderManagement pizzaOrderMana, int selectedIndex, bool buttonCheck)
         {
             InitializeComponent();
             _pizzaOrderMana = pizzaOrderMana;
+            _pizzaOrderSelectionIndex = selectedIndex;
+            _buttonCheck = buttonCheck;
         }
 
         private void SubForm_Load(object sender, EventArgs e)
         {
             RefreshScreen();
+            if (!_buttonCheck)
+                SetSelectedPizzaDetails();
         }
 
         /// <summary>
@@ -67,7 +73,7 @@ namespace sub
         private void OkButton_Click(object sender, EventArgs e)
         {
             //GetPizzaMenuから選択しているピザのインスタンスを取得
-            var pizzaInstance = _pizzaOrderMana.GetPizzaMenu(slectedIndex);
+            var pizzaInstance = new PizzaOrderManagement().GetPizzaMenu(_pizzaMenuSlectedIndex);
             bool isPizzaChanged = false;
             var toppings = new List<int>();
 
@@ -117,7 +123,11 @@ namespace sub
                     pizzaInstance.SetTopping(_pizzaOrderMana.GetToppingMenu(topping.Index));
                 }
             }
-            _pizzaOrderMana.AddPizzaOrderList(pizzaInstance);
+
+            if (_buttonCheck)
+                _pizzaOrderMana.AddPizzaOrderList(pizzaInstance);
+            else
+                _pizzaOrderMana.ChangePizza(_pizzaOrderSelectionIndex, pizzaInstance);
 
             if (isPizzaChanged)
                 MessageBox.Show($"{pizzaInstance.Name}に変更されました。");
@@ -148,7 +158,7 @@ namespace sub
 
             if (e.CurrentValue == 0)
             {
-                slectedIndex = e.Index;
+                _pizzaMenuSlectedIndex = e.Index;
                 OkButton.Enabled = e.CurrentValue == 0;
 
                 var defaultToppings = new List<ToppingMenu>();
@@ -173,6 +183,21 @@ namespace sub
                     }
                 }
             }
+        }
+
+        /// <summary>
+        ///選択したピザの詳細をセットする
+        /// </summary>
+        public void SetSelectedPizzaDetails()
+        {
+            foreach (ListViewItem item in MainMenuListView.Items)
+            {
+                item.Checked = _pizzaOrderMana.GetPizzaOrder(_pizzaOrderSelectionIndex).Name == item.Text;
+                item.Tag = _pizzaOrderMana.GetPizzaOrder(_pizzaOrderSelectionIndex).Name == item.Text;
+            }
+
+            foreach (ListViewItem item in ToppingListView.Items)
+                item.Checked = _pizzaOrderMana.GetPizzaOrder(_pizzaOrderSelectionIndex).ToppingList.Any(e => e.Name == item.Text);
         }
     }
 }

@@ -2,7 +2,6 @@
 using Models.Pizza;
 using sub;
 using System.Windows.Forms;
-using WindowsFormsApp1;
 
 namespace PizzaOrderSystem2
 {
@@ -16,7 +15,7 @@ namespace PizzaOrderSystem2
 
         private void OrderButton_Click(object sender, System.EventArgs e)
         {
-            var subForm = new SubForm(_pizzaOrderMana);
+            var subForm = new SubForm(_pizzaOrderMana, GetSelectedIndex(), true);
             if (DialogResult.OK == subForm.ShowDialog())
             {
                 MainFormRefreshScreen();
@@ -119,7 +118,7 @@ namespace PizzaOrderSystem2
 
         private void Changebutton_Click(object sender, System.EventArgs e)
         {
-            var changeForm = new ChangeForm(_pizzaOrderMana, GetSelectedIndex());
+            var changeForm = new SubForm(_pizzaOrderMana, GetSelectedIndex(), false);
 
             if (DialogResult.OK == changeForm.ShowDialog())
             {
