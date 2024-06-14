@@ -141,11 +141,11 @@ namespace sub
                 topping.Tag = true;
             }
 
+            OkButton.Enabled = e.CurrentValue == 0;
+
             if (e.CurrentValue == 0)
             {
                 _pizzaMenuSlectedIndex = e.Index;
-                OkButton.Enabled = e.CurrentValue == 0;
-
                 var defaultToppings = new List<ToppingMenu>();
 
                 //選択したピザのインスタンスをリストから取得
