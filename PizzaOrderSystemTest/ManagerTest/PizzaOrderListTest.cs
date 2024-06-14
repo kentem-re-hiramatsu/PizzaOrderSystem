@@ -153,18 +153,18 @@ namespace PizzaOrderSystemTest.ManagerTest
                 (int)ToppingEnum.モッツァレラチーズ,
             };
 
-            var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            var pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new MargheritaPizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(2, 2);
             toppings.Add((int)ToppingEnum.シーフードミックス);
 
-            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new SeafoodPizza().Name, pizzaInstance.Name);
 
             toppings.Add((int)ToppingEnum.ホタテ);
 
-            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new PescatorePizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(2, 2);
@@ -172,7 +172,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.コーン);
             toppings.Add((int)ToppingEnum.ベーコン);
 
-            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new BambinoPizza().Name, pizzaInstance.Name);
         }
 
@@ -188,12 +188,12 @@ namespace PizzaOrderSystemTest.ManagerTest
                 (int)ToppingEnum.シーフードミックス,
             };
 
-            var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            var pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new MargheritaPizza().Name, pizzaInstance.Name);
 
             toppings.Add((int)ToppingEnum.ホタテ);
 
-            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new PescatorePizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(4, 1);
@@ -201,7 +201,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.コーン);
             toppings.Add((int)ToppingEnum.ベーコン);
 
-            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new BambinoPizza().Name, pizzaInstance.Name);
         }
 
@@ -217,13 +217,13 @@ namespace PizzaOrderSystemTest.ManagerTest
                 (int)ToppingEnum.バジル,
             };
 
-            var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            var pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new MargheritaPizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(2, 3);
             toppings.Add((int)ToppingEnum.ホタテ);
 
-            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new PescatorePizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(2, 1);
@@ -232,7 +232,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.コーン);
             toppings.Add((int)ToppingEnum.ベーコン);
 
-            pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new BambinoPizza().Name, pizzaInstance.Name);
         }
 
@@ -251,7 +251,7 @@ namespace PizzaOrderSystemTest.ManagerTest
                 (int)ToppingEnum.ベーコン,
             };
 
-            var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
+            var pizzaInstance = pizzaOrderMana.GeToptimizedPizza(toppings);
             Assert.AreEqual(new BambinoPizza().Name, pizzaInstance.Name);
         }
     }

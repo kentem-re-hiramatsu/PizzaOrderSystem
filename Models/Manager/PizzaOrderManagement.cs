@@ -144,12 +144,10 @@ namespace Models.Manager
                 //Defaultトッピングの数を取得
                 var Count = pizza.ToppingList.Count + 1;
 
-                ToppingMenu topping = null;
-
                 //Defaultトッピング以外のトッピングを追加処理
                 for (int j = Count; j < pizzaData.Length; j++)
                 {
-                    topping = GetToppingMenu(int.Parse(pizzaData[j]));
+                    ToppingMenu topping = GetToppingMenu(int.Parse(pizzaData[j]));
                     pizza.SetTopping(topping);
                 }
                 AddPizzaOrderList(pizza);
@@ -187,9 +185,9 @@ namespace Models.Manager
         }
 
         /// <summary>
-        /// ピザ変更
+        /// より安いピザに変更
         /// </summary>
-        public PizzaMenu ContainsSameTopping(List<int> toppings)
+        public PizzaMenu GeToptimizedPizza(List<int> toppings)
         {
             PizzaMenu pizzaInstance = null;
             int lowPrice = int.MaxValue;

@@ -82,10 +82,10 @@ namespace sub
                     toppings.Add(item.Index);
             }
 
-            var containsTopping = _pizzaOrderMana.ContainsSameTopping(toppings);
+            var optimizedPizza = _pizzaOrderMana.GeToptimizedPizza(toppings);
 
             //ピザが変更されているか
-            if (containsTopping.Name != pizzaInstance.Name)
+            if (optimizedPizza.Name != pizzaInstance.Name)
             {
                 //すべてのトッピングを初期化
                 foreach (ListViewItem topping in ToppingListView.Items)
@@ -93,7 +93,7 @@ namespace sub
                     topping.Tag = true;
                 }
 
-                pizzaInstance = containsTopping;
+                pizzaInstance = optimizedPizza;
                 isPizzaChanged = true;
 
                 //任意のピザのDefaultトッピングと全トッピングを比較しDefaultトッピングにチェックする処理
