@@ -40,7 +40,8 @@ namespace PizzaOrderSystemTest.ManagerTest
             pizzaOrderMana.RemovePizzaOrderList(1);
             listCount = pizzaOrderMana.PizzaOrderList.Count;
 
-            Assert.AreEqual(1, listCount);
+            Assert.AreEqual(1, listCount:
+                );
             Assert.AreEqual(new PlainPizza().Name, pizzaOrderMana.GetPizzaOrder(0).Name);
         }
 
