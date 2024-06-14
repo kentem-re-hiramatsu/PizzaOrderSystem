@@ -14,13 +14,14 @@ namespace PizzaOrderSystemTest
             var name = cheese.Name;
             var price = cheese.Price;
 
-            Assert.AreEqual(name, "チーズ");
-            Assert.AreEqual(price, 100);
+            Assert.AreEqual("チーズ", name);
+            Assert.AreEqual(100, price);
         }
 
         [TestMethod]
         public void CheeseDefaultTest()
         {
+            Assert.AreEqual(0, new Cheese(0).Price);
             Assert.ThrowsException<Exception>(() => new Cheese(-1));
         }
 
@@ -31,13 +32,14 @@ namespace PizzaOrderSystemTest
             var name = friedGarlic.Name;
             var price = friedGarlic.Price;
 
-            Assert.AreEqual(name, "フライドガーリック");
-            Assert.AreEqual(price, 150);
+            Assert.AreEqual("フライドガーリック", name);
+            Assert.AreEqual(150, price);
         }
 
         [TestMethod]
         public void FriedGarlicDefaultTest()
         {
+            Assert.AreEqual(0, new FriedGarlic(0).Price);
             Assert.ThrowsException<Exception>(() => new FriedGarlic(-1));
         }
 
@@ -48,13 +50,14 @@ namespace PizzaOrderSystemTest
             var name = mozzarellaCheese.Name;
             var price = mozzarellaCheese.Price;
 
-            Assert.AreEqual(name, "モッツァレラチーズ");
-            Assert.AreEqual(price, 300);
+            Assert.AreEqual("モッツァレラチーズ", name);
+            Assert.AreEqual(300, price);
         }
 
         [TestMethod]
         public void MozzarellaCheeseDefaultTest()
         {
+            Assert.AreEqual(0, new MozzarellaCheese(0).Price);
             Assert.ThrowsException<Exception>(() => new MozzarellaCheese(-1));
         }
 
@@ -65,13 +68,14 @@ namespace PizzaOrderSystemTest
             var name = seafoodMix.Name;
             var price = seafoodMix.Price;
 
-            Assert.AreEqual(name, "シーフードミックス");
-            Assert.AreEqual(price, 500);
+            Assert.AreEqual("シーフードミックス", name);
+            Assert.AreEqual(500, price);
         }
 
         [TestMethod]
         public void SeafoodMixDefaultTest()
         {
+            Assert.AreEqual(0, new SeafoodMix(0).Price);
             Assert.ThrowsException<Exception>(() => new SeafoodMix(-1));
         }
 
@@ -82,13 +86,14 @@ namespace PizzaOrderSystemTest
             var name = scallops.Name;
             var price = scallops.Price;
 
-            Assert.AreEqual(name, "ホタテ");
-            Assert.AreEqual(price, 500);
+            Assert.AreEqual("ホタテ", name);
+            Assert.AreEqual(500, price);
         }
 
         [TestMethod]
         public void ScallopsDefaultTest()
         {
+            Assert.AreEqual(0, new Scallops(0).Price);
             Assert.ThrowsException<Exception>(() => new Scallops(-1));
         }
 
@@ -99,13 +104,14 @@ namespace PizzaOrderSystemTest
             var name = basil.Name;
             var price = basil.Price;
 
-            Assert.AreEqual(name, "バジル");
-            Assert.AreEqual(price, 100);
+            Assert.AreEqual("バジル", name);
+            Assert.AreEqual(100, price);
         }
 
         [TestMethod]
         public void BasilDefaultTest()
         {
+            Assert.AreEqual(0, new Basil(0).Price);
             Assert.ThrowsException<Exception>(() => new Basil(-1));
         }
 
@@ -116,13 +122,14 @@ namespace PizzaOrderSystemTest
             var name = tomato.Name;
             var price = tomato.Price;
 
-            Assert.AreEqual(name, "トマト");
-            Assert.AreEqual(price, 250);
+            Assert.AreEqual("トマト", name);
+            Assert.AreEqual(250, price);
         }
 
         [TestMethod]
         public void TomatoDefaultTest()
         {
+            Assert.AreEqual(0, new Tomato(0).Price);
             Assert.ThrowsException<Exception>(() => new Tomato(-1));
         }
 
@@ -133,13 +140,14 @@ namespace PizzaOrderSystemTest
             var name = tuna.Name;
             var price = tuna.Price;
 
-            Assert.AreEqual(name, "ツナ");
-            Assert.AreEqual(price, 250);
+            Assert.AreEqual("ツナ", name);
+            Assert.AreEqual(250, price);
         }
 
         [TestMethod]
         public void TunaDefaultTest()
         {
+            Assert.AreEqual(0, new Tuna(0).Price);
             Assert.ThrowsException<Exception>(() => new Tuna(-1));
         }
 
@@ -150,13 +158,14 @@ namespace PizzaOrderSystemTest
             var name = corn.Name;
             var price = corn.Price;
 
-            Assert.AreEqual(name, "コーン");
-            Assert.AreEqual(price, 250);
+            Assert.AreEqual("コーン", name);
+            Assert.AreEqual(250, price);
         }
 
         [TestMethod]
         public void CornDefaultTest()
         {
+            Assert.AreEqual(0, new Corn(0).Price);
             Assert.ThrowsException<Exception>(() => new Corn(-1));
         }
 
@@ -167,13 +176,14 @@ namespace PizzaOrderSystemTest
             var name = bacon.Name;
             var price = bacon.Price;
 
-            Assert.AreEqual(name, "ベーコン");
-            Assert.AreEqual(price, 250);
+            Assert.AreEqual("ベーコン", name);
+            Assert.AreEqual(250, price);
         }
 
         [TestMethod]
         public void BaconDefaultTest()
         {
+            Assert.AreEqual(0, new Bacon(0).Price);
             Assert.ThrowsException<Exception>(() => new Bacon(-1));
         }
     }

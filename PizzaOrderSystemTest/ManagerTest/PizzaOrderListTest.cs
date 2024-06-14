@@ -16,16 +16,16 @@ namespace PizzaOrderSystemTest.ManagerTest
         public void AddPizzaOrderListTest()
         {
             var listCount = pizzaOrderMana.PizzaOrderList.Count;
-            Assert.AreEqual(listCount, 0);
+            Assert.AreEqual(0, listCount);
 
             pizzaOrderMana.AddPizzaOrderList(new PlainPizza());
             pizzaOrderMana.AddPizzaOrderList(new SeafoodPizza());
 
             listCount = pizzaOrderMana.PizzaOrderList.Count;
 
-            Assert.AreEqual(listCount, 2);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).Name, new PlainPizza().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(1).Name, new SeafoodPizza().Name);
+            Assert.AreEqual(2, listCount);
+            Assert.AreEqual(new PlainPizza().Name, pizzaOrderMana.GetPizzaOrder(0).Name);
+            Assert.AreEqual(new SeafoodPizza().Name, pizzaOrderMana.GetPizzaOrder(1).Name);
         }
 
         [TestMethod]
@@ -35,13 +35,13 @@ namespace PizzaOrderSystemTest.ManagerTest
             pizzaOrderMana.AddPizzaOrderList(new SeafoodPizza());
 
             var listCount = pizzaOrderMana.PizzaOrderList.Count;
-            Assert.AreEqual(listCount, 2);
+            Assert.AreEqual(2, listCount);
 
             pizzaOrderMana.RemovePizzaOrderList(1);
             listCount = pizzaOrderMana.PizzaOrderList.Count;
 
-            Assert.AreEqual(listCount, 1);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).Name, new PlainPizza().Name);
+            Assert.AreEqual(1, listCount);
+            Assert.AreEqual(new PlainPizza().Name, pizzaOrderMana.GetPizzaOrder(0).Name);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace PizzaOrderSystemTest.ManagerTest
 
             var TotalPrice = pizzaPrice + tunaPrice + basilPrice;
 
-            Assert.AreEqual(PizzaMenuTotalPrice, TotalPrice);
+            Assert.AreEqual(TotalPrice, PizzaMenuTotalPrice);
         }
 
         [TestMethod]
@@ -68,13 +68,13 @@ namespace PizzaOrderSystemTest.ManagerTest
         {
             var count = pizzaOrderMana.PizzaMenuList.Count;
 
-            Assert.AreEqual(count, 5);
+            Assert.AreEqual(5, count);
 
-            Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(0).Name, new PlainPizza().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(1).Name, new MargheritaPizza().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(2).Name, new SeafoodPizza().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(3).Name, new PescatorePizza().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaMenu(4).Name, new BambinoPizza().Name);
+            Assert.AreEqual(new PlainPizza().Name, pizzaOrderMana.GetPizzaMenu(0).Name);
+            Assert.AreEqual(new MargheritaPizza().Name, pizzaOrderMana.GetPizzaMenu(1).Name);
+            Assert.AreEqual(new SeafoodPizza().Name, pizzaOrderMana.GetPizzaMenu(2).Name);
+            Assert.AreEqual(new PescatorePizza().Name, pizzaOrderMana.GetPizzaMenu(3).Name);
+            Assert.AreEqual(new BambinoPizza().Name, pizzaOrderMana.GetPizzaMenu(4).Name);
         }
 
         [TestMethod]
@@ -82,18 +82,18 @@ namespace PizzaOrderSystemTest.ManagerTest
         {
             var count = pizzaOrderMana.ToppingMenuList.Count;
 
-            Assert.AreEqual(count, 10);
+            Assert.AreEqual(10, count);
 
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(0).Name, new Cheese().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(1).Name, new FriedGarlic().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(2).Name, new MozzarellaCheese().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(3).Name, new SeafoodMix().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(4).Name, new Scallops().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(5).Name, new Basil().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(6).Name, new Tomato().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(7).Name, new Tuna().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(8).Name, new Corn().Name);
-            Assert.AreEqual(pizzaOrderMana.GetToppingMenu(9).Name, new Bacon().Name);
+            Assert.AreEqual(new Cheese().Name, pizzaOrderMana.GetToppingMenu(0).Name);
+            Assert.AreEqual(new FriedGarlic().Name, pizzaOrderMana.GetToppingMenu(1).Name);
+            Assert.AreEqual(new MozzarellaCheese().Name, pizzaOrderMana.GetToppingMenu(2).Name);
+            Assert.AreEqual(new SeafoodMix().Name, pizzaOrderMana.GetToppingMenu(3).Name);
+            Assert.AreEqual(new Scallops().Name, pizzaOrderMana.GetToppingMenu(4).Name);
+            Assert.AreEqual(new Basil().Name, pizzaOrderMana.GetToppingMenu(5).Name);
+            Assert.AreEqual(new Tomato().Name, pizzaOrderMana.GetToppingMenu(6).Name);
+            Assert.AreEqual(new Tuna().Name, pizzaOrderMana.GetToppingMenu(7).Name);
+            Assert.AreEqual(new Corn().Name, pizzaOrderMana.GetToppingMenu(8).Name);
+            Assert.AreEqual(new Bacon().Name, pizzaOrderMana.GetToppingMenu(9).Name);
         }
 
         [TestMethod]
@@ -104,6 +104,9 @@ namespace PizzaOrderSystemTest.ManagerTest
 
             pizzaIndex = pizzaOrderMana.GetPizzaMenuIndex("バンビーノピザ");
             Assert.AreEqual(4, pizzaIndex);
+
+            pizzaIndex = pizzaOrderMana.GetPizzaMenuIndex("ピザハット");
+            Assert.AreEqual(-1, pizzaIndex);
         }
 
         [TestMethod]
@@ -114,6 +117,9 @@ namespace PizzaOrderSystemTest.ManagerTest
 
             topping = pizzaOrderMana.GetToppingMenuIndex("ベーコン");
             Assert.AreEqual(9, topping);
+
+            topping = pizzaOrderMana.GetToppingMenuIndex("バナナ");
+            Assert.AreEqual(-1, topping);
         }
 
         [TestMethod]
@@ -124,16 +130,16 @@ namespace PizzaOrderSystemTest.ManagerTest
             beforePlainPizza.SetTopping(new Corn());
 
             pizzaOrderMana.AddPizzaOrderList(beforePlainPizza);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).GetTopping(2).Name, new Bacon().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).GetTopping(3).Name, new Corn().Name);
+            Assert.AreEqual(new Bacon().Name, pizzaOrderMana.GetPizzaOrder(0).GetTopping(2).Name);
+            Assert.AreEqual(new Corn().Name, pizzaOrderMana.GetPizzaOrder(0).GetTopping(3).Name);
 
             var aftrerPlainPizza = new PlainPizza();
             aftrerPlainPizza.SetTopping(new Bacon());
             aftrerPlainPizza.SetTopping(new SeafoodMix());
             pizzaOrderMana.ChangePizza(0, aftrerPlainPizza);
 
-            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).GetTopping(2).Name, new Bacon().Name);
-            Assert.AreEqual(pizzaOrderMana.GetPizzaOrder(0).GetTopping(3).Name, new SeafoodMix().Name);
+            Assert.AreEqual(new Bacon().Name, pizzaOrderMana.GetPizzaOrder(0).GetTopping(2).Name);
+            Assert.AreEqual(new SeafoodMix().Name, pizzaOrderMana.GetPizzaOrder(0).GetTopping(3).Name);
         }
 
         [TestMethod]
@@ -148,18 +154,18 @@ namespace PizzaOrderSystemTest.ManagerTest
             };
 
             var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new MargheritaPizza().Name);
+            Assert.AreEqual(new MargheritaPizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(2, 2);
             toppings.Add((int)ToppingEnum.シーフードミックス);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new SeafoodPizza().Name);
+            Assert.AreEqual(new SeafoodPizza().Name, pizzaInstance.Name);
 
             toppings.Add((int)ToppingEnum.ホタテ);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new PescatorePizza().Name);
+            Assert.AreEqual(new PescatorePizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(2, 2);
             toppings.Add((int)ToppingEnum.ツナ);
@@ -167,7 +173,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.ベーコン);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new BambinoPizza().Name);
+            Assert.AreEqual(new BambinoPizza().Name, pizzaInstance.Name);
         }
 
         [TestMethod]
@@ -183,12 +189,12 @@ namespace PizzaOrderSystemTest.ManagerTest
             };
 
             var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new MargheritaPizza().Name);
+            Assert.AreEqual(new MargheritaPizza().Name, pizzaInstance.Name);
 
             toppings.Add((int)ToppingEnum.ホタテ);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new PescatorePizza().Name);
+            Assert.AreEqual(new PescatorePizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(4, 1);
             toppings.Add((int)ToppingEnum.ツナ);
@@ -196,7 +202,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.ベーコン);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new BambinoPizza().Name);
+            Assert.AreEqual(new BambinoPizza().Name, pizzaInstance.Name);
         }
 
         [TestMethod]
@@ -212,13 +218,13 @@ namespace PizzaOrderSystemTest.ManagerTest
             };
 
             var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new MargheritaPizza().Name);
+            Assert.AreEqual(new MargheritaPizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(2, 3);
             toppings.Add((int)ToppingEnum.ホタテ);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new PescatorePizza().Name);
+            Assert.AreEqual(new PescatorePizza().Name, pizzaInstance.Name);
 
             toppings.RemoveRange(2, 1);
             toppings.Add((int)ToppingEnum.トマト);
@@ -227,7 +233,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             toppings.Add((int)ToppingEnum.ベーコン);
 
             pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new BambinoPizza().Name);
+            Assert.AreEqual(new BambinoPizza().Name, pizzaInstance.Name);
         }
 
 
@@ -246,7 +252,7 @@ namespace PizzaOrderSystemTest.ManagerTest
             };
 
             var pizzaInstance = pizzaOrderMana.ContainsSameTopping(toppings);
-            Assert.AreEqual(pizzaInstance.Name, new BambinoPizza().Name);
+            Assert.AreEqual(new BambinoPizza().Name, pizzaInstance.Name);
         }
     }
 }

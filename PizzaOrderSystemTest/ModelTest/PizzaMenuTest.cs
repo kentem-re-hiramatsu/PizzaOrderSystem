@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models.Pizza;
+using Models.Topping;
 
 namespace PizzaOrderSystemTest
 {
@@ -102,6 +103,19 @@ namespace PizzaOrderSystemTest
 
             Assert.AreEqual("ベーコン", bambinoPizza.GetTopping(4).Name);
             Assert.AreEqual(0, bambinoPizza.GetTopping(4).Price);
+        }
+
+        [TestMethod]
+        public void GetPizzaTotalPrice()
+        {
+            var plainPizza = new PlainPizza();
+
+            plainPizza.SetTopping(new Tuna());
+            plainPizza.SetTopping(new Corn());
+
+            int pizzaTotalPrice = new PlainPizza().Price + new Tuna().Price + new Corn().Price;
+
+            Assert.AreEqual(pizzaTotalPrice, plainPizza.GetPizzaTotalPrice());
         }
     }
 }
